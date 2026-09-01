@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #231B11; text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: #EF6300; }
+    .micro { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .label { font-size: 13px; font-weight: 600; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0 16px; font-size: 14px; font-weight: 600;
+      border: 1px solid transparent; box-sizing: border-box; white-space: nowrap;
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 16px; padding: 26px; background: #F8F3ED; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 7px">
+    <div style="display: flex; align-items: baseline; gap: 10px">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #231B11">Signal</div>
+      <div class="micro" style="color: #8C8072">Colour is rationed</div>
+    </div>
+    <div style="font-size: 13px; line-height: 1.55; color: #6F6152; text-wrap: pretty">Colour is rationed. Warm graphite does the work and one hot accent appears only as a fill on the single primary action. Links and the focus ring are ink. The destructive action stays distinct from the warm accent by inverting: dark ink on the accent, light ink on a deeper red.</div>
+    <div style="font-size: 13px; line-height: 1.55; color: #6F6152; text-wrap: pretty"><strong style="color: #231B11">Form.</strong> Crisp corners, a heavier border, no shadow. Ink carries the hierarchy; the accent only fills the one action that matters. Type is Archivo.</div>
+  </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; padding: 20px; border-radius: 12px; background: #FDF9F6; border: 1.5px solid #E6DFD7">
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+          <div class="micro" style="color: #8C8072">LIGHT</div>
+          <div class="micro" style="color: #8C8072">27/27 pairs pass</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; color: #6F6152">
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">surface</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #8C8072; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">border+</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #231B11; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">ink</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #EF6300; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">accent</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #FFE1D5; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">soft</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #BF0046; border: 1px solid #E6DFD7"></div>
+              <div class="micro" style="color: inherit">danger</div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 8px; background: #FFFFFF; border: 1.5px solid #E6DFD7; ">
+
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+            <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: #231B11">Workspace</div>
+            <span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 11px; font-weight: 600; background: #D2F5DA; color: #00783B">
+              <span style="width: 5px; height: 5px; border-radius: 999px; background: #00783B"></span>Saved</span>
+          </div>
+
+          <div style="font-size: 14px; line-height: 21px; color: #6F6152; text-wrap: pretty">
+            Everyone you invite sees this name. <a href="#" style="color: #231B11">What others see</a>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div class="label" style="color: #231B11; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Name</div>
+            <div style="display: flex; align-items: center; height: 44px; padding: 0 13px; border-radius: 6px; font-size: 15px; background: #FFFFFF; border: 1.5px solid #8C8072; color: #231B11; box-sizing: border-box">Studio</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div class="label" style="color: #231B11; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Appearance</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 13px; border-radius: 6px; font-size: 15px; background: #FFFFFF; border: 1.5px solid #231B11; color: #231B11; box-sizing: border-box; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #231B11">
+              <span>Follow the system</span>
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#6F6152" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; border-top: 1.5px solid #E6DFD7">
+            <span class="btn" style="height: 44px; border-radius: 6px; background: #EF6300; color: #0C0703; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Save changes</span>
+            <span class="btn" style="height: 44px; border-radius: 6px; color: #231B11; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Discard</span>
+            <span class="btn" style="height: 44px; border-radius: 6px; background: #BF0046; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Delete</span>
+          </div>
+        </div>
+
+        <div class="micro" style="color: #8C8072">
+          tightest border on surface &middot; 1.32:1 (min 1.3)
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; padding: 20px; border-radius: 12px; background: #0C0703; border: 1.5px solid #372C20">
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+          <div class="micro" style="color: #8C8072">DARK</div>
+          <div class="micro" style="color: #8C8072">27/27 pairs pass</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; color: #B5A99D">
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #150E06; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">surface</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #6F6152; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">border+</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #F8F3ED; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">ink</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #EF6300; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">accent</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #3A1100; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">soft</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="height: 34px; border-radius: 8px; background: #FF4B74; border: 1px solid #372C20"></div>
+              <div class="micro" style="color: inherit">danger</div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 8px; background: #150E06; border: 1.5px solid #372C20; ">
+
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+            <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: #F8F3ED">Workspace</div>
+            <span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 11px; font-weight: 600; background: #002A10; color: #1ABC63">
+              <span style="width: 5px; height: 5px; border-radius: 999px; background: #1ABC63"></span>Saved</span>
+          </div>
+
+          <div style="font-size: 14px; line-height: 21px; color: #B5A99D; text-wrap: pretty">
+            Everyone you invite sees this name. <a href="#" style="color: #F8F3ED">What others see</a>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div class="label" style="color: #F8F3ED; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Name</div>
+            <div style="display: flex; align-items: center; height: 44px; padding: 0 13px; border-radius: 6px; font-size: 15px; background: #150E06; border: 1.5px solid #6F6152; color: #F8F3ED; box-sizing: border-box">Studio</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div class="label" style="color: #F8F3ED; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Appearance</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 13px; border-radius: 6px; font-size: 15px; background: #150E06; border: 1.5px solid #F8F3ED; color: #F8F3ED; box-sizing: border-box; box-shadow: 0 0 0 2px #150E06, 0 0 0 4px #F8F3ED">
+              <span>Follow the system</span>
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#B5A99D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; border-top: 1.5px solid #372C20">
+            <span class="btn" style="height: 44px; border-radius: 6px; background: #EF6300; color: #0C0703; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Save changes</span>
+            <span class="btn" style="height: 44px; border-radius: 6px; color: #F8F3ED; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Discard</span>
+            <span class="btn" style="height: 44px; border-radius: 6px; background: #FF4B74; color: #0C0703; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;">Delete</span>
+          </div>
+        </div>
+
+        <div class="micro" style="color: #8C8072">
+          tightest border-strong on surface &middot; 3.20:1 (min 3)
+        </div>
+      </div>
+
+</div>
+</x-dc>
+</body>
+</html>

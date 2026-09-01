@@ -1,28 +1,43 @@
 {
   "pages": [
-    { "id": "page-1", "name": "Foundations" },
-    { "id": "page-2", "name": "Primitives" }
+    { "id": "directions", "name": "Directions" },
+    { "id": "foundations", "name": "Foundations" },
+    { "id": "primitives", "name": "Primitives" }
   ],
   "artboards": [
-    { "file": "Main.dc.html", "page": "page-1", "x": 0, "y": 0, "w": 1240, "h": 1500 },
-    { "file": "Typography.dc.html", "page": "page-1", "x": 1360, "y": 0, "w": 980, "h": 1240 },
-    { "file": "Geometry.dc.html", "page": "page-1", "x": 2440, "y": 0, "w": 1000, "h": 1360 },
+    { "file": "DirectionIndigo.dc.html", "page": "directions", "x": 0, "y": 0, "w": 640, "h": 1320 },
+    { "file": "DirectionPetrol.dc.html", "page": "directions", "x": 720, "y": 0, "w": 640, "h": 1320 },
+    { "file": "DirectionAmethyst.dc.html", "page": "directions", "x": 1440, "y": 0, "w": 640, "h": 1320 },
+    { "file": "DirectionMagenta.dc.html", "page": "directions", "x": 2160, "y": 0, "w": 640, "h": 1320 },
+    { "file": "DirectionSignal.dc.html", "page": "directions", "x": 2880, "y": 0, "w": 640, "h": 1320 },
 
-    { "file": "Buttons.dc.html", "page": "page-2", "x": 0, "y": 0, "w": 1280, "h": 1240 },
-    { "file": "Fields.dc.html", "page": "page-2", "x": 1400, "y": 0, "w": 1160, "h": 1400 },
-    { "file": "Surfaces.dc.html", "page": "page-2", "x": 0, "y": 1520, "w": 1240, "h": 1200 },
-    { "file": "Dialog.dc.html", "page": "page-2", "x": 1360, "y": 1520, "w": 1160, "h": 1080 },
-    { "file": "Composition.dc.html", "page": "page-2", "x": 0, "y": 2840, "w": 1240, "h": 1080 }
+    { "file": "Main.dc.html", "page": "foundations", "x": 0, "y": 0, "w": 1240, "h": 1500 },
+    { "file": "Typography.dc.html", "page": "foundations", "x": 1360, "y": 0, "w": 980, "h": 1240 },
+    { "file": "Geometry.dc.html", "page": "foundations", "x": 2440, "y": 0, "w": 1000, "h": 1360 },
+
+    { "file": "Buttons.dc.html", "page": "primitives", "x": 0, "y": 0, "w": 1280, "h": 1240 },
+    { "file": "Fields.dc.html", "page": "primitives", "x": 1400, "y": 0, "w": 1160, "h": 1400 },
+    { "file": "Surfaces.dc.html", "page": "primitives", "x": 0, "y": 1520, "w": 1240, "h": 1200 },
+    { "file": "Dialog.dc.html", "page": "primitives", "x": 1360, "y": 1520, "w": 1160, "h": 1080 },
+    { "file": "Composition.dc.html", "page": "primitives", "x": 0, "y": 2840, "w": 1240, "h": 1080 }
   ],
   "annotations": [
     {
+      "id": "pick",
+      "page": "directions",
+      "x": 0,
+      "y": -230,
+      "w": 900,
+      "text": "Pick one. Same composition, same measured floors, five different positions.\n\nIndigo is the incumbent - it is here so the comparison is honest, not to win.\n\nEach direction changes hue, chroma, form and type together, because \"too boring\" is rarely only a colour problem. All 27 contrast pairs pass in both appearances for every one of them; each tile prints its own tightest pair.\n\nThe Foundations and Primitives pages still show Indigo. Whichever you pick gets carried through them before any token is written."
+    },
+    {
       "id": "gate",
-      "page": "page-1",
+      "page": "foundations",
       "x": 0,
       "y": -190,
       "w": 700,
       "text": "This canvas is the binding handoff for tokens.css.\nNothing in src/ gets written until it is approved.\n\nEvery contrast number on these artboards is computed by tools/palette-report.mjs, not estimated. All 27 pairs pass their floor in both appearances."
     }
   ],
-  "launch": { "view": "canvas", "page": "page-1" }
+  "launch": { "view": "canvas", "page": "directions" }
 }
