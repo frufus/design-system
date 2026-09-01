@@ -1,3 +1,36 @@
+<template>
+  <div class="flex flex-col gap-1">
+    <label :for="controlId" class="text-sm font-medium text-ink">{{ label }}</label>
+
+    <slot :control-id="controlId" :described-by="describedBy" :invalid="invalid" />
+
+    <p v-if="error" :id="errorId" class="flex items-center gap-1 text-xs text-danger-ink">
+      <!-- The icon is what keeps the state from being colour alone. It is
+           decoration: the message beside it already says what is wrong. -->
+      <svg
+        data-fds-error-icon
+        aria-hidden="true"
+        focusable="false"
+        width="1em"
+        height="1em"
+        viewBox="0 0 16 16"
+        fill="none"
+      >
+        <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6" />
+        <path d="M8 4.8v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        <circle cx="8" cy="11.1" r="0.9" fill="currentColor" />
+      </svg>
+      {{ error }}
+    </p>
+
+    <!-- The description stays when an error appears. Removing it takes
+         information away at exactly the moment it is most needed. -->
+    <p v-if="description" :id="descriptionId" class="text-xs text-ink-muted">
+      {{ description }}
+    </p>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { computed, useId } from 'vue'
 
@@ -44,36 +77,3 @@ const describedBy = computed(() => {
   return present.length > 0 ? present.join(' ') : undefined
 })
 </script>
-
-<template>
-  <div class="flex flex-col gap-1">
-    <label :for="controlId" class="text-sm font-medium text-ink">{{ label }}</label>
-
-    <slot :control-id="controlId" :described-by="describedBy" :invalid="invalid" />
-
-    <p v-if="error" :id="errorId" class="flex items-center gap-1 text-xs text-danger-ink">
-      <!-- The icon is what keeps the state from being colour alone. It is
-           decoration: the message beside it already says what is wrong. -->
-      <svg
-        data-fds-error-icon
-        aria-hidden="true"
-        focusable="false"
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6" />
-        <path d="M8 4.8v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-        <circle cx="8" cy="11.1" r="0.9" fill="currentColor" />
-      </svg>
-      {{ error }}
-    </p>
-
-    <!-- The description stays when an error appears. Removing it takes
-         information away at exactly the moment it is most needed. -->
-    <p v-if="description" :id="descriptionId" class="text-xs text-ink-muted">
-      {{ description }}
-    </p>
-  </div>
-</template>

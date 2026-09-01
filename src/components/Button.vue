@@ -1,3 +1,39 @@
+<template>
+  <button
+    :type="type"
+    :class="classes"
+    :disabled="disabled || undefined"
+    :aria-disabled="loading || undefined"
+    :aria-busy="loading || undefined"
+    @click="onClick"
+  >
+    <!-- The indicator is decoration: the label already says what is happening,
+         and a second announcement would only interrupt it. -->
+    <svg
+      v-if="loading"
+      data-fds-busy
+      class="fds-spin"
+      aria-hidden="true"
+      focusable="false"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-opacity="0.3" stroke-width="2" />
+      <path
+        d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+
+    <!-- Every word belongs to the consuming project. -->
+    <slot />
+  </button>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import {
@@ -60,38 +96,3 @@ function onClick(event: MouseEvent): void {
   emit('click', event)
 }
 </script>
-
-<template>
-  <button
-    :type="type"
-    :class="classes"
-    :disabled="disabled || undefined"
-    :aria-disabled="loading || undefined"
-    :aria-busy="loading || undefined"
-    @click="onClick"
-  >
-    <!-- The indicator is decoration: the label already says what is happening,
-         and a second announcement would only interrupt it. -->
-    <svg
-      v-if="loading"
-      data-fds-busy
-      aria-hidden="true"
-      focusable="false"
-      width="1em"
-      height="1em"
-      viewBox="0 0 16 16"
-      fill="none"
-    >
-      <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-opacity="0.3" stroke-width="2" />
-      <path
-        d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-      />
-    </svg>
-
-    <!-- Every word belongs to the consuming project. -->
-    <slot />
-  </button>
-</template>

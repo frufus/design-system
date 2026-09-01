@@ -73,6 +73,20 @@ nothing at all.
 **Enforced by** the register suite in `tests/registers.test.ts`, which fails if a
 shadow scale is reintroduced.
 
+### The one animation is shared, and it obeys reduced motion
+
+The package animates exactly one thing: the busy indicator on a working button.
+It lives in the register as `.fds-spin`, not in the component, for the same
+reason components carry no style block - a component declaring its own animation
+is a component holding a value that is not a token, and that is how a system ends
+up with six slightly different spinners.
+
+Its duration comes from a motion token, so it stops with everything else under
+`prefers-reduced-motion` rather than needing an opt-out of its own.
+
+**Enforced by** the register suite in `tests/registers.test.ts`, which requires
+the animation to exist and its duration to come from a token.
+
 ### Three radii, and no more
 
 `0` for surfaces, `2` for tags, `4` for controls. A rounded corner means _this
@@ -116,6 +130,13 @@ component starts holding values that are not tokens; scoping only hides that it
 has. Shared shape belongs in a register in `src/registers.css`.
 
 **Enforced by** `no-style-blocks`.
+
+### Components put their markup first
+
+`<template>` comes before `<script setup>` in every component. The markup is what
+a reader opens a component for; the setup block is how it got there.
+
+**Enforced by** `template-before-script`.
 
 ### Use the platform before reimplementing it
 

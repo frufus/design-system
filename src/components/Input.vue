@@ -1,3 +1,20 @@
+<template>
+  <FieldShell :id="id" :label="label" :description="description" :error="error">
+    <template #default="{ controlId, describedBy, invalid }">
+      <input
+        :id="controlId"
+        :type="type"
+        :value="modelValue"
+        :disabled="disabled || undefined"
+        :aria-describedby="describedBy"
+        :aria-invalid="invalid"
+        class="fds-control"
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      />
+    </template>
+  </FieldShell>
+</template>
+
 <script setup lang="ts">
 import FieldShell from './FieldShell.vue'
 
@@ -27,20 +44,3 @@ withDefaults(
 
 defineEmits<{ 'update:modelValue': [value: string] }>()
 </script>
-
-<template>
-  <FieldShell :id="id" :label="label" :description="description" :error="error">
-    <template #default="{ controlId, describedBy, invalid }">
-      <input
-        :id="controlId"
-        :type="type"
-        :value="modelValue"
-        :disabled="disabled || undefined"
-        :aria-describedby="describedBy"
-        :aria-invalid="invalid"
-        class="fds-control"
-        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-      />
-    </template>
-  </FieldShell>
-</template>

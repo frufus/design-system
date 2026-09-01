@@ -67,6 +67,44 @@ export function scanForStyleBlocks(root) {
 }
 
 /**
+ * `<template>` belongs before `<script setup>`.
+ *
+ * The markup is what a reader opens a component for; the setup block is how it
+ * got there. This compares the position of the two opening tags rather than
+ * parsing the file - the question is about ordering, and a parser would be a
+ * large dependency for a comparison of two numbers. A file with no template is
+ * ignored, because the rule has nothing to say about it.
+ */
+export function findScriptBeforeTemplate(text) {
+  const template = text.indexOf('<template')
+  const script = text.indexOf('<script')
+
+  if (template === -1 || script === -1) return []
+  return script < template ? ['<script> comes before <template>'] : []
+}
+
+/** @returns {{file: string, line: number, matches: string[]}[]} */
+export function scanForScriptBeforeTemplate(root) {
+  const offences = []
+
+  for (const directory of SCANNED_DIRECTORIES) {
+    for (const file of walkComponents(join(root, directory))) {
+      const text = readFileSync(file, 'utf8')
+      const matches = findScriptBeforeTemplate(text)
+      if (matches.length > 0) {
+        offences.push({
+          file: relative(root, file).split('\\').join('/'),
+          line: text.slice(0, text.indexOf('<script')).split('\n').length,
+          matches,
+        })
+      }
+    }
+  }
+
+  return offences
+}
+
+/**
  * Every rule this package enforces mechanically. `id` is what
  * docs/DESIGN-LANGUAGE.md refers to, and a test asserts the two agree in both
  * directions.
@@ -89,6 +127,14 @@ export const CHECKS = [
     title: 'Class names are literal',
     scan: scanForComposedClasses,
     explain: 'Tailwind only emits class names it has seen literally.',
+  },
+  {
+    id: 'template-before-script',
+    title: 'Components put their markup first',
+    scan: scanForScriptBeforeTemplate,
+    explain:
+      'The markup is what a reader opens a component for; the setup block is ' +
+      'how it got there.',
   },
   {
     id: 'no-style-blocks',

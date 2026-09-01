@@ -1,3 +1,33 @@
+<template>
+  <component
+    :is="interactive ? 'button' : 'div'"
+    :type="interactive ? 'button' : undefined"
+    :disabled="interactive && disabled ? true : undefined"
+    :class="rootClasses"
+    @click="interactive && $emit('click', $event)"
+  >
+    <div
+      v-if="hasHeader"
+      data-fds-card-header
+      class="flex items-center justify-between gap-2 border-b border-border px-3 py-2"
+    >
+      <slot name="header" />
+    </div>
+
+    <div class="px-3 py-3">
+      <slot />
+    </div>
+
+    <div
+      v-if="hasFooter"
+      data-fds-card-footer
+      class="flex items-center justify-between gap-2 border-t border-border-strong bg-surface-sunken px-3 py-2"
+    >
+      <slot name="footer" />
+    </div>
+  </component>
+</template>
+
 <script setup lang="ts">
 import { computed, useSlots } from 'vue'
 
@@ -39,33 +69,3 @@ const rootClasses = computed(() => [
     : '',
 ])
 </script>
-
-<template>
-  <component
-    :is="interactive ? 'button' : 'div'"
-    :type="interactive ? 'button' : undefined"
-    :disabled="interactive && disabled ? true : undefined"
-    :class="rootClasses"
-    @click="interactive && $emit('click', $event)"
-  >
-    <div
-      v-if="hasHeader"
-      data-fds-card-header
-      class="flex items-center justify-between gap-2 border-b border-border px-3 py-2"
-    >
-      <slot name="header" />
-    </div>
-
-    <div class="px-3 py-3">
-      <slot />
-    </div>
-
-    <div
-      v-if="hasFooter"
-      data-fds-card-footer
-      class="flex items-center justify-between gap-2 border-t border-border-strong bg-surface-sunken px-3 py-2"
-    >
-      <slot name="footer" />
-    </div>
-  </component>
-</template>
