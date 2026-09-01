@@ -1,6 +1,7 @@
 # button Specification
 
 ## Purpose
+
 Defines what a button guarantees to the project using it: which states it can be
 in, how it behaves for a keyboard and a screen reader while it is working, the
 target size it never drops below, and the fact that it contributes no words of
