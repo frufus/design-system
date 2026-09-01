@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Fira Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+    a { color: #026465; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #017879; }
+    .mono { font-family: 'Fira Mono', ui-monospace, Consolas, monospace; font-size: 11px; }
+    .key { font-family: 'Fira Mono', ui-monospace, Consolas, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+    .drow { display: grid; grid-template-columns: 3px 92px minmax(0, 1fr) auto; align-items: center; gap: 0 10px; height: 40px; padding: 0 12px; }
+    .irow { display: grid; grid-template-columns: 3px 92px minmax(0, 1fr) auto; align-items: center; gap: 0 10px; height: 52px; padding: 0 12px; }
+    .ctl { display: flex; align-items: center; height: 44px; padding: 0 12px; border-radius: 4px; border: 1px solid transparent; box-sizing: border-box; font-size: 15px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 14px; border-radius: 4px; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; border: 1px solid transparent; box-sizing: border-box; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #EFF5F7; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <div style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #131F22">Fira</div>
+    <div class="key" style="color: #758589">Mozilla, 2013 &middot; SIL OFL 1.1</div>
+    <div style="font-size: 14px; line-height: 1.5; color: #55676C">Independent of IBM and of Google alike.</div>
+  </div>
+
+  <div style="border: 1px solid #758589; background: #FFFFFF; padding: 16px 18px">
+    <div style="display: flex; align-items: flex-end; gap: 16px">
+      <div style="font-size: 56px; font-weight: 300; line-height: 1; letter-spacing: -0.03em; color: #131F22">Aa</div>
+      <div class="mono" style="font-size: 34px; line-height: 1.1; color: #131F22">Il1O0</div>
+    </div>
+    <div style="display: flex; gap: 14px; align-items: baseline; padding-top: 14px">
+      <span style="font-size: 19px; font-weight: 300; color: #55676C">300</span>
+      <span style="font-size: 19px; font-weight: 400; color: #55676C">400</span>
+      <span style="font-size: 19px; font-weight: 500; color: #131F22">500</span>
+      <span style="font-size: 19px; font-weight: 600; color: #131F22">600</span>
+      <span style="font-size: 19px; font-weight: 700; color: #131F22">700</span>
+    </div>
+    <div class="mono" style="font-size: 14px; color: #55676C; padding-top: 10px">0123456789 &middot; 16.90 / 3.82</div>
+    <div style="font-size: 15px; line-height: 22px; color: #55676C; padding-top: 12px; text-wrap: pretty">
+      A dense row has to stay readable at fifteen over twenty-two, and a column of
+      figures has to stay a column when the figures change.
+    </div>
+  </div>
+
+      <div style="border: 1px solid #758589; background: #FFFFFF">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 26px; padding: 0 12px; background: #131F22">
+          <div class="key" style="color: #EFF5F7">Workspace / settings</div>
+          <div class="key" style="color: #CDF1F0">12 rev</div>
+        </div>
+        <div class="drow" style="border-bottom: 1px solid #D8E2E4">
+          <div style="height: 18px; background: #D8E2E4"></div>
+          <div class="key" style="color: #55676C">Brand</div>
+          <div style="font-size: 14px; color: #131F22">Citadel</div>
+          <div class="mono" style="color: #758589">BASE</div>
+        </div>
+        <div class="drow" style="border-bottom: 1px solid #D8E2E4">
+          <div style="height: 18px; background: #1E7635"></div>
+          <div class="key" style="color: #55676C">Status</div>
+          <div style="font-size: 14px; color: #131F22">Saved</div>
+          <div class="mono" style="color: #758589">OK</div>
+        </div>
+        <div class="drow" style="border-bottom: 1px solid #D8E2E4">
+          <div style="height: 18px; background: #A77000"></div>
+          <div class="key" style="color: #55676C">Retention</div>
+          <div style="font-size: 14px; color: #131F22">Ends in 9 days</div>
+          <div class="mono" style="color: #758589">WARN</div>
+        </div>
+        <div class="irow">
+          <div style="height: 18px; background: #D8E2E4"></div>
+          <div class="key" style="color: #55676C">Name</div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #758589; border-top-color: #55676C; color: #131F22">Studio</div>
+          <div class="mono" style="color: #758589">6/40</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; background: #EFF5F7; border-top: 1px solid #758589">
+          <div style="display: flex">
+            <span class="btn" style="border-radius: 4px 0 0 4px; background: #017879; color: #FFFFFF">Save changes</span>
+            <span class="btn" style="border-radius: 0 4px 4px 0; border-color: #758589; border-left-width: 0; color: #131F22">Discard</span>
+          </div>
+          <div class="mono" style="color: #758589">v0.1.0</div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #55676C; background: #081114">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 26px; padding: 0 12px; background: #03090B">
+          <div class="key" style="color: #EFF5F7">Workspace / settings</div>
+          <div class="key" style="color: #09CACC">12 rev</div>
+        </div>
+        <div class="drow" style="border-bottom: 1px solid #233135">
+          <div style="height: 18px; background: #51B766"></div>
+          <div class="key" style="color: #9FAFB2">Status</div>
+          <div style="font-size: 14px; color: #EFF5F7">Saved</div>
+          <div class="mono" style="color: #758589">OK</div>
+        </div>
+        <div class="irow">
+          <div style="height: 18px; background: #233135"></div>
+          <div class="key" style="color: #9FAFB2">Name</div>
+          <div class="ctl" style="background: #03090B; border-color: #55676C; border-top-color: #9FAFB2; color: #EFF5F7">Studio</div>
+          <div class="mono" style="color: #758589">6/40</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; background: #03090B; border-top: 1px solid #55676C">
+          <div style="display: flex">
+            <span class="btn" style="border-radius: 4px 0 0 4px; background: #07AAAB; color: #03090B">Save changes</span>
+            <span class="btn" style="border-radius: 0 4px 4px 0; border-color: #55676C; border-left-width: 0; color: #EFF5F7">Discard</span>
+          </div>
+          <div class="mono" style="color: #758589">v0.1.0</div>
+        </div>
+      </div>
+
+  <div style="display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; background: #FFFFFF; border-left: 3px solid #017879">
+    <div style="font-size: 12px; line-height: 1.6; color: #55676C; text-wrap: pretty">Built for Firefox OS, so it is a system typeface by intent - technical, but warmer and rounder than Plex. Price: the mono ships fewer weights, and the softer shapes read slightly less exact in a long column of figures.</div>
+  </div>
+
+  <div class="key" style="color: #758589">@fontsource/fira-sans 5.3.0</div>
+
+</div>
+</x-dc>
+</body>
+</html>

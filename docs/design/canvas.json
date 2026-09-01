@@ -1,11 +1,17 @@
 {
   "pages": [
+    { "id": "typeface", "name": "Typeface" },
     { "id": "foundations", "name": "Foundations" },
     { "id": "primitives", "name": "Primitives" },
     { "id": "form", "name": "Form studies" },
     { "id": "directions", "name": "Directions" }
   ],
   "artboards": [
+    { "file": "TypefacePlex.dc.html", "page": "typeface", "x": 0, "y": 0, "w": 640, "h": 1140 },
+    { "file": "TypefaceAtkinson.dc.html", "page": "typeface", "x": 720, "y": 0, "w": 640, "h": 1140 },
+    { "file": "TypefaceFira.dc.html", "page": "typeface", "x": 1440, "y": 0, "w": 640, "h": 1140 },
+    { "file": "TypefaceDejaVu.dc.html", "page": "typeface", "x": 2160, "y": 0, "w": 640, "h": 1140 },
+
     { "file": "Main.dc.html", "page": "foundations", "x": 0, "y": 0, "w": 1240, "h": 1200 },
     { "file": "Typography.dc.html", "page": "foundations", "x": 1360, "y": 0, "w": 1020, "h": 1420 },
     { "file": "Geometry.dc.html", "page": "foundations", "x": 2460, "y": 0, "w": 1020, "h": 1180 },
@@ -28,13 +34,20 @@
   ],
   "annotations": [
     {
+      "id": "typepick",
+      "page": "typeface",
+      "x": 0,
+      "y": -270,
+      "w": 960,
+      "text": "Same palette, same layout, same words - only the typeface changes.\n\nAll four are self-hosted in the package; none is fetched from a font host at runtime. Three of them are SIL OFL 1.1, which is the practical ceiling for a usable UI face: it asks nothing of your code, no attribution in the interface, no share-alike. Its only two limits - you may not sell the font on its own, and a modified copy must be renamed - never touch us.\n\nSo the licence is not the differentiator. Provenance and character are.\n\nEach tile shows Il1O0 at size, because that is where a typeface for dense data either helps or does not, and states what it costs at the bottom."
+    },
+    {
       "id": "gate",
       "page": "foundations",
       "x": 0,
       "y": -250,
       "w": 980,
-      "text": "PETROL + CONSOLE. This is the binding handoff for tokens.css - nothing in src/ gets written until it is approved.\n\nThe one conflict the form study left open is resolved here: display rows sit at 40 px, but any row holding a control is 52 px so the control keeps its full 44 px target. Density where it is free, never at the cost of the floor.\n\nEvery contrast number on these artboards is computed by tools/palette-report.mjs. All 27 pairs pass in both appearances; the tightest is the decorative hairline at 1.32.",
-      "kind": "note"
+      "text": "APPROVED: PETROL + CONSOLE. This is the binding handoff for tokens.css.\n\nThe form study's one conflict is resolved here: display rows sit at 40 px, but any row holding a control is 52 px so the control keeps its full 44 px target.\n\nThese artboards are drawn in IBM Plex. If the Typeface page settles on another face, they get redrawn before any token ships.\n\nEvery contrast number is computed by tools/palette-report.mjs. All 27 pairs pass in both appearances."
     },
     {
       "id": "formpick",
@@ -42,7 +55,7 @@
       "x": 0,
       "y": -190,
       "w": 900,
-      "text": "Settled: CONSOLE.\n\nKept as the record of what was compared. All three dropped the card-in-a-card habit; Console won because the row - not the box - became the unit, which is what the density is actually for."
+      "text": "Settled: CONSOLE.\n\nKept as the record of what was compared. All three dropped the card-in-a-card habit; Console won because the row - not the box - became the unit."
     },
     {
       "id": "pick",
@@ -53,5 +66,5 @@
       "text": "Settled: PETROL.\n\nKept as the record. Each candidate changed hue, chroma, form and type together, and all 27 contrast pairs pass in both appearances for every one of them - so the choice was about character, not about which one was safe."
     }
   ],
-  "launch": { "view": "canvas", "page": "foundations" }
+  "launch": { "view": "canvas", "page": "typeface" }
 }
