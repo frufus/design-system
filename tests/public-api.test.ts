@@ -5,9 +5,9 @@ import * as api from '../src/index.ts'
 // for every consuming project, so the surface is asserted rather than assumed.
 describe('public API', () => {
   it('exports every component built so far', () => {
-    expect(api.Button).toBeTruthy()
-    expect(api.Input).toBeTruthy()
-    expect(api.Select).toBeTruthy()
+    for (const name of ['Badge', 'Button', 'Card', 'EmptyState', 'Input', 'Select']) {
+      expect(api[name as keyof typeof api], `${name} is not exported`).toBeTruthy()
+    }
   })
 
   it('exports the values a consumer needs to type their own props', () => {
@@ -21,9 +21,13 @@ describe('public API', () => {
     // Not pedantry: an accidental export is as binding as a deliberate one, and
     // this is the cheapest moment to notice one.
     expect(Object.keys(api).sort()).toEqual([
+      'BADGE_TONES',
       'BUTTON_SIZES',
       'BUTTON_VARIANTS',
+      'Badge',
       'Button',
+      'Card',
+      'EmptyState',
       'Input',
       'Select',
     ])

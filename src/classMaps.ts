@@ -55,3 +55,23 @@ export const buttonSizeClasses: Record<ButtonSize, string> = {
 
 /** Every button wears both: the register that gives it its shape, and the ring. */
 export const buttonBaseClasses = 'fds-action fds-focus-ring'
+
+export const BADGE_TONES = ['neutral', 'accent', 'success', 'warning', 'danger', 'outline'] as const
+
+export type BadgeTone = (typeof BADGE_TONES)[number]
+
+export const DEFAULT_BADGE_TONE: BadgeTone = 'neutral'
+
+/**
+ * Each tone names both halves of a pair the contrast suite measures: the soft
+ * fill and the ink chosen against it. A soft fill with borrowed ink is the
+ * classic way a badge fails its floor in one appearance and passes in the other.
+ */
+export const badgeToneClasses: Record<BadgeTone, string> = {
+  neutral: 'bg-disabled-surface text-ink',
+  accent: 'bg-accent-soft text-accent-ink',
+  success: 'bg-success-soft text-success-ink',
+  warning: 'bg-warning-soft text-warning-ink',
+  danger: 'bg-danger-soft text-danger-ink',
+  outline: 'border-border-strong text-ink-muted',
+}
