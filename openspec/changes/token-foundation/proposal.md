@@ -77,6 +77,6 @@ None. This is the project's first behaviour.
   something a consumer or CI ever executes.
 - **Licensing:** SIL OFL 1.1 for both families. The licence text ships beside the
   files, and `NOTICE` records the Braille Institute as their author.
-- **Risk:** the token *names* are the package's public surface. Renaming one
+- **Risk:** the token _names_ are the package's public surface. Renaming one
   after a consuming project exists is a breaking change, so the naming is settled
   here and recorded as an ADR.

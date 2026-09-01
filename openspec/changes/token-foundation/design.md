@@ -42,11 +42,11 @@ radius, control heights and motion are hand-written in the same file, because th
 are not derived from anything and a generator for them would be indirection with
 no source of truth behind it.
 
-*Alternative rejected:* hand-write the colours too. It was how the canvas started,
+_Alternative rejected:_ hand-write the colours too. It was how the canvas started,
 and the first draft already carried three ratios that had been rounded the wrong
 way. A swatch and the number printed beside it must come from one computation.
 
-*Alternative rejected:* generate at build time from the consumer's side. That
+_Alternative rejected:_ generate at build time from the consumer's side. That
 would make the package a build-tool dependency instead of a stylesheet, which the
 "ships source, one Tailwind pass" decision rules out.
 
@@ -57,10 +57,20 @@ committed file and a fresh generation disagree.
 ### Three selectors, in a fixed order
 
 ```css
-:root { /* light values */ }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { /* dark */ } }
-:root[data-theme='dark'] { /* dark */ }
-:root[data-theme='light'] { /* light */ }
+:root {
+  /* light values */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    /* dark */
+  }
+}
+:root[data-theme='dark'] {
+  /* dark */
+}
+:root[data-theme='light'] {
+  /* light */
+}
 ```
 
 Light is the bare `:root` declaration so that a token can never exist only inside
@@ -69,15 +79,19 @@ and nobody notices until a screenshot. The `:not([data-theme='light'])` guard is
 what lets an explicit light choice win under a dark system, and the two attribute
 blocks make the toggle authoritative in both directions.
 
-*Alternative rejected:* `light-dark()`. It is well supported now, but it puts both
+_Alternative rejected:_ `light-dark()`. It is well supported now, but it puts both
 values inside every declaration, which makes a consumer's override a two-value
 edit instead of a one-value edit and defeats the retheming story.
 
 ### Namespace the raw tokens, keep the utility names clean
 
+Recorded as [ADR-0001](../../../docs/adr/0001-token-names-are-the-public-surface.md),
+because the names outlive this change: they are the package's public surface
+and a rename is a breaking change for every consumer at once.
+
 Raw tokens are `--fds-*`; `@theme inline` maps them onto unprefixed utility names.
 A shared package cannot claim `--color-bg` without risking a collision with the
-consumer's own tokens, and `@theme inline` maps a utility to the *variable* rather
+consumer's own tokens, and `@theme inline` maps a utility to the _variable_ rather
 than its value — which is exactly the mechanism that makes runtime retheming work
 without a single `dark:` variant.
 
@@ -89,7 +103,7 @@ component. Layer placement matters: a consumer's utility must still be able to
 override the register on a specific element, and `@layer components` loses to
 utilities by design.
 
-*Alternative rejected:* `@apply`. It is banned in this project, and here it would
+_Alternative rejected:_ `@apply`. It is banned in this project, and here it would
 also inline the values at build time, breaking the runtime retheming the whole
 architecture rests on.
 
@@ -102,10 +116,10 @@ for the whole 200–800 range of both families — against roughly 100 KB for th
 eight static weights the type scale would otherwise need, and two requests instead
 of eight.
 
-*Alternative rejected:* static weights. Cheaper per file, more files, and it makes
+_Alternative rejected:_ static weights. Cheaper per file, more files, and it makes
 the scale's weights a build-time commitment rather than a token one.
 
-*Alternative rejected:* leaving the font to the consumer. The face is the reason
+_Alternative rejected:_ leaving the font to the consumer. The face is the reason
 this identity is legible in the first place; making it optional would mean the
 package's own primitives are drawn in something the design was never checked in.
 

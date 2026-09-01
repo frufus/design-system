@@ -123,7 +123,12 @@ function panel(tk, compact) {
         </div>
 ${rows
   .map(
-    ([k, v, code, bar]) => `        <div class="drow" style="border-bottom: 1px solid ${tk.border.hex}">
+    ([
+      k,
+      v,
+      code,
+      bar,
+    ]) => `        <div class="drow" style="border-bottom: 1px solid ${tk.border.hex}">
           <div style="height: 18px; background: ${bar}"></div>
           <div class="key" style="color: ${tk['ink-muted'].hex}">${k}</div>
           <div style="font-size: 14px; color: ${tk.ink.hex}">${v}</div>

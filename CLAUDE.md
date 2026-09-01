@@ -11,18 +11,25 @@ requirements are the capability specs under `openspec/specs/`; anything under
 ## Commands
 
 ```
-npm run test       # Vitest
-npm run lint       # ESLint
-npm run typecheck  # vue-tsc
-npm run format     # Prettier
+npm run test         # Vitest
+npm run lint         # ESLint plus the colour-literal check
+npm run typecheck    # vue-tsc
+npm run format       # Prettier
+npm run build:tokens # regenerate the colour half of src/tokens.css
+npm run build:fonts  # re-vendor the subset woff2 (needs python + fonttools)
 ```
+
+Both build steps are authoring steps whose output is committed. A consuming
+project never runs them, and the test suite fails if a committed file and a
+fresh generation disagree.
 
 ## Directories
 
 ```
-src/               Tokens, registers, class maps and the primitives
+src/               Tokens, registers, vendored fonts and the primitives
 docs/design/       .dc.html artboards - the binding visual handoff
 docs/adr/          Architecture decisions
 openspec/          Binding specs and change proposals
 tests/             Unit and end-to-end tests
+tools/             Authoring scripts: palette measurement, token and font builds
 ```

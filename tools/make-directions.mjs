@@ -71,7 +71,8 @@ const FORM = {
     shadow: true,
     tracking: '-0.015em',
     caps: false,
-    formNote: 'Pill-shaped actions against square-ish cards, so the button is the loudest shape too.',
+    formNote:
+      'Pill-shaped actions against square-ish cards, so the button is the loudest shape too.',
   },
   signal: {
     file: 'DirectionSignal',
@@ -86,7 +87,8 @@ const FORM = {
     shadow: false,
     tracking: '-0.01em',
     caps: true,
-    formNote: 'Crisp corners, a heavier border, no shadow. Ink carries the hierarchy; the accent only fills the one action that matters.',
+    formNote:
+      'Crisp corners, a heavier border, no shadow. Ink carries the hierarchy; the accent only fills the one action that matters.',
   },
 }
 
@@ -112,9 +114,7 @@ function panel(t, form, appearance, rows) {
       ? 'box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 18px rgba(0, 0, 0, 0.05);'
       : ''
     : ''
-  const tightest = rows
-    .slice()
-    .sort((a, b) => a.ratio / a.min - b.ratio / b.min)[0]
+  const tightest = rows.slice().sort((a, b) => a.ratio / a.min - b.ratio / b.min)[0]
 
   return `
       <div style="display: flex; flex-direction: column; gap: 16px; padding: 20px; border-radius: ${form.cardRadius + 4}px; background: ${t.canvas.hex}; border: ${form.borderW}px solid ${t.border.hex}">

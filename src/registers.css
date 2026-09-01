@@ -1,0 +1,229 @@
+/*
+ * @frufus/design-system - Tailwind registers
+ *
+ * Import after tokens.css. This file does three things:
+ *
+ *   1. Removes Tailwind's default theme rather than extending it.
+ *   2. Claims utility names for our own tokens, mapped to the variables
+ *      themselves so a runtime appearance change repaints without a rebuild.
+ *   3. Declares the control register every form control shares.
+ *
+ * A consuming project wires the package with exactly four lines:
+ *
+ *   @import 'tailwindcss';
+ *   @source '../node_modules/@frufus/design-system/src';
+ *   @import '@frufus/design-system/tokens.css';
+ *   @import '@frufus/design-system/registers.css';
+ *
+ * The @source line is required because Tailwind v4 does not scan installed
+ * dependencies for class names. Without it the primitives render unstyled and
+ * nothing raises an error, which is why it is part of the documented contract.
+ */
+
+/* ------------------------------------------------------------------------- *
+ * 1. Null the default theme
+ *
+ * A palette that is merely extended leaves the defaults available, and
+ * available means eventually used. Everything carrying visual identity goes;
+ * breakpoints, containers and the spacing base are structural and stay, because
+ * removing them would break responsive utilities without making the identity
+ * any more its own.
+ *
+ * Note what is absent below: no shadow scale is remapped afterwards. In this
+ * identity depth is a surface and a border, never a shadow, so `shadow-*`
+ * producing nothing is the rule being enforced rather than an oversight.
+ * ------------------------------------------------------------------------- */
+
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --ease-*: initial;
+}
+
+/* ------------------------------------------------------------------------- *
+ * 2. Claim the utility names
+ *
+ * `inline` is load-bearing: it maps each utility to the *variable*, not to the
+ * value it happens to hold right now. That is the whole mechanism behind
+ * runtime retheming, and the reason there is not a single `dark:` variant
+ * anywhere in this package.
+ * ------------------------------------------------------------------------- */
+
+@theme inline {
+  --color-canvas: var(--fds-canvas);
+  --color-surface: var(--fds-surface);
+  --color-surface-sunken: var(--fds-surface-sunken);
+  --color-surface-raised: var(--fds-surface-raised);
+  --color-border: var(--fds-border);
+  --color-border-strong: var(--fds-border-strong);
+
+  --color-ink: var(--fds-ink);
+  --color-ink-muted: var(--fds-ink-muted);
+  --color-ink-subtle: var(--fds-ink-subtle);
+  --color-ink-on-accent: var(--fds-ink-on-accent);
+  --color-ink-on-danger: var(--fds-ink-on-danger);
+
+  --color-accent: var(--fds-accent);
+  --color-accent-hover: var(--fds-accent-hover);
+  --color-accent-active: var(--fds-accent-active);
+  --color-accent-soft: var(--fds-accent-soft);
+  --color-accent-ink: var(--fds-accent-ink);
+  --color-focus: var(--fds-focus);
+
+  --color-success: var(--fds-success);
+  --color-success-soft: var(--fds-success-soft);
+  --color-success-ink: var(--fds-success-ink);
+  --color-warning: var(--fds-warning);
+  --color-warning-soft: var(--fds-warning-soft);
+  --color-warning-ink: var(--fds-warning-ink);
+  --color-danger: var(--fds-danger);
+  --color-danger-hover: var(--fds-danger-hover);
+  --color-danger-active: var(--fds-danger-active);
+  --color-danger-soft: var(--fds-danger-soft);
+  --color-danger-ink: var(--fds-danger-ink);
+
+  --color-disabled-surface: var(--fds-disabled-surface);
+  --color-disabled-ink: var(--fds-disabled-ink);
+
+  --font-sans: var(--fds-font-sans);
+  --font-mono: var(--fds-font-mono);
+
+  --text-display: var(--fds-text-display);
+  --text-2xl: var(--fds-text-2xl);
+  --text-xl: var(--fds-text-xl);
+  --text-lg: var(--fds-text-lg);
+  --text-base: var(--fds-text-base);
+  --text-sm: var(--fds-text-sm);
+  --text-xs: var(--fds-text-xs);
+  --text-code: var(--fds-text-code);
+  --text-key: var(--fds-text-key);
+
+  --leading-display: var(--fds-leading-display);
+  --leading-2xl: var(--fds-leading-2xl);
+  --leading-xl: var(--fds-leading-xl);
+  --leading-lg: var(--fds-leading-lg);
+  --leading-base: var(--fds-leading-base);
+  --leading-sm: var(--fds-leading-sm);
+  --leading-xs: var(--fds-leading-xs);
+  --leading-code: var(--fds-leading-code);
+  --leading-key: var(--fds-leading-key);
+
+  --tracking-display: var(--fds-tracking-display);
+  --tracking-2xl: var(--fds-tracking-2xl);
+  --tracking-xl: var(--fds-tracking-xl);
+  --tracking-lg: var(--fds-tracking-lg);
+  --tracking-base: var(--fds-tracking-base);
+  --tracking-sm: var(--fds-tracking-sm);
+  --tracking-xs: var(--fds-tracking-xs);
+  --tracking-code: var(--fds-tracking-code);
+  --tracking-key: var(--fds-tracking-key);
+
+  --font-weight-display: var(--fds-weight-display);
+  --font-weight-2xl: var(--fds-weight-2xl);
+  --font-weight-xl: var(--fds-weight-xl);
+  --font-weight-lg: var(--fds-weight-lg);
+  --font-weight-base: var(--fds-weight-base);
+  --font-weight-sm: var(--fds-weight-sm);
+  --font-weight-xs: var(--fds-weight-xs);
+  --font-weight-code: var(--fds-weight-code);
+  --font-weight-key: var(--fds-weight-key);
+
+  --radius-none: var(--fds-radius-none);
+  --radius-tag: var(--fds-radius-tag);
+  --radius-control: var(--fds-radius-control);
+
+  --ease-standard: var(--fds-ease-standard);
+  --ease-exit: var(--fds-ease-exit);
+
+  /* Tailwind derives every spacing utility from this one value, so pointing it
+     at the first step of our scale puts `p-4` on the same 4 px grid the design
+     was drawn on. */
+  --spacing: var(--fds-space-1);
+}
+
+/* ------------------------------------------------------------------------- *
+ * 3. The control register
+ *
+ * Input and Select share one shape. It lives in @layer components rather than
+ * in utilities so a consuming project can still override any single property on
+ * a specific element - the components layer loses to utilities by design.
+ *
+ * The recessed look is a darker fill and a darker top edge, never a shadow,
+ * which is what makes it read the same on a white ground and a near-black one.
+ * ------------------------------------------------------------------------- */
+
+@layer components {
+  .fds-control {
+    display: flex;
+    align-items: center;
+    gap: var(--fds-space-2);
+    inline-size: 100%;
+    block-size: var(--fds-control-md);
+    padding-inline: var(--fds-space-3);
+    border: var(--fds-border-width) solid var(--fds-border-strong);
+    border-block-start-color: var(--fds-ink-muted);
+    border-radius: var(--fds-radius-control);
+    background-color: var(--fds-surface-sunken);
+    color: var(--fds-ink);
+    font-family: var(--fds-font-sans);
+    font-size: var(--fds-text-base);
+    line-height: var(--fds-leading-base);
+    transition:
+      border-color var(--fds-duration-fast) var(--fds-ease-standard),
+      background-color var(--fds-duration-fast) var(--fds-ease-standard),
+      box-shadow var(--fds-duration-fast) var(--fds-ease-standard);
+  }
+
+  .fds-control::placeholder {
+    color: var(--fds-ink-subtle);
+  }
+
+  .fds-control:hover:not(:disabled, [aria-disabled='true']) {
+    border-color: var(--fds-ink-muted);
+    border-block-start-color: var(--fds-ink);
+  }
+
+  /* Focus lifts the field flush with the panel: the recessed fill goes back to
+     the surface exactly while the control is taking your keystrokes. */
+  .fds-control:focus-visible {
+    outline: none;
+    border-color: var(--fds-focus);
+    background-color: var(--fds-surface);
+    box-shadow:
+      0 0 0 var(--fds-focus-offset) var(--fds-surface),
+      0 0 0 calc(var(--fds-focus-offset) + var(--fds-focus-width)) var(--fds-focus);
+  }
+
+  .fds-control[aria-invalid='true'] {
+    border-color: var(--fds-danger);
+    border-block-start-color: var(--fds-danger);
+  }
+
+  /* Flat, not faded. Opacity would let each variant's colour leak through and
+     break contrast differently in every appearance; a dedicated pair of tokens
+     keeps it measurable. */
+  .fds-control:disabled,
+  .fds-control[aria-disabled='true'] {
+    border-color: var(--fds-disabled-surface);
+    background-color: var(--fds-disabled-surface);
+    color: var(--fds-disabled-ink);
+    cursor: not-allowed;
+  }
+
+  /* The ring belongs to the system, not to any one control, so anything
+     focusable can wear it. */
+  .fds-focus-ring:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--fds-focus-offset) var(--fds-surface),
+      0 0 0 calc(var(--fds-focus-offset) + var(--fds-focus-width)) var(--fds-focus);
+  }
+}

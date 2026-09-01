@@ -1,0 +1,37 @@
+@frufus/design-system bundles third-party font software.
+
+────────────────────────────────────────────────────────────────────────────
+Atkinson Hyperlegible Next  ·  Atkinson Hyperlegible Mono
+────────────────────────────────────────────────────────────────────────────
+
+  src/fonts/atkinson-hyperlegible-next-latin.woff2
+  src/fonts/atkinson-hyperlegible-mono-latin.woff2
+
+Licence
+  SIL Open Font License, Version 1.1. The full text ships beside the files as
+  src/fonts/OFL.txt.
+
+Authorship
+  The Atkinson Hyperlegible typeface was created by the Braille Institute of
+  America, Inc. and is named after its founder, J. Robert Atkinson. The Next
+  and Mono families extend that work; their own copyright notices read
+  "The Atkinson Hyperlegible Next Project Authors" and "The Atkinson
+  Hyperlegible Mono Project Authors", and they are developed in the
+  googlefonts organisation on GitHub:
+
+    https://github.com/googlefonts/atkinson-hyperlegible-next
+    https://github.com/googlefonts/atkinson-hyperlegible-next-mono
+
+  Development home is not the same as authorship or as a runtime dependency:
+  this package serves the files from the consuming project's own origin and
+  contacts no font host.
+
+Modification
+  The shipped files are subsets, produced by tools/subset-fonts.mjs from
+  @fontsource-variable/atkinson-hyperlegible-next 5.3.0 and
+  @fontsource-variable/atkinson-hyperlegible-mono 5.3.0. Glyphs outside the
+  documented Latin ranges were removed; no outline, metric or axis was
+  altered, and the weight axis still spans 200 to 800.
+
+  The upstream copyright notice declares no Reserved Font Name, so the subsets
+  keep the original family names, as the licence permits.

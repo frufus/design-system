@@ -4,3 +4,8 @@ storybook-static/
 coverage/
 package-lock.json
 docs/design/*.dc.html
+
+# Half of this file is emitted by tools/build-tokens.mjs. Prettier reformatting
+# it would put the committed bytes and a fresh generation permanently at odds,
+# and the generator is the authority on that region's shape.
+src/tokens.css
