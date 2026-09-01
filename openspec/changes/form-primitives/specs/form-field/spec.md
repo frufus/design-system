@@ -65,6 +65,9 @@ both its error and its description, in that order.
 
 ### Requirement: A disabled field is inert and announced
 
+A disabled field SHALL refuse focus and input, report its state to assistive
+technology, and communicate it with dedicated colours rather than transparency.
+
 #### Scenario: A field is disabled
 
 - **WHEN** a field renders disabled
