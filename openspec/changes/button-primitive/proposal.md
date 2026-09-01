@@ -11,8 +11,11 @@ the six that copy it.
 
 ## What Changes
 
+- **Changed:** `src/registers.css` gains an action register beside the control
+  register, and a target-restoring helper.
 - **New:** `src/classMaps.ts` — the explicit `Record<K, string>` maps that turn a
-  variant or a size into classes. No class name is ever assembled from a
+  variant or a size into classes. They hold only what actually varies: the
+  colours and the box. No class name is ever assembled from a
   variable, so every class the build sees can be found by searching for it.
 - **New:** `src/components/Button.vue` — four variants (primary, secondary,
   ghost, destructive), three sizes, a disabled state and a loading state, with
@@ -47,7 +50,12 @@ double-submitted while it is working.
 
 ### Modified Capabilities
 
-None.
+- `tailwind-registers`: gains the action register that every button variant
+  shares, and the mechanism a control below 44 pixels uses to restore its target.
+  Discovered while implementing rather than while planning: the shape, focus ring
+  and transition were about to be repeated per variant in the class maps, which
+  is exactly the duplication the control register already exists to prevent for
+  fields.
 
 ## Impact
 

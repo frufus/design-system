@@ -36,13 +36,13 @@ that follow.** Where it is not marked, it is a decision local to Button.
 indexes them. The maps are exported so a test can assert every documented value
 has an entry, and so a reader can see the whole surface in one place.
 
-*Alternative rejected:* a `cva`-style helper or `clsx` with conditional objects.
+_Alternative rejected:_ a `cva`-style helper or `clsx` with conditional objects.
 Both are pleasant and both make the class strings computed. The project's rule is
 that every class the build sees is greppable, and Tailwind's scanner enforces the
 same thing from the other side: a class it cannot see literally is a class it
 does not emit.
 
-*Alternative rejected:* one flat map keyed by `${variant}-${size}`. Twelve
+_Alternative rejected:_ one flat map keyed by `${variant}-${size}`. Twelve
 entries instead of seven, and adding a size would mean editing four rows.
 
 ### `disabled` uses the attribute; `loading` uses `aria-disabled`
@@ -59,10 +59,10 @@ is worse than the alternative: a keyboard user who pressed Enter would find thei
 focus back at the top of the document while the action they started is still
 running.
 
-*Alternative rejected:* `disabled` for both. Simpler, and it moves focus out from
+_Alternative rejected:_ `disabled` for both. Simpler, and it moves focus out from
 under a user at the exact moment they are waiting for feedback.
 
-*Alternative rejected:* leaving `loading` activatable and letting the consumer
+_Alternative rejected:_ leaving `loading` activatable and letting the consumer
 guard against double submission. That is the bug this state exists to prevent,
 and every consumer would solve it again.
 
@@ -78,7 +78,7 @@ A button inside a form that does not say otherwise submits it. That default has
 caused enough accidental submissions to be worth reversing here; a project that
 wants a submit button asks for one.
 
-*Alternative rejected:* following the platform default. Consistency with the
+_Alternative rejected:_ following the platform default. Consistency with the
 platform is worth less than not firing a form submission nobody asked for.
 
 ### `[pattern]` An unknown prop value falls back rather than failing

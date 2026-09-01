@@ -20,7 +20,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lint": "eslint . && node tools/check-literal-colours.mjs && node tools/check-appearance-props.mjs",
+    "lint": "eslint . && node tools/check-literal-colours.mjs && node tools/check-appearance-props.mjs && node tools/check-composed-classes.mjs",
     "typecheck": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
