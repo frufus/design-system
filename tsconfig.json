@@ -16,6 +16,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
+    // The build tools are plain ESM JavaScript. Allowing them in lets vue-tsc
+    // infer their exported shapes for the tests that import them, without
+    // typechecking the tools themselves.
+    "allowJs": true,
+    "checkJs": false,
     "noEmit": true
   },
   "include": [
@@ -23,6 +28,7 @@
     "src/**/*.vue",
     "stories/**/*.ts",
     "tests/**/*.ts",
+    "tools/**/*.mjs",
     "*.config.ts"
   ]
 }
