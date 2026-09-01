@@ -36,9 +36,7 @@ describe('literal colour scanner', () => {
 describe('the package holds to it', () => {
   it('has no colour literal outside the token stylesheet', () => {
     const offences = scan(process.cwd())
-    const rendered = offences
-      .map((o) => `${o.file}:${o.line} ${o.matches.join(', ')}`)
-      .join('\n')
+    const rendered = offences.map((o) => `${o.file}:${o.line} ${o.matches.join(', ')}`).join('\n')
 
     expect(offences, `colour literals outside src/tokens.css:\n${rendered}`).toEqual([])
   })

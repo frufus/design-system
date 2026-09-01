@@ -22,7 +22,9 @@ function generatedRegion(source: string): string {
 // a drift this test exists to catch.
 describe('generated colour tokens', () => {
   it('committed src/tokens.css matches a fresh generation', () => {
-    expect(generatedRegion(tokensCss)).toBe(generatedRegion(BEGIN_MARKER + renderColourTokens() + END_MARKER))
+    expect(generatedRegion(tokensCss)).toBe(
+      generatedRegion(BEGIN_MARKER + renderColourTokens() + END_MARKER),
+    )
   })
 
   it('declares light on the bare :root, so no token exists only in a media query', () => {

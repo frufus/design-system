@@ -28,7 +28,8 @@ const PATTERNS = [
 export function findLiteralColours(text) {
   const found = []
   for (const pattern of PATTERNS) {
-    for (const match of text.matchAll(pattern)) found.push({ value: match[0], at: match.index ?? 0 })
+    for (const match of text.matchAll(pattern))
+      found.push({ value: match[0], at: match.index ?? 0 })
   }
   return found.sort((a, b) => a.at - b.at).map((entry) => entry.value)
 }

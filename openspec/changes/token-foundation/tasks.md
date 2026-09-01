@@ -94,7 +94,7 @@
 
 ## 8. Close the change
 
-- [ ] 8.1 Run the full suite plus `openspec validate --strict`.
+- [x] 8.1 Run the full suite plus `openspec validate --strict`.
       **Verified by:** both green, with the test count reported.
-- [ ] 8.2 Update `CLAUDE.md` commands with `build:tokens`.
+- [x] 8.2 Update `CLAUDE.md` commands with `build:tokens`.
       **Verified by:** every command listed in `CLAUDE.md` runs.

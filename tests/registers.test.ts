@@ -126,7 +126,9 @@ describe('control register', () => {
     // A selector can mention the state while excluding it - the hover rule does
     // exactly that - so look for one that selects it rather than negates it.
     const disabled = components.find(
-      (block) => /:disabled|\[aria-disabled='true']/.test(block.selector) && !block.selector.includes(':not('),
+      (block) =>
+        /:disabled|\[aria-disabled='true']/.test(block.selector) &&
+        !block.selector.includes(':not('),
     )
     expect(disabled, 'no disabled rule in the components layer').toBeTruthy()
     expect(disabled?.declarations['opacity']).toBeUndefined()

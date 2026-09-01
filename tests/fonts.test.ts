@@ -18,7 +18,9 @@ const rootTokens = blocks
 
 /** Every url(...) target in a src declaration, unquoted. */
 function sources(declaration: string): string[] {
-  return [...declaration.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)].map((match) => match[2] ?? '')
+  return [...declaration.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)].map(
+    (match) => match[2] ?? '',
+  )
 }
 
 // The package promises the interface renders in the intended typeface with no

@@ -65,9 +65,7 @@ function splice(source) {
   if (start === -1 || end === -1) {
     throw new Error('src/tokens.css is missing the generated colour markers')
   }
-  return (
-    source.slice(0, start + BEGIN_MARKER.length) + renderColourTokens() + source.slice(end)
-  )
+  return source.slice(0, start + BEGIN_MARKER.length) + renderColourTokens() + source.slice(end)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

@@ -45,9 +45,7 @@ describe('parseCss', () => {
   it('preserves a value containing nested parentheses', () => {
     const blocks = parseCss('.a { box-shadow: 0 0 0 2px var(--fds-surface, oklch(1 0 0)); }')
 
-    expect(blocks[0]?.declarations['box-shadow']).toBe(
-      '0 0 0 2px var(--fds-surface, oklch(1 0 0))',
-    )
+    expect(blocks[0]?.declarations['box-shadow']).toBe('0 0 0 2px var(--fds-surface, oklch(1 0 0))')
   })
 
   it('keeps the last declaration when a property is repeated', () => {

@@ -334,52 +334,52 @@ const fmtOklch = ([L, C, h]) => `oklch(${L} ${C} ${h})`
 // Report only when run directly - other tools import build() and measure(),
 // and an import that printed a report and then exited would take them with it.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-const args = process.argv.slice(2)
-const named = args.filter((a) => !a.startsWith('--'))
-const keys = named.length ? named : Object.keys(directions)
+  const args = process.argv.slice(2)
+  const named = args.filter((a) => !a.startsWith('--'))
+  const keys = named.length ? named : Object.keys(directions)
 
-if (args.includes('--hex')) {
+  if (args.includes('--hex')) {
+    for (const key of keys) {
+      const built = build(key)
+      for (const appearance of ['light', 'dark']) {
+        console.log(`\n# ${key} / ${appearance}`)
+        for (const [token, v] of Object.entries(built.tokens[appearance])) {
+          console.log(`${token.padEnd(16)} ${v.hex}  ${fmtOklch(v.oklch)}`)
+        }
+      }
+    }
+    process.exit(0)
+  }
+
+  let failures = 0
   for (const key of keys) {
     const built = build(key)
+    const results = measure(built)
+    failures += [...results.light, ...results.dark].filter((r) => !r.ok).length
+
+    console.log(`\n${'='.repeat(66)}\n${built.label}  (${key})\n${built.note}`)
+    if (built.clamped.length) console.log(`chroma clamped into sRGB: ${built.clamped.join(', ')}`)
+
     for (const appearance of ['light', 'dark']) {
-      console.log(`\n# ${key} / ${appearance}`)
-      for (const [token, v] of Object.entries(built.tokens[appearance])) {
-        console.log(`${token.padEnd(16)} ${v.hex}  ${fmtOklch(v.oklch)}`)
+      const rows = results[appearance]
+      const tightest = [...rows].sort((a, b) => a.ratio / a.min - b.ratio / b.min)[0]
+      console.log(
+        `  ${appearance.padEnd(5)} ${rows.filter((r) => r.ok).length}/${rows.length} pass` +
+          `   tightest: ${tightest.fg} on ${tightest.bg} ` +
+          `${tightest.ratio.toFixed(2)} (min ${tightest.min})`,
+      )
+      for (const r of rows.filter((x) => !x.ok)) {
+        console.log(
+          `    FAIL ${r.ratio.toFixed(2)} : 1 (min ${r.min})  ${r.fg} on ${r.bg} - ${r.what}`,
+        )
       }
     }
   }
-  process.exit(0)
-}
 
-let failures = 0
-for (const key of keys) {
-  const built = build(key)
-  const results = measure(built)
-  failures += [...results.light, ...results.dark].filter((r) => !r.ok).length
-
-  console.log(`\n${'='.repeat(66)}\n${built.label}  (${key})\n${built.note}`)
-  if (built.clamped.length) console.log(`chroma clamped into sRGB: ${built.clamped.join(', ')}`)
-
-  for (const appearance of ['light', 'dark']) {
-    const rows = results[appearance]
-    const tightest = [...rows].sort((a, b) => a.ratio / a.min - b.ratio / b.min)[0]
-    console.log(
-      `  ${appearance.padEnd(5)} ${rows.filter((r) => r.ok).length}/${rows.length} pass` +
-        `   tightest: ${tightest.fg} on ${tightest.bg} ` +
-        `${tightest.ratio.toFixed(2)} (min ${tightest.min})`,
-    )
-    for (const r of rows.filter((x) => !x.ok)) {
-      console.log(
-        `    FAIL ${r.ratio.toFixed(2)} : 1 (min ${r.min})  ${r.fg} on ${r.bg} - ${r.what}`,
-      )
-    }
-  }
-}
-
-console.log(
-  failures === 0
-    ? `\nAll ${keys.length * PAIRS.length * 2} pairs meet their floor across ${keys.length} direction(s).`
-    : `\n${failures} problem(s).`,
-)
-process.exit(failures === 0 ? 0 : 1)
+  console.log(
+    failures === 0
+      ? `\nAll ${keys.length * PAIRS.length * 2} pairs meet their floor across ${keys.length} direction(s).`
+      : `\n${failures} problem(s).`,
+  )
+  process.exit(failures === 0 ? 0 : 1)
 }

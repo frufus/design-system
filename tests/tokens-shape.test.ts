@@ -90,9 +90,7 @@ describe('reduced motion', () => {
     expect(reduced).toHaveLength(1)
 
     const declared = Object.keys(reduced[0]?.declarations ?? {})
-    const durations = Object.keys(rootTokens).filter((name) =>
-      name.startsWith('--fds-duration-'),
-    )
+    const durations = Object.keys(rootTokens).filter((name) => name.startsWith('--fds-duration-'))
 
     expect(declared.sort()).toEqual(durations.sort())
     for (const value of Object.values(reduced[0]?.declarations ?? {})) {
