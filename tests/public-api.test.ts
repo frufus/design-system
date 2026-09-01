@@ -5,7 +5,16 @@ import * as api from '../src/index.ts'
 // for every consuming project, so the surface is asserted rather than assumed.
 describe('public API', () => {
   it('exports every component built so far', () => {
-    for (const name of ['Badge', 'Button', 'Card', 'Dialog', 'EmptyState', 'Input', 'Select']) {
+    for (const name of [
+      'Badge',
+      'Button',
+      'Card',
+      'Combobox',
+      'Dialog',
+      'EmptyState',
+      'Input',
+      'Select',
+    ]) {
       expect(api[name as keyof typeof api], `${name} is not exported`).toBeTruthy()
     }
   })
@@ -27,10 +36,13 @@ describe('public API', () => {
       'Badge',
       'Button',
       'Card',
+      'Combobox',
       'Dialog',
       'EmptyState',
       'Input',
       'Select',
+      'defaultMatcher',
+      'filterOptions',
     ])
   })
 })

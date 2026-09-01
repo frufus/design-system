@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import Button from '../src/components/Button.vue'
 import Badge from '../src/components/Badge.vue'
 import Card from '../src/components/Card.vue'
+import Combobox from '../src/components/Combobox.vue'
 import Dialog from '../src/components/Dialog.vue'
 import EmptyState from '../src/components/EmptyState.vue'
 import Input from '../src/components/Input.vue'
@@ -187,6 +188,27 @@ describe('Dialog accessibility', () => {
         attachTo: document.body,
       })
       wrapper.get('dialog').element.setAttribute('open', '')
+
+      expect(await violationsIn(wrapper.element)).toEqual([])
+    })
+  }
+})
+
+describe('Combobox accessibility', () => {
+  const options = [
+    { value: 'mephiston', label: 'Mephiston Red' },
+    { value: 'khorne', label: 'Khorne Red' },
+  ]
+
+  for (const appearance of appearances) {
+    it(`has no violations with the list open, in ${appearance}`, async () => {
+      withAppearance(appearance)
+      const wrapper = mount(Combobox, {
+        props: { label: 'Paint', options, modelValue: 'khorne' },
+        attachTo: document.body,
+      })
+
+      await wrapper.get('input').trigger('keydown', { key: 'ArrowDown' })
 
       expect(await violationsIn(wrapper.element)).toEqual([])
     })

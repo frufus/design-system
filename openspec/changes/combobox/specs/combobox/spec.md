@@ -111,6 +111,9 @@ technology announces, worded by the consuming project.
 
 ### Requirement: The chosen option is marked by more than colour
 
+The option currently chosen SHALL be distinguishable without perceiving colour,
+and SHALL be reported as selected to assistive technology.
+
 #### Scenario: The list is open with a value chosen
 
 - **WHEN** the list shows the chosen option
