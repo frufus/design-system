@@ -277,6 +277,11 @@
   --fds-row-display: 40px;
   --fds-row-interactive: 52px;
 
+  /* An action's label is its own typographic decision: the type scale has no
+     step at this weight, and a button is not a heading. */
+  --fds-weight-action: 600;
+  --fds-tracking-action: 0.02em;
+
   --fds-border-width: 1px;
   --fds-focus-width: 2px;
   --fds-focus-offset: 2px;

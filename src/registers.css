@@ -218,6 +218,56 @@
     cursor: not-allowed;
   }
 
+  /* The action register: everything a button is before it has a colour. Shape,
+     focus ring, transition and inert state live here rather than in the class
+     maps, so they are not decisions each variant makes for itself. */
+  .fds-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--fds-space-2);
+    border: var(--fds-border-width) solid transparent;
+    border-radius: var(--fds-radius-control);
+    font-family: var(--fds-font-sans);
+    font-weight: var(--fds-weight-action);
+    letter-spacing: var(--fds-tracking-action);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--fds-duration-fast) var(--fds-ease-standard),
+      border-color var(--fds-duration-fast) var(--fds-ease-standard),
+      color var(--fds-duration-fast) var(--fds-ease-standard);
+  }
+
+  /* Both unavailable states look identical; only their mechanism differs, and
+     that difference is the component's to make, not the stylesheet's. */
+  .fds-action:disabled,
+  .fds-action[aria-disabled='true'] {
+    background-color: var(--fds-disabled-surface);
+    border-color: transparent;
+    color: var(--fds-disabled-ink);
+    cursor: not-allowed;
+  }
+
+  /* Restores a 44 px activation area around a control whose visible box is
+     smaller, without changing how it looks. The pseudo-element is centred on the
+     control and does not paint, so a neighbour keeps its own visible box. */
+  .fds-target {
+    position: relative;
+  }
+
+  .fds-target::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    min-inline-size: var(--fds-target-min);
+    min-block-size: var(--fds-target-min);
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
   /* The ring belongs to the system, not to any one control, so anything
      focusable can wear it. */
   .fds-focus-ring:focus-visible {
