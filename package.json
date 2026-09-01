@@ -20,18 +20,22 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lint": "eslint . && node tools/check-literal-colours.mjs",
+    "lint": "eslint . && node tools/check-literal-colours.mjs && node tools/check-appearance-props.mjs",
     "typecheck": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build:tokens": "node tools/build-tokens.mjs",
-    "build:fonts": "node tools/subset-fonts.mjs"
+    "build:fonts": "node tools/subset-fonts.mjs",
+    "dev": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0",
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.5.10",
+    "@storybook/vue3-vite": "^10.5.10",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.4.0",
     "@vitejs/plugin-vue": "^6.0.8",
@@ -42,6 +46,7 @@
     "eslint-plugin-vue": "^10.10.0",
     "happy-dom": "^20.12.0",
     "prettier": "^3.9.6",
+    "storybook": "^10.5.10",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.69.0",

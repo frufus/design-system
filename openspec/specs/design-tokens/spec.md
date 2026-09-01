@@ -1,6 +1,7 @@
 # design-tokens Specification
 
 ## Purpose
+
 Defines the `--fds-*` token contract: which tokens exist, how a viewer or a
 consuming project selects an appearance, what a consumer may redefine, and the
 accessibility floors every value has to meet before it ships.

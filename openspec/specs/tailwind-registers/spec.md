@@ -1,6 +1,7 @@
 # tailwind-registers Specification
 
 ## Purpose
+
 Defines how Tailwind utilities resolve inside a project that installs this
 package: which default utilities stop existing, which utility names the package's
 tokens claim, and the shared control register that keeps every form control the
