@@ -1,0 +1,5 @@
+schema: spec-driven
+created: 2026-09-01
+# This change is tooling: the catalog is not published, not exported and not
+# part of the package's files, so no consumer-observable behaviour changes.
+skip_specs: true
