@@ -5,5 +5,7 @@
 // Nothing outside this file is part of the package's contract.
 
 export { default as Button } from './components/Button.vue'
+export { default as Input } from './components/Input.vue'
+export { default as Select } from './components/Select.vue'
 
 export { BUTTON_SIZES, BUTTON_VARIANTS, type ButtonSize, type ButtonVariant } from './classMaps.ts'
