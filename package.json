@@ -24,7 +24,8 @@
     "typecheck": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:tokens": "node tools/build-tokens.mjs"
+    "build:tokens": "node tools/build-tokens.mjs",
+    "build:fonts": "node tools/subset-fonts.mjs"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0",

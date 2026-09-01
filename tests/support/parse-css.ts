@@ -128,12 +128,16 @@ export function parseCss(source: string, label = '<inline>'): CssBlock[] {
       prelude = ''
       i += 1
 
-      if (head.startsWith('@')) {
+      const { body, next } = readBody(text, i, label)
+
+      // An at-rule's block either holds nested rules (@media, @supports, @layer)
+      // or declarations of its own (@font-face, @property). Which one it is
+      // shows in the body: only a nesting block contains a further `{`.
+      if (head.startsWith('@') && body.includes('{')) {
         atRules.push(head)
         continue
       }
 
-      const { body, next } = readBody(text, i, label)
       blocks.push({
         selector: head,
         atRules: [...atRules],

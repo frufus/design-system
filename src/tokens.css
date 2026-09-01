@@ -149,3 +149,38 @@
   --fds-disabled-ink: oklch(0.502 0.023 214);
 }
 /* <<< end generated */
+
+/* ------------------------------------------------------------------------- *
+ * Typeface
+ *
+ * Both faces ship inside the package and are served from the consuming
+ * project's own origin. Nothing is fetched from a font host, so the interface
+ * renders as designed with no network at all.
+ *
+ * The weight range is stated explicitly because these are variable fonts whose
+ * default instance is their lightest: a rule that reaches the family without
+ * naming a weight would otherwise render far too thin.
+ * ------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('./fonts/atkinson-hyperlegible-next-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible Mono';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('./fonts/atkinson-hyperlegible-mono-latin.woff2') format('woff2');
+}
+
+:root {
+  --fds-font-sans: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --fds-font-mono: 'Atkinson Hyperlegible Mono', ui-monospace, SFMono-Regular, Consolas,
+    monospace;
+}

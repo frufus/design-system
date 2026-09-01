@@ -24,18 +24,18 @@
 
 ## 3. Vendor the typeface
 
-- [ ] 3.1 Write `tools/subset-fonts.mjs`: fetch the two variable `woff2` from the
+- [x] 3.1 Write `tools/subset-fonts.mjs`: fetch the two variable `woff2` from the
       pinned source package, subset them to the documented unicode ranges, and
       write them to `src/fonts/` with their SIL OFL 1.1 licence text.
       **Verified by:** `node tools/subset-fonts.mjs` produces two files whose sizes
       match the recorded expectations within a tolerance, and re-running it leaves
       no diff.
-- [ ] 3.2 Add the `@font-face` declarations to `src/tokens.css`, each with an
+- [x] 3.2 Add the `@font-face` declarations to `src/tokens.css`, each with an
       explicit `font-weight: 200 800` range, `font-display: swap`, and a relative
       `url()` that resolves from the package.
       **Verified by:** `npm run test -- fonts` asserts every referenced font file
       exists on disk and that the declared family names match the token values.
-- [ ] 3.3 Add the author and licence to `NOTICE`.
+- [x] 3.3 Add the author and licence to `NOTICE`.
       **Verified by:** the same test asserts `NOTICE` names the Braille Institute
       and that the licence file is present beside the fonts.
 

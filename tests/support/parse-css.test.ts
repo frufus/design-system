@@ -65,6 +65,30 @@ describe('parseCss', () => {
     expect(() => parseCss(':root { color: red; } }', 'registers.css')).toThrow(CssParseError)
   })
 
+  it('reads an at-rule that holds declarations rather than rules', () => {
+    const blocks = parseCss(`
+      @font-face {
+        font-family: 'Atkinson Hyperlegible Next';
+        font-weight: 200 800;
+        src: url('./fonts/sans.woff2') format('woff2');
+      }
+    `)
+
+    expect(blocks).toHaveLength(1)
+    expect(blocks[0]?.selector).toBe('@font-face')
+    expect(blocks[0]?.atRules).toEqual([])
+    expect(blocks[0]?.declarations['font-weight']).toBe('200 800')
+    expect(blocks[0]?.declarations['font-family']).toBe("'Atkinson Hyperlegible Next'")
+  })
+
+  it('still nests an at-rule that holds rules', () => {
+    const blocks = parseCss('@media print { @font-face { font-family: x; } }')
+
+    expect(blocks).toHaveLength(1)
+    expect(blocks[0]?.selector).toBe('@font-face')
+    expect(blocks[0]?.atRules).toEqual(['@media print'])
+  })
+
   it('ignores comments, including a brace inside one', () => {
     const blocks = parseCss(`
       /* a { not: a-rule } */
