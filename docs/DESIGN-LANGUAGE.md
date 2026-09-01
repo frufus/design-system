@@ -150,6 +150,13 @@ Three components take this seriously, and it is the most consequential rule here
 - **Dialog** uses the platform's `dialog` element and `showModal()`, which
   provides the focus trap, the inert page, Escape and focus restoration.
 
+One component breaks this rule, and says so: **Combobox** implements the ARIA
+combobox pattern by hand, because there is no platform primitive for a searchable
+single choice — `<select>` cannot search, and `<datalist>` behaves differently in
+every engine and cannot mark an option as chosen. It is alone in its change,
+specified scenario by scenario, and tested the same way. For a short list of
+known values, `Select` is still the better answer.
+
 Where the platform cannot be used, say so and take on the whole cost. Where it
 can, the component's job is to delegate, not to approximate.
 
