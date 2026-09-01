@@ -179,7 +179,7 @@ exist.
 ```
 npm run test            # every assertion the package makes about itself,
                         #   including contrast and accessibility
-npm run lint            # ESLint plus the four convention checks
+npm run lint            # ESLint plus the five convention checks
 npm run typecheck       # vue-tsc
 npm run test:consumer   # packs, installs and builds against a real application
 ```
