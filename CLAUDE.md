@@ -16,7 +16,7 @@ npm run build:storybook
 npm run test         # Vitest
 npm run test:consumer # packs, installs and builds against a real app - slow, and
                      #   the only check that catches a broken files or exports map
-npm run lint         # ESLint plus the colour-literal check
+npm run lint         # ESLint plus the five convention checks
 npm run typecheck    # vue-tsc
 npm run format       # Prettier
 npm run build:tokens # regenerate the colour half of src/tokens.css
