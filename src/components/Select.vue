@@ -30,7 +30,7 @@ defineEmits<{ 'update:modelValue': [value: string] }>()
 </script>
 
 <template>
-  <FieldShell :label="label" :description="description" :error="error" :id="id">
+  <FieldShell :id="id" :label="label" :description="description" :error="error">
     <template #default="{ controlId, describedBy, invalid }">
       <div class="relative flex items-center">
         <select

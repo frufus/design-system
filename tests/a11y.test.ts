@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import Button from '../src/components/Button.vue'
 import Badge from '../src/components/Badge.vue'
 import Card from '../src/components/Card.vue'
+import Dialog from '../src/components/Dialog.vue'
 import EmptyState from '../src/components/EmptyState.vue'
 import Input from '../src/components/Input.vue'
 import Select from '../src/components/Select.vue'
@@ -164,6 +165,28 @@ describe('Surface accessibility', () => {
         slots: { title: 'Nothing on the shelf yet', default: 'Add the paints you own.' },
         attachTo: document.body,
       })
+
+      expect(await violationsIn(wrapper.element)).toEqual([])
+    })
+  }
+})
+
+describe('Dialog accessibility', () => {
+  for (const appearance of appearances) {
+    it(`has no violations in its markup, in ${appearance}`, async () => {
+      // The modal behaviour - trapping, inertness, focus restoration - is the
+      // browser's, and this DOM implements neither it nor showModal. So the
+      // dialog is mounted closed and its `open` attribute is set from here, as
+      // test scaffolding, to make the markup visible to axe. What is checked is
+      // the naming and the structure; the behaviour belongs to the end-to-end
+      // pass over the built catalog.
+      withAppearance(appearance)
+      const wrapper = mount(Dialog, {
+        props: { open: false, title: 'Remove Mephiston Red from your shelf?' },
+        slots: { default: 'Results will stop preferring paints you already own.' },
+        attachTo: document.body,
+      })
+      wrapper.get('dialog').element.setAttribute('open', '')
 
       expect(await violationsIn(wrapper.element)).toEqual([])
     })
