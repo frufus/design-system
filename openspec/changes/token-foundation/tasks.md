@@ -80,15 +80,15 @@
 
 ## 7. Enforcement and wiring
 
-- [ ] 7.1 Add the literal-colour check over every package file except
+- [x] 7.1 Add the literal-colour check over every package file except
       `src/tokens.css`.
       **Verified by:** `npm run lint` fails when a hex literal is added to a
       stylesheet or component.
-- [ ] 7.2 Confirm the `exports` map resolves both stylesheets from a consuming
+- [x] 7.2 Confirm the `exports` map resolves both stylesheets from a consuming
       path shape.
       **Verified by:** `npm run test -- exports` resolves `./tokens.css` and
       `./registers.css` to files that exist.
-- [ ] 7.3 Record the token naming as an ADR via the `adr` skill.
+- [x] 7.3 Record the token naming as an ADR via the `adr` skill.
       **Verified by:** the ADR file exists under `docs/adr/` and names what a
       rename would cost.
 

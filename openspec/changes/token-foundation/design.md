@@ -75,6 +75,10 @@ edit instead of a one-value edit and defeats the retheming story.
 
 ### Namespace the raw tokens, keep the utility names clean
 
+Recorded as [ADR-0001](../../../docs/adr/0001-token-names-are-the-public-surface.md),
+because the names outlive this change: they are the package's public surface
+and a rename is a breaking change for every consumer at once.
+
 Raw tokens are `--fds-*`; `@theme inline` maps them onto unprefixed utility names.
 A shared package cannot claim `--color-bg` without risking a collision with the
 consumer's own tokens, and `@theme inline` maps a utility to the *variable* rather
