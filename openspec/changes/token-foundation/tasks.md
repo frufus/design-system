@@ -1,23 +1,23 @@
 ## 1. Pure logic first: the stylesheet parser
 
-- [ ] 1.1 Write `tests/support/parse-css.test.ts` for a small parser that turns
+- [x] 1.1 Write `tests/support/parse-css.test.ts` for a small parser that turns
       stylesheet text into a record of selector to custom-property map: nested
       at-rules, an empty block, a declaration with a `var()` value, and a
       malformed block that must throw rather than be skipped.
       **Verified by:** `npm run test -- parse-css` — all cases pass, including the
       malformed input raising a named parse error.
-- [ ] 1.2 Implement `tests/support/parse-css.ts` until 1.1 is green.
+- [x] 1.2 Implement `tests/support/parse-css.ts` until 1.1 is green.
       **Verified by:** the same run, with no test skipped.
 
 ## 2. Generate the colour tokens
 
-- [ ] 2.1 Write `tools/build-tokens.mjs`: import `build('petrol')` from
+- [x] 2.1 Write `tools/build-tokens.mjs`: import `build('petrol')` from
       `tools/palette-report.mjs`, emit both appearances' colour custom properties
       into `src/tokens.css` between explicit generated-region markers, and leave
       the hand-written half untouched.
       **Verified by:** `node tools/build-tokens.mjs` writes the file, and running
       it twice produces no diff (`git diff --exit-code src/tokens.css`).
-- [ ] 2.2 Add `npm run build:tokens` and a test asserting the committed
+- [x] 2.2 Add `npm run build:tokens` and a test asserting the committed
       `src/tokens.css` matches a fresh generation.
       **Verified by:** `npm run test -- tokens-generated` fails when a colour value
       in the committed file is edited by hand.
