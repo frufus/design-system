@@ -1,0 +1,5 @@
+schema: spec-driven
+created: 2026-09-01
+# A defect fix and a convention, neither of which changes what the package
+# promises a consuming project.
+skip_specs: true
