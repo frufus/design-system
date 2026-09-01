@@ -20,14 +20,15 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lint": "eslint . && node tools/check-literal-colours.mjs && node tools/check-appearance-props.mjs && node tools/check-composed-classes.mjs",
+    "lint": "eslint . && node tools/check-conventions.mjs",
     "typecheck": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build:tokens": "node tools/build-tokens.mjs",
     "build:fonts": "node tools/subset-fonts.mjs",
     "dev": "storybook dev -p 6006",
-    "build:storybook": "storybook build"
+    "build:storybook": "storybook build",
+    "test:consumer": "node tools/smoke-consumer.mjs"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0",
