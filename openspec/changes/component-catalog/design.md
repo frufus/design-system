@@ -3,13 +3,13 @@
 See `proposal.md` — Why. The constraints that shape the approach:
 
 - Tailwind v4 is CSS-first here, and it does not scan `node_modules` for class
-  names. The catalog runs *inside* the package rather than beside it, so its
+  names. The catalog runs _inside_ the package rather than beside it, so its
   `@source` must point at `src/` directly — which makes it a rehearsal of the
   consumer wiring rather than a copy of it.
 - The identity has no shadows and two appearances of equal rank. A catalog that
   can only show one appearance would let half the design go unlooked-at.
 - `src/tokens.css` selects the dark appearance from `prefers-color-scheme`
-  *unless* `data-theme` says otherwise. That is the hook the toolbar control
+  _unless_ `data-theme` says otherwise. That is the hook the toolbar control
   needs, and it already exists.
 
 ## Goals / Non-Goals
@@ -30,18 +30,34 @@ See `proposal.md` — Why. The constraints that shape the approach:
 
 ## Decisions
 
+### Deviation: Storybook 10, not the 9 the plan named
+
+The plan chose Storybook 9 when 9 was the current major. It is now 10, and the
+plan's own reason for choosing Storybook over the lighter alternatives was
+longevity — Histoire was rejected specifically because it had stopped tracking
+Vue and Vite releases. Installing a major that is already superseded would
+contradict the argument that selected the tool.
+
+Recorded here rather than discovered in the diff. The choice is reversible: the
+version lives in `package.json`, and nothing in the catalog's configuration
+depends on a behaviour unique to 10.
+
+_Condition:_ this holds only if 10 works with the Vite version this repo already
+pins. If the catalog does not build, the deviation is withdrawn and 9 is pinned
+instead — a version that cannot build is not a longevity argument.
+
 ### The toolbar sets `data-theme`, and the story never knows
 
 A global type in `preview.ts` writes `data-theme` onto the preview document's
 root element. Stories render exactly what a consuming application would render;
 none of them takes an appearance prop, and none branches on one.
 
-*Alternative rejected:* a decorator that wraps each story in a themed container.
+_Alternative rejected:_ a decorator that wraps each story in a themed container.
 It would work, and it would quietly permit a component to receive its appearance
 as data — which is the habit this package exists to remove. Setting the attribute
 on the root keeps the mechanism identical to production.
 
-*Alternative rejected:* rendering both appearances side by side in every story.
+_Alternative rejected:_ rendering both appearances side by side in every story.
 Useful for a design review, wrong for a catalog: it halves the space a component
 gets and makes the a11y addon check a page rather than a component.
 
@@ -52,7 +68,7 @@ consuming project, with the `@source` path adjusted for running inside the
 package. If someone breaks the export map or moves a stylesheet, the catalog
 stops rendering.
 
-*Alternative rejected:* importing `src/tokens.css` and `src/registers.css`
+_Alternative rejected:_ importing `src/tokens.css` and `src/registers.css`
 directly by relative path and skipping Tailwind. Faster to set up, and it would
 have hidden exactly the class of mistake this is here to catch.
 

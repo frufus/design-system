@@ -29,6 +29,7 @@
     "stories/**/*.ts",
     "tests/**/*.ts",
     "tools/**/*.mjs",
+    ".storybook/**/*.ts",
     "*.config.ts"
   ]
 }

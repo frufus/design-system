@@ -1,0 +1,35 @@
+/*
+ * The consumer wiring, rehearsed.
+ *
+ * These are the four lines the documentation gives a consuming project. Only
+ * the paths differ, because the catalog runs inside the package rather than
+ * installed beside it:
+ *
+ *   @import 'tailwindcss';
+ *   @source '../node_modules/@frufus/design-system/src';
+ *   @import '@frufus/design-system/tokens.css';
+ *   @import '@frufus/design-system/registers.css';
+ *
+ * Keeping the shape identical means a broken export map or a moved stylesheet
+ * stops the catalog here, rather than in someone else's project.
+ */
+
+@import 'tailwindcss';
+@source '../src';
+@import '../src/tokens.css';
+@import '../src/registers.css';
+
+/* The catalog's own frame, not part of the package: give the preview the page
+   ground and the body type so a story is looked at in context rather than on
+   a bare white sheet. */
+body {
+  margin: 0;
+  padding: var(--fds-space-6);
+  background-color: var(--fds-canvas);
+  color: var(--fds-ink);
+  font-family: var(--fds-font-sans);
+  font-size: var(--fds-text-base);
+  line-height: var(--fds-leading-base);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}

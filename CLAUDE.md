@@ -11,6 +11,8 @@ requirements are the capability specs under `openspec/specs/`; anything under
 ## Commands
 
 ```
+npm run dev          # Storybook catalog, both appearances from the toolbar
+npm run build:storybook
 npm run test         # Vitest
 npm run lint         # ESLint plus the colour-literal check
 npm run typecheck    # vue-tsc
@@ -29,6 +31,8 @@ fresh generation disagree.
 src/               Tokens, registers, vendored fonts and the primitives
 docs/design/       .dc.html artboards - the binding visual handoff
 docs/adr/          Architecture decisions
+.storybook/        Catalog config: the consumer wiring, rehearsed
+stories/           Component stories
 openspec/          Binding specs and change proposals
 tests/             Unit and end-to-end tests
 tools/             Authoring scripts: palette measurement, token and font builds
