@@ -4,8 +4,18 @@
 // consuming project, on the same standing as the token names in ADR-0001.
 // Nothing outside this file is part of the package's contract.
 
+export { default as Badge } from './components/Badge.vue'
 export { default as Button } from './components/Button.vue'
+export { default as Card } from './components/Card.vue'
+export { default as EmptyState } from './components/EmptyState.vue'
 export { default as Input } from './components/Input.vue'
 export { default as Select } from './components/Select.vue'
 
-export { BUTTON_SIZES, BUTTON_VARIANTS, type ButtonSize, type ButtonVariant } from './classMaps.ts'
+export {
+  BADGE_TONES,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS,
+  type BadgeTone,
+  type ButtonSize,
+  type ButtonVariant,
+} from './classMaps.ts'

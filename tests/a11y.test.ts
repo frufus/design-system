@@ -3,6 +3,9 @@ import axe from 'axe-core'
 import { mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it } from 'vitest'
 import Button from '../src/components/Button.vue'
+import Badge from '../src/components/Badge.vue'
+import Card from '../src/components/Card.vue'
+import EmptyState from '../src/components/EmptyState.vue'
 import Input from '../src/components/Input.vue'
 import Select from '../src/components/Select.vue'
 
@@ -129,4 +132,40 @@ describe('Button accessibility', () => {
 
     expect(await violationsIn(wrapper.element)).toEqual([])
   })
+})
+
+describe('Surface accessibility', () => {
+  for (const appearance of appearances) {
+    it(`has no violations for a badge in ${appearance}`, async () => {
+      withAppearance(appearance)
+      const wrapper = mount(Badge, {
+        props: { tone: 'success', mark: true },
+        slots: { default: 'Verified' },
+        attachTo: document.body,
+      })
+
+      expect(await violationsIn(wrapper.element)).toEqual([])
+    })
+
+    it(`has no violations for an interactive card in ${appearance}`, async () => {
+      withAppearance(appearance)
+      const wrapper = mount(Card, {
+        props: { interactive: true },
+        slots: { default: 'Evil Sunz Scarlet' },
+        attachTo: document.body,
+      })
+
+      expect(await violationsIn(wrapper.element)).toEqual([])
+    })
+
+    it(`has no violations for an empty state in ${appearance}`, async () => {
+      withAppearance(appearance)
+      const wrapper = mount(EmptyState, {
+        slots: { title: 'Nothing on the shelf yet', default: 'Add the paints you own.' },
+        attachTo: document.body,
+      })
+
+      expect(await violationsIn(wrapper.element)).toEqual([])
+    })
+  }
 })
