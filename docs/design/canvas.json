@@ -1,11 +1,21 @@
 {
   "pages": [
-    { "id": "form", "name": "Form" },
-    { "id": "directions", "name": "Directions" },
     { "id": "foundations", "name": "Foundations" },
-    { "id": "primitives", "name": "Primitives" }
+    { "id": "primitives", "name": "Primitives" },
+    { "id": "form", "name": "Form studies" },
+    { "id": "directions", "name": "Directions" }
   ],
   "artboards": [
+    { "file": "Main.dc.html", "page": "foundations", "x": 0, "y": 0, "w": 1240, "h": 1200 },
+    { "file": "Typography.dc.html", "page": "foundations", "x": 1360, "y": 0, "w": 1020, "h": 1420 },
+    { "file": "Geometry.dc.html", "page": "foundations", "x": 2460, "y": 0, "w": 1020, "h": 1180 },
+
+    { "file": "Buttons.dc.html", "page": "primitives", "x": 0, "y": 0, "w": 1300, "h": 1220 },
+    { "file": "Fields.dc.html", "page": "primitives", "x": 1420, "y": 0, "w": 1180, "h": 1320 },
+    { "file": "Surfaces.dc.html", "page": "primitives", "x": 0, "y": 1440, "w": 1260, "h": 1200 },
+    { "file": "Dialog.dc.html", "page": "primitives", "x": 1380, "y": 1440, "w": 1180, "h": 980 },
+    { "file": "Composition.dc.html", "page": "primitives", "x": 0, "y": 2760, "w": 1260, "h": 1000 },
+
     { "file": "FormRulework.dc.html", "page": "form", "x": 0, "y": 0, "w": 660, "h": 1160 },
     { "file": "FormConsole.dc.html", "page": "form", "x": 740, "y": 0, "w": 660, "h": 1220 },
     { "file": "FormPlate.dc.html", "page": "form", "x": 1480, "y": 0, "w": 660, "h": 1340 },
@@ -14,43 +24,34 @@
     { "file": "DirectionPetrol.dc.html", "page": "directions", "x": 720, "y": 0, "w": 640, "h": 1320 },
     { "file": "DirectionAmethyst.dc.html", "page": "directions", "x": 1440, "y": 0, "w": 640, "h": 1320 },
     { "file": "DirectionMagenta.dc.html", "page": "directions", "x": 2160, "y": 0, "w": 640, "h": 1320 },
-    { "file": "DirectionSignal.dc.html", "page": "directions", "x": 2880, "y": 0, "w": 640, "h": 1320 },
-
-    { "file": "Main.dc.html", "page": "foundations", "x": 0, "y": 0, "w": 1240, "h": 1500 },
-    { "file": "Typography.dc.html", "page": "foundations", "x": 1360, "y": 0, "w": 980, "h": 1240 },
-    { "file": "Geometry.dc.html", "page": "foundations", "x": 2440, "y": 0, "w": 1000, "h": 1360 },
-
-    { "file": "Buttons.dc.html", "page": "primitives", "x": 0, "y": 0, "w": 1280, "h": 1240 },
-    { "file": "Fields.dc.html", "page": "primitives", "x": 1400, "y": 0, "w": 1160, "h": 1400 },
-    { "file": "Surfaces.dc.html", "page": "primitives", "x": 0, "y": 1520, "w": 1240, "h": 1200 },
-    { "file": "Dialog.dc.html", "page": "primitives", "x": 1360, "y": 1520, "w": 1160, "h": 1080 },
-    { "file": "Composition.dc.html", "page": "primitives", "x": 0, "y": 2840, "w": 1240, "h": 1080 }
+    { "file": "DirectionSignal.dc.html", "page": "directions", "x": 2880, "y": 0, "w": 640, "h": 1320 }
   ],
   "annotations": [
+    {
+      "id": "gate",
+      "page": "foundations",
+      "x": 0,
+      "y": -250,
+      "w": 980,
+      "text": "PETROL + CONSOLE. This is the binding handoff for tokens.css - nothing in src/ gets written until it is approved.\n\nThe one conflict the form study left open is resolved here: display rows sit at 40 px, but any row holding a control is 52 px so the control keeps its full 44 px target. Density where it is free, never at the cost of the floor.\n\nEvery contrast number on these artboards is computed by tools/palette-report.mjs. All 27 pairs pass in both appearances; the tightest is the decorative hairline at 1.32.",
+      "kind": "note"
+    },
     {
       "id": "formpick",
       "page": "form",
       "x": 0,
-      "y": -250,
-      "w": 940,
-      "text": "Petrol is settled. This page varies only STRUCTURE - same palette, same IBM Plex Sans and Mono - so form is the single variable.\n\nAll three drop the card-in-a-card habit, which is the part that reads as generic. Rulework replaces boxes with a gutter and hairlines. Console makes the row the unit and sets surfaces inset instead of raised. Plate uses one unbroken surface and lets scale carry the hierarchy.\n\nEach names what it costs at the bottom - none of them is free.\n\nPick one, or say which parts of two you want combined."
+      "y": -190,
+      "w": 900,
+      "text": "Settled: CONSOLE.\n\nKept as the record of what was compared. All three dropped the card-in-a-card habit; Console won because the row - not the box - became the unit, which is what the density is actually for."
     },
     {
       "id": "pick",
       "page": "directions",
       "x": 0,
-      "y": -230,
-      "w": 900,
-      "text": "Settled: PETROL.\n\nThe five candidates stay here as the record of what was compared. Each changed hue, chroma, form and type together; all 27 contrast pairs pass in both appearances for every one of them.\n\nThe open question moved to the Form page."
-    },
-    {
-      "id": "gate",
-      "page": "foundations",
-      "x": 0,
       "y": -190,
-      "w": 700,
-      "text": "These pages still show the Indigo values. They get recoloured to Petrol - and restructured to whichever form you pick - before any token is written.\n\nEvery contrast number on them is computed by tools/palette-report.mjs, not estimated."
+      "w": 900,
+      "text": "Settled: PETROL.\n\nKept as the record. Each candidate changed hue, chroma, form and type together, and all 27 contrast pairs pass in both appearances for every one of them - so the choice was about character, not about which one was safe."
     }
   ],
-  "launch": { "view": "canvas", "page": "form" }
+  "launch": { "view": "canvas", "page": "foundations" }
 }

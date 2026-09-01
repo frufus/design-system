@@ -7,182 +7,217 @@
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
   <style>
     body {
       margin: 0;
-      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums;
     }
-    a { color: #344EA8; text-decoration: none; }
-    a:hover { color: #4C6DDA; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; }
-    .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-    .state { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    a { color: #026465; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #017879; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 11px; }
+    .key {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .strip { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 26px; padding: 0 12px; }
     .badge {
       display: inline-flex; align-items: center; gap: 6px;
-      height: 24px; padding: 0 10px; border-radius: 999px;
-      font-size: 12px; font-weight: 600; letter-spacing: -0.002em;
+      height: 22px; padding: 0 8px; border-radius: 2px;
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
       border: 1px solid transparent; box-sizing: border-box;
     }
-    .dot { width: 6px; height: 6px; border-radius: 999px; }
+    .sq { width: 6px; height: 6px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 44px; padding: 0 20px; border-radius: 12px;
-      font-size: 15px; font-weight: 600; border: 1px solid transparent; box-sizing: border-box;
+      height: 44px; padding: 0 16px; border-radius: 4px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+      border: 1px solid transparent; box-sizing: border-box;
     }
+    .row { display: grid; grid-template-columns: 3px 96px minmax(0, 1fr) auto; align-items: center; gap: 0 10px; height: 40px; padding: 0 12px; }
   </style>
 </helmet>
 
-<div style="display: flex; flex-direction: column; gap: 26px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 30px; background: #EFF5F7; min-height: 100%; box-sizing: border-box">
 
-  <div style="display: flex; flex-direction: column; gap: 10px">
-    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Card, Badge, EmptyState</div>
-    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 780px; text-wrap: pretty">
-      The three presentational primitives. None of them owns a string: every word on this sheet
-      arrives through a slot, which is why the package can be dropped into a project in any language.
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <div style="font-size: 30px; font-weight: 300; letter-spacing: -0.03em; color: #131F22">Card, Badge, EmptyState</div>
+      <div class="key" style="color: #758589">The three presentational primitives</div>
+    </div>
+    <div style="font-size: 14px; line-height: 1.6; color: #55676C; max-width: 880px; text-wrap: pretty">
+      None of them owns a string: every word here arrives through a slot, which is why the package can
+      be dropped into a project in any language. Card keeps its name in the API even though its
+      Console form is a panel with strips &mdash; the shape changed, the contract did not.
     </div>
   </div>
 
-  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px">
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
 
     <!-- ============================ LIGHT ============================ -->
-    <div style="display: flex; flex-direction: column; gap: 24px; padding: 26px; border-radius: 20px; background: #F2F4F8; border: 1px solid #DDE0E6">
-      <div class="group-label" style="color: #7D828D">Light appearance</div>
+    <div style="display: flex; flex-direction: column; gap: 18px">
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Badge</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px">
-          <span class="badge" style="background: #DDE0E6; color: #191C24">Draft</span>
-          <span class="badge" style="background: #DFE8FF; color: #344EA8">In review</span>
-          <span class="badge" style="background: #D9F2DE; color: #247542"><span class="dot" style="background: #247542"></span>Verified</span>
-          <span class="badge" style="background: #FEECD5; color: #7A5103"><span class="dot" style="background: #A6710F"></span>Stale</span>
-          <span class="badge" style="background: #FEE4E2; color: #B7272C"><span class="dot" style="background: #B7272C"></span>Failed</span>
-          <span class="badge" style="border-color: #7D828D; color: #5F646F">Outline</span>
+      <div style="border: 1px solid #758589; background: #FFFFFF">
+        <div class="strip" style="background: #131F22"><div class="key" style="color: #EFF5F7">Light appearance</div><div class="key" style="color: #CDF1F0">Badge</div></div>
+        <div style="padding: 16px 14px; display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="badge" style="background: #D8E2E4; color: #131F22">Draft</span>
+          <span class="badge" style="background: #CDF1F0; color: #026465">In review</span>
+          <span class="badge" style="background: #D8F3DA; color: #1E7635"><span class="sq" style="background: #1E7635"></span>Verified</span>
+          <span class="badge" style="background: #FFECD4; color: #7B5100"><span class="sq" style="background: #A77000"></span>Stale</span>
+          <span class="badge" style="background: #FFE4E1; color: #C1011F"><span class="sq" style="background: #C1011F"></span>Failed</span>
+          <span class="badge" style="border-color: #758589; color: #55676C">Outline</span>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Card &middot; resting</div>
-        <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #DDE0E6; box-shadow: 0 1px 2px rgba(25, 28, 36, 0.06)">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
-            <div style="display: flex; flex-direction: column; gap: 3px">
-              <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #191C24">Mephiston Red</div>
-              <div style="font-size: 14px; color: #5F646F">Citadel &middot; Base &middot; opaque</div>
-            </div>
-            <span class="badge" style="background: #D9F2DE; color: #247542"><span class="dot" style="background: #247542"></span>Verified</span>
+      <div style="border: 1px solid #758589; background: #FFFFFF">
+        <div class="strip" style="background: #EFF5F7; border-bottom: 1px solid #758589">
+          <div class="key" style="color: #55676C">Card &middot; with strips and rows</div>
+          <span class="badge" style="background: #D8F3DA; color: #1E7635"><span class="sq" style="background: #1E7635"></span>Verified</span>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #D8E2E4">
+          <div style="height: 18px; background: #D8E2E4"></div>
+          <div class="key" style="color: #55676C">Brand</div>
+          <div style="font-size: 14px; color: #131F22">Citadel</div>
+          <div class="mono" style="color: #758589">BASE</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #D8E2E4">
+          <div style="height: 18px; background: #D8E2E4"></div>
+          <div class="key" style="color: #55676C">Finish</div>
+          <div style="font-size: 14px; color: #131F22">Opaque</div>
+          <div class="mono" style="color: #758589">OP</div>
+        </div>
+        <div class="row">
+          <div style="height: 18px; background: #017879"></div>
+          <div class="key" style="color: #55676C">Matches</div>
+          <div style="font-size: 14px; color: #131F22">4 across 3 brands</div>
+          <div class="mono" style="color: #026465">&Delta;E 2.4</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; background: #EFF5F7; border-top: 1px solid #758589">
+          <div style="display: flex">
+            <span class="btn" style="height: 36px; padding: 0 12px; font-size: 12px; border-radius: 4px 0 0 4px; background: #017879; color: #FFFFFF">Compare</span>
+            <span class="btn" style="height: 36px; padding: 0 12px; font-size: 12px; border-radius: 0 4px 4px 0; border-color: #758589; border-left-width: 0; color: #131F22">Add to shelf</span>
           </div>
-          <div style="font-size: 15px; line-height: 24px; color: #5F646F; text-wrap: pretty">
-            Four substitutes across three manufacturers, each carrying the source it rests on.
-          </div>
-          <div style="display: flex; gap: 10px; padding-top: 16px; border-top: 1px solid #DDE0E6">
-            <span class="btn" style="height: 36px; padding: 0 14px; border-radius: 8px; font-size: 13px; background: #4C6DDA; color: #FFFFFF">Compare</span>
-            <span class="btn" style="height: 36px; padding: 0 14px; border-radius: 8px; font-size: 13px; color: #344EA8">Add to shelf</span>
-          </div>
+          <div class="mono" style="color: #758589">upd 4 min</div>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Card &middot; interactive, hovered</div>
-        <div style="display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #4C6DDA; box-shadow: 0 2px 6px rgba(25, 28, 36, 0.08), 0 1px 2px rgba(25, 28, 36, 0.05)">
-          <div style="width: 40px; height: 40px; border-radius: 10px; background: #B7272C; flex-shrink: 0"></div>
+      <div style="border: 1px solid #758589; background: #FFFFFF">
+        <div class="strip" style="background: #EFF5F7; border-bottom: 1px solid #758589"><div class="key" style="color: #55676C">Card &middot; interactive, hovered</div></div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-left: 3px solid #017879; background: #EFF5F7">
+          <div style="width: 36px; height: 36px; background: #C1011F; flex-shrink: 0"></div>
           <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1">
-            <div style="font-size: 15px; font-weight: 600; color: #191C24">Evil Sunz Scarlet</div>
-            <div style="font-size: 13px; color: #5F646F">&Delta;E 2.4 &middot; manufacturer chart</div>
+            <div style="font-size: 15px; font-weight: 500; color: #131F22">Evil Sunz Scarlet</div>
+            <div class="mono" style="color: #55676C">army painter &middot; chart</div>
           </div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 5 5 5-5 5" stroke="#4C6DDA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 5 5 5-5 5" stroke="#017879" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">EmptyState</div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 28px; border-radius: 16px; background: #FFFFFF; border: 1px dashed #DDE0E6; text-align: center">
-          <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #191C24">Nothing on the shelf yet</div>
-          <div style="font-size: 14px; line-height: 21px; color: #5F646F; max-width: 320px; text-wrap: pretty">
+      <div style="border: 1px solid #758589; background: #FFFFFF">
+        <div class="strip" style="background: #EFF5F7; border-bottom: 1px solid #758589"><div class="key" style="color: #55676C">EmptyState</div></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 26px; text-align: center">
+          <div class="key" style="color: #758589">0 items</div>
+          <div style="font-size: 20px; font-weight: 300; letter-spacing: -0.02em; color: #131F22">Nothing on the shelf yet</div>
+          <div style="font-size: 13px; line-height: 20px; color: #55676C; max-width: 320px; text-wrap: pretty">
             Add the paints you own and every result will tell you what you can already use.
           </div>
-          <span class="btn" style="background: #4C6DDA; color: #FFFFFF; margin-top: 4px">Add a paint</span>
+          <span class="btn" style="background: #017879; color: #FFFFFF; margin-top: 4px">Add a paint</span>
         </div>
       </div>
     </div>
 
     <!-- ============================ DARK ============================ -->
-    <div style="display: flex; flex-direction: column; gap: 24px; padding: 26px; border-radius: 20px; background: #06080C; border: 1px solid #2B2E37">
-      <div class="group-label" style="color: #7D828D">Dark appearance</div>
+    <div style="display: flex; flex-direction: column; gap: 18px">
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Badge</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px">
-          <span class="badge" style="background: #2B2E37; color: #F2F4F8">Draft</span>
-          <span class="badge" style="background: #101C43; color: #91AFFD">In review</span>
-          <span class="badge" style="background: #022911; color: #56B675"><span class="dot" style="background: #56B675"></span>Verified</span>
-          <span class="badge" style="background: #352101; color: #F2AC39"><span class="dot" style="background: #F2AC39"></span>Stale</span>
-          <span class="badge" style="background: #410C0C; color: #F1635E"><span class="dot" style="background: #F1635E"></span>Failed</span>
-          <span class="badge" style="border-color: #5F646F; color: #A7ABB5">Outline</span>
+      <div style="border: 1px solid #55676C; background: #081114">
+        <div class="strip" style="background: #131F22"><div class="key" style="color: #EFF5F7">Dark appearance</div><div class="key" style="color: #09CACC">Badge</div></div>
+        <div style="padding: 16px 14px; display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="badge" style="background: #233135; color: #EFF5F7">Draft</span>
+          <span class="badge" style="background: #002626; color: #09CACC">In review</span>
+          <span class="badge" style="background: #002A0B; color: #51B766"><span class="sq" style="background: #51B766"></span>Verified</span>
+          <span class="badge" style="background: #362100; color: #F9A901"><span class="sq" style="background: #F9A901"></span>Stale</span>
+          <span class="badge" style="background: #450508; color: #FC5654"><span class="sq" style="background: #FC5654"></span>Failed</span>
+          <span class="badge" style="border-color: #55676C; color: #9FAFB2">Outline</span>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Card &middot; resting</div>
-        <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 16px; background: #0D0F15; border: 1px solid #2B2E37">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
-            <div style="display: flex; flex-direction: column; gap: 3px">
-              <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #F2F4F8">Mephiston Red</div>
-              <div style="font-size: 14px; color: #A7ABB5">Citadel &middot; Base &middot; opaque</div>
-            </div>
-            <span class="badge" style="background: #022911; color: #56B675"><span class="dot" style="background: #56B675"></span>Verified</span>
+      <div style="border: 1px solid #55676C; background: #081114">
+        <div class="strip" style="background: #03090B; border-bottom: 1px solid #55676C">
+          <div class="key" style="color: #9FAFB2">Card &middot; with strips and rows</div>
+          <span class="badge" style="background: #002A0B; color: #51B766"><span class="sq" style="background: #51B766"></span>Verified</span>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #233135">
+          <div style="height: 18px; background: #233135"></div>
+          <div class="key" style="color: #9FAFB2">Brand</div>
+          <div style="font-size: 14px; color: #EFF5F7">Citadel</div>
+          <div class="mono" style="color: #758589">BASE</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #233135">
+          <div style="height: 18px; background: #233135"></div>
+          <div class="key" style="color: #9FAFB2">Finish</div>
+          <div style="font-size: 14px; color: #EFF5F7">Opaque</div>
+          <div class="mono" style="color: #758589">OP</div>
+        </div>
+        <div class="row">
+          <div style="height: 18px; background: #07AAAB"></div>
+          <div class="key" style="color: #9FAFB2">Matches</div>
+          <div style="font-size: 14px; color: #EFF5F7">4 across 3 brands</div>
+          <div class="mono" style="color: #09CACC">&Delta;E 2.4</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; background: #03090B; border-top: 1px solid #55676C">
+          <div style="display: flex">
+            <span class="btn" style="height: 36px; padding: 0 12px; font-size: 12px; border-radius: 4px 0 0 4px; background: #07AAAB; color: #03090B">Compare</span>
+            <span class="btn" style="height: 36px; padding: 0 12px; font-size: 12px; border-radius: 0 4px 4px 0; border-color: #55676C; border-left-width: 0; color: #EFF5F7">Add to shelf</span>
           </div>
-          <div style="font-size: 15px; line-height: 24px; color: #A7ABB5; text-wrap: pretty">
-            Four substitutes across three manufacturers, each carrying the source it rests on.
-          </div>
-          <div style="display: flex; gap: 10px; padding-top: 16px; border-top: 1px solid #2B2E37">
-            <span class="btn" style="height: 36px; padding: 0 14px; border-radius: 8px; font-size: 13px; background: #6A8DF8; color: #06080C">Compare</span>
-            <span class="btn" style="height: 36px; padding: 0 14px; border-radius: 8px; font-size: 13px; color: #91AFFD">Add to shelf</span>
-          </div>
+          <div class="mono" style="color: #758589">upd 4 min</div>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">Card &middot; interactive, hovered</div>
-        <div style="display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 16px; background: #191C24; border: 1px solid #6A8DF8">
-          <div style="width: 40px; height: 40px; border-radius: 10px; background: #B7272C; flex-shrink: 0"></div>
+      <div style="border: 1px solid #55676C; background: #081114">
+        <div class="strip" style="background: #03090B; border-bottom: 1px solid #55676C"><div class="key" style="color: #9FAFB2">Card &middot; interactive, hovered</div></div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-left: 3px solid #07AAAB; background: #131F22">
+          <div style="width: 36px; height: 36px; background: #C1011F; flex-shrink: 0"></div>
           <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1">
-            <div style="font-size: 15px; font-weight: 600; color: #F2F4F8">Evil Sunz Scarlet</div>
-            <div style="font-size: 13px; color: #A7ABB5">&Delta;E 2.4 &middot; manufacturer chart</div>
+            <div style="font-size: 15px; font-weight: 500; color: #EFF5F7">Evil Sunz Scarlet</div>
+            <div class="mono" style="color: #9FAFB2">army painter &middot; chart</div>
           </div>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 5 5 5-5 5" stroke="#6A8DF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 5 5 5-5 5" stroke="#07AAAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="state" style="color: #7D828D">EmptyState</div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 28px; border-radius: 16px; background: #0D0F15; border: 1px dashed #2B2E37; text-align: center">
-          <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #F2F4F8">Nothing on the shelf yet</div>
-          <div style="font-size: 14px; line-height: 21px; color: #A7ABB5; max-width: 320px; text-wrap: pretty">
+      <div style="border: 1px solid #55676C; background: #081114">
+        <div class="strip" style="background: #03090B; border-bottom: 1px solid #55676C"><div class="key" style="color: #9FAFB2">EmptyState</div></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 26px; text-align: center">
+          <div class="key" style="color: #758589">0 items</div>
+          <div style="font-size: 20px; font-weight: 300; letter-spacing: -0.02em; color: #EFF5F7">Nothing on the shelf yet</div>
+          <div style="font-size: 13px; line-height: 20px; color: #9FAFB2; max-width: 320px; text-wrap: pretty">
             Add the paints you own and every result will tell you what you can already use.
           </div>
-          <span class="btn" style="background: #6A8DF8; color: #06080C; margin-top: 4px">Add a paint</span>
+          <span class="btn" style="background: #07AAAB; color: #03090B; margin-top: 4px">Add a paint</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="display: flex; gap: 12px; align-items: flex-start; padding: 22px 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-    <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
-    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 28px">
-      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        <strong style="color: #191C24">Badge tone comes from a map.</strong> Six tones, six entries in
-        <span class="mono">classMaps.ts</span>. No class name assembled from a variable anywhere, so
+  <div style="display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; background: #FFFFFF; border-left: 3px solid #017879">
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 30px">
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">Badge tone comes from a map.</strong> Six tones, six entries in
+        <span class="mono">classMaps.ts</span>. No class name is ever assembled from a variable, so
         every class the build sees can be found by searching for it.
       </div>
-      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        <strong style="color: #191C24">A card is a container, not a component family.</strong> Header,
-        body and footer are slots. It gains a border and a pointer only when the whole card is one
-        link or button.
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">An interactive card takes a left bar, not a lift.</strong>
+        There is no shadow to raise it with, so the whole card gains a 3&nbsp;px accent edge and a
+        recessed fill &mdash; the same move a selected row makes.
       </div>
-      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        <strong style="color: #191C24">Empty states are statements, not illustrations.</strong> A
-        sentence that says what is missing and one action that fixes it. No mascot, no spot drawing.
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">Empty states are statements, not illustrations.</strong> A
+        count, a sentence saying what is missing, and one action that fixes it. No mascot, no spot
+        drawing.
       </div>
     </div>
   </div>

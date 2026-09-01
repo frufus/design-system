@@ -7,189 +7,198 @@
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
   <style>
     body {
       margin: 0;
-      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums;
     }
-    a { color: #344EA8; text-decoration: none; }
-    a:hover { color: #4C6DDA; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; }
-    .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    a { color: #026465; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #017879; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 11px; }
+    .key {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .strip { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 26px; padding: 0 12px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 44px; padding: 0 20px; border-radius: 12px;
-      font-size: 15px; font-weight: 600; letter-spacing: -0.005em;
+      height: 44px; padding: 0 16px; border-radius: 4px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
       border: 1px solid transparent; box-sizing: border-box; white-space: nowrap;
     }
     .matrix {
-      display: grid;
-      grid-template-columns: 104px repeat(6, minmax(0, 1fr));
-      gap: 14px;
-      align-items: center;
+      display: grid; grid-template-columns: 96px repeat(6, minmax(0, 1fr));
+      gap: 12px; align-items: center; padding: 16px 14px;
     }
-    .rowname { font-size: 13px; font-weight: 600; }
+    .rn { font-size: 13px; font-weight: 600; }
     .spin { animation: spin 900ms linear infinite; transform-origin: 50% 50%; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </helmet>
 
-<div style="display: flex; flex-direction: column; gap: 26px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 30px; background: #EFF5F7; min-height: 100%; box-sizing: border-box">
 
-  <div style="display: flex; flex-direction: column; gap: 10px">
-    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Button</div>
-    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 760px; text-wrap: pretty">
-      Four variants, six states, both appearances. Hover moves one step along the accent ramp;
-      pressed moves two. The focus ring is the same two-pixel accent ring on every variant &mdash;
-      it belongs to the system, not to the button.
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <div style="font-size: 30px; font-weight: 300; letter-spacing: -0.03em; color: #131F22">Button</div>
+      <div class="key" style="color: #758589">4 variants &middot; 6 states &middot; 2 appearances</div>
+    </div>
+    <div style="font-size: 14px; line-height: 1.6; color: #55676C; max-width: 860px; text-wrap: pretty">
+      Hover moves one step along the accent ramp, pressed moves two. The focus ring is the same
+      offset two-pixel ring on every variant &mdash; it belongs to the system, not to the button, and
+      it is the one place the accent appears on a variant that otherwise has no colour.
     </div>
   </div>
 
   <!-- ============================ LIGHT ============================ -->
-  <div style="display: flex; flex-direction: column; gap: 18px; padding: 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-    <div class="group-label" style="color: #7D828D">Light appearance</div>
+  <div style="border: 1px solid #758589; background: #FFFFFF">
+    <div class="strip" style="background: #131F22">
+      <div class="key" style="color: #EFF5F7">Light appearance</div>
+      <div class="key" style="color: #CDF1F0">height 44 &middot; radius 4</div>
+    </div>
 
     <div class="matrix">
       <div></div>
-      <div class="mono" style="color: #7D828D">rest</div>
-      <div class="mono" style="color: #7D828D">hover</div>
-      <div class="mono" style="color: #7D828D">active</div>
-      <div class="mono" style="color: #7D828D">focus-visible</div>
-      <div class="mono" style="color: #7D828D">disabled</div>
-      <div class="mono" style="color: #7D828D">loading</div>
+      <div class="key" style="color: #758589">rest</div>
+      <div class="key" style="color: #758589">hover</div>
+      <div class="key" style="color: #758589">active</div>
+      <div class="key" style="color: #758589">focus</div>
+      <div class="key" style="color: #758589">disabled</div>
+      <div class="key" style="color: #758589">loading</div>
 
-      <div class="rowname" style="color: #191C24">Primary</div>
-      <div><span class="btn" style="background: #4C6DDA; color: #FFFFFF">Save</span></div>
-      <div><span class="btn" style="background: #405EC6; color: #FFFFFF">Save</span></div>
-      <div><span class="btn" style="background: #344EA8; color: #FFFFFF">Save</span></div>
-      <div><span class="btn" style="background: #4C6DDA; color: #FFFFFF; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">Save</span></div>
-      <div><span class="btn" style="background: #DDE0E6; color: #5F646F">Save</span></div>
-      <div><span class="btn" style="background: #4C6DDA; color: #FFFFFF">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>
-        Save</span></div>
+      <div class="rn" style="color: #131F22">Primary</div>
+      <div><span class="btn" style="background: #017879; color: #FFFFFF">Save</span></div>
+      <div><span class="btn" style="background: #026465; color: #FFFFFF">Save</span></div>
+      <div><span class="btn" style="background: #005354; color: #FFFFFF">Save</span></div>
+      <div><span class="btn" style="background: #017879; color: #FFFFFF; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">Save</span></div>
+      <div><span class="btn" style="background: #D8E2E4; color: #55676C">Save</span></div>
+      <div><span class="btn" style="background: #017879; color: #FFFFFF">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>Save</span></div>
 
-      <div class="rowname" style="color: #191C24">Secondary</div>
-      <div><span class="btn" style="background: #FFFFFF; border-color: #7D828D; color: #191C24">Cancel</span></div>
-      <div><span class="btn" style="background: #F2F4F8; border-color: #7D828D; color: #191C24">Cancel</span></div>
-      <div><span class="btn" style="background: #F2F4F8; border-color: #5F646F; color: #191C24">Cancel</span></div>
-      <div><span class="btn" style="background: #FFFFFF; border-color: #7D828D; color: #191C24; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">Cancel</span></div>
-      <div><span class="btn" style="background: #FFFFFF; border-color: #DDE0E6; color: #5F646F">Cancel</span></div>
-      <div><span class="btn" style="background: #FFFFFF; border-color: #7D828D; color: #191C24">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#191C24" stroke-opacity="0.25" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#191C24" stroke-width="2" stroke-linecap="round"/></svg>
-        Cancel</span></div>
+      <div class="rn" style="color: #131F22">Secondary</div>
+      <div><span class="btn" style="background: #FFFFFF; border-color: #758589; color: #131F22">Cancel</span></div>
+      <div><span class="btn" style="background: #EFF5F7; border-color: #758589; color: #131F22">Cancel</span></div>
+      <div><span class="btn" style="background: #EFF5F7; border-color: #55676C; color: #131F22">Cancel</span></div>
+      <div><span class="btn" style="background: #FFFFFF; border-color: #758589; color: #131F22; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">Cancel</span></div>
+      <div><span class="btn" style="background: #FFFFFF; border-color: #D8E2E4; color: #55676C">Cancel</span></div>
+      <div><span class="btn" style="background: #FFFFFF; border-color: #758589; color: #131F22">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#131F22" stroke-opacity="0.25" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#131F22" stroke-width="2" stroke-linecap="round"/></svg>Cancel</span></div>
 
-      <div class="rowname" style="color: #191C24">Ghost</div>
-      <div><span class="btn" style="color: #344EA8">Details</span></div>
-      <div><span class="btn" style="background: #DFE8FF; color: #344EA8">Details</span></div>
-      <div><span class="btn" style="background: #DFE8FF; border-color: #4C6DDA; color: #344EA8">Details</span></div>
-      <div><span class="btn" style="color: #344EA8; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">Details</span></div>
-      <div><span class="btn" style="color: #5F646F">Details</span></div>
-      <div><span class="btn" style="color: #344EA8">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#344EA8" stroke-opacity="0.25" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#344EA8" stroke-width="2" stroke-linecap="round"/></svg>
-        Details</span></div>
+      <div class="rn" style="color: #131F22">Ghost</div>
+      <div><span class="btn" style="color: #026465">Details</span></div>
+      <div><span class="btn" style="background: #CDF1F0; color: #026465">Details</span></div>
+      <div><span class="btn" style="background: #CDF1F0; border-color: #017879; color: #026465">Details</span></div>
+      <div><span class="btn" style="color: #026465; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">Details</span></div>
+      <div><span class="btn" style="color: #55676C">Details</span></div>
+      <div><span class="btn" style="color: #026465">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#026465" stroke-opacity="0.25" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#026465" stroke-width="2" stroke-linecap="round"/></svg>Details</span></div>
 
-      <div class="rowname" style="color: #191C24">Destructive</div>
-      <div><span class="btn" style="background: #B7272C; color: #FFFFFF">Delete</span></div>
-      <div><span class="btn" style="background: #991C21; color: #FFFFFF">Delete</span></div>
-      <div><span class="btn" style="background: #7C1419; color: #FFFFFF">Delete</span></div>
-      <div><span class="btn" style="background: #B7272C; color: #FFFFFF; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">Delete</span></div>
-      <div><span class="btn" style="background: #DDE0E6; color: #5F646F">Delete</span></div>
-      <div><span class="btn" style="background: #B7272C; color: #FFFFFF">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>
-        Delete</span></div>
+      <div class="rn" style="color: #131F22">Destructive</div>
+      <div><span class="btn" style="background: #C1011F; color: #FFFFFF">Delete</span></div>
+      <div><span class="btn" style="background: #A00017; color: #FFFFFF">Delete</span></div>
+      <div><span class="btn" style="background: #820011; color: #FFFFFF">Delete</span></div>
+      <div><span class="btn" style="background: #C1011F; color: #FFFFFF; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">Delete</span></div>
+      <div><span class="btn" style="background: #D8E2E4; color: #55676C">Delete</span></div>
+      <div><span class="btn" style="background: #C1011F; color: #FFFFFF">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>Delete</span></div>
     </div>
   </div>
 
   <!-- ============================ DARK ============================ -->
-  <div style="display: flex; flex-direction: column; gap: 18px; padding: 26px; border-radius: 20px; background: #0D0F15; border: 1px solid #2B2E37">
-    <div class="group-label" style="color: #7D828D">Dark appearance</div>
+  <div style="border: 1px solid #55676C; background: #081114">
+    <div class="strip" style="background: #131F22">
+      <div class="key" style="color: #EFF5F7">Dark appearance</div>
+      <div class="key" style="color: #09CACC">height 44 &middot; radius 4</div>
+    </div>
 
     <div class="matrix">
       <div></div>
-      <div class="mono" style="color: #7D828D">rest</div>
-      <div class="mono" style="color: #7D828D">hover</div>
-      <div class="mono" style="color: #7D828D">active</div>
-      <div class="mono" style="color: #7D828D">focus-visible</div>
-      <div class="mono" style="color: #7D828D">disabled</div>
-      <div class="mono" style="color: #7D828D">loading</div>
+      <div class="key" style="color: #758589">rest</div>
+      <div class="key" style="color: #758589">hover</div>
+      <div class="key" style="color: #758589">active</div>
+      <div class="key" style="color: #758589">focus</div>
+      <div class="key" style="color: #758589">disabled</div>
+      <div class="key" style="color: #758589">loading</div>
 
-      <div class="rowname" style="color: #F2F4F8">Primary</div>
-      <div><span class="btn" style="background: #6A8DF8; color: #06080C">Save</span></div>
-      <div><span class="btn" style="background: #91AFFD; color: #06080C">Save</span></div>
-      <div><span class="btn" style="background: #5A7DEA; color: #06080C">Save</span></div>
-      <div><span class="btn" style="background: #6A8DF8; color: #06080C; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">Save</span></div>
-      <div><span class="btn" style="background: #2B2E37; color: #7D828D">Save</span></div>
-      <div><span class="btn" style="background: #6A8DF8; color: #06080C">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#06080C" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#06080C" stroke-width="2" stroke-linecap="round"/></svg>
-        Save</span></div>
+      <div class="rn" style="color: #EFF5F7">Primary</div>
+      <div><span class="btn" style="background: #07AAAB; color: #03090B">Save</span></div>
+      <div><span class="btn" style="background: #09CACC; color: #03090B">Save</span></div>
+      <div><span class="btn" style="background: #02999A; color: #03090B">Save</span></div>
+      <div><span class="btn" style="background: #07AAAB; color: #03090B; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">Save</span></div>
+      <div><span class="btn" style="background: #233135; color: #758589">Save</span></div>
+      <div><span class="btn" style="background: #07AAAB; color: #03090B">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#03090B" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#03090B" stroke-width="2" stroke-linecap="round"/></svg>Save</span></div>
 
-      <div class="rowname" style="color: #F2F4F8">Secondary</div>
-      <div><span class="btn" style="background: #0D0F15; border-color: #5F646F; color: #F2F4F8">Cancel</span></div>
-      <div><span class="btn" style="background: #191C24; border-color: #5F646F; color: #F2F4F8">Cancel</span></div>
-      <div><span class="btn" style="background: #191C24; border-color: #7D828D; color: #F2F4F8">Cancel</span></div>
-      <div><span class="btn" style="background: #0D0F15; border-color: #5F646F; color: #F2F4F8; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">Cancel</span></div>
-      <div><span class="btn" style="background: #0D0F15; border-color: #2B2E37; color: #7D828D">Cancel</span></div>
-      <div><span class="btn" style="background: #0D0F15; border-color: #5F646F; color: #F2F4F8">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#F2F4F8" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#F2F4F8" stroke-width="2" stroke-linecap="round"/></svg>
-        Cancel</span></div>
+      <div class="rn" style="color: #EFF5F7">Secondary</div>
+      <div><span class="btn" style="background: #081114; border-color: #55676C; color: #EFF5F7">Cancel</span></div>
+      <div><span class="btn" style="background: #131F22; border-color: #55676C; color: #EFF5F7">Cancel</span></div>
+      <div><span class="btn" style="background: #131F22; border-color: #758589; color: #EFF5F7">Cancel</span></div>
+      <div><span class="btn" style="background: #081114; border-color: #55676C; color: #EFF5F7; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">Cancel</span></div>
+      <div><span class="btn" style="background: #081114; border-color: #233135; color: #758589">Cancel</span></div>
+      <div><span class="btn" style="background: #081114; border-color: #55676C; color: #EFF5F7">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#EFF5F7" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#EFF5F7" stroke-width="2" stroke-linecap="round"/></svg>Cancel</span></div>
 
-      <div class="rowname" style="color: #F2F4F8">Ghost</div>
-      <div><span class="btn" style="color: #91AFFD">Details</span></div>
-      <div><span class="btn" style="background: #101C43; color: #91AFFD">Details</span></div>
-      <div><span class="btn" style="background: #101C43; border-color: #6A8DF8; color: #91AFFD">Details</span></div>
-      <div><span class="btn" style="color: #91AFFD; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">Details</span></div>
-      <div><span class="btn" style="color: #7D828D">Details</span></div>
-      <div><span class="btn" style="color: #91AFFD">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#91AFFD" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#91AFFD" stroke-width="2" stroke-linecap="round"/></svg>
-        Details</span></div>
+      <div class="rn" style="color: #EFF5F7">Ghost</div>
+      <div><span class="btn" style="color: #09CACC">Details</span></div>
+      <div><span class="btn" style="background: #002626; color: #09CACC">Details</span></div>
+      <div><span class="btn" style="background: #002626; border-color: #07AAAB; color: #09CACC">Details</span></div>
+      <div><span class="btn" style="color: #09CACC; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">Details</span></div>
+      <div><span class="btn" style="color: #758589">Details</span></div>
+      <div><span class="btn" style="color: #09CACC">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#09CACC" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#09CACC" stroke-width="2" stroke-linecap="round"/></svg>Details</span></div>
 
-      <div class="rowname" style="color: #F2F4F8">Destructive</div>
-      <div><span class="btn" style="background: #F1635E; color: #06080C">Delete</span></div>
-      <div><span class="btn" style="background: #F99088; color: #06080C">Delete</span></div>
-      <div><span class="btn" style="background: #E0514E; color: #06080C">Delete</span></div>
-      <div><span class="btn" style="background: #F1635E; color: #06080C; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">Delete</span></div>
-      <div><span class="btn" style="background: #2B2E37; color: #7D828D">Delete</span></div>
-      <div><span class="btn" style="background: #F1635E; color: #06080C">
-        <svg class="spin" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#06080C" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#06080C" stroke-width="2" stroke-linecap="round"/></svg>
-        Delete</span></div>
+      <div class="rn" style="color: #EFF5F7">Destructive</div>
+      <div><span class="btn" style="background: #FC5654; color: #03090B">Delete</span></div>
+      <div><span class="btn" style="background: #FF8B84; color: #03090B">Delete</span></div>
+      <div><span class="btn" style="background: #EB4143; color: #03090B">Delete</span></div>
+      <div><span class="btn" style="background: #FC5654; color: #03090B; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">Delete</span></div>
+      <div><span class="btn" style="background: #233135; color: #758589">Delete</span></div>
+      <div><span class="btn" style="background: #FC5654; color: #03090B">
+        <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#03090B" stroke-opacity="0.3" stroke-width="2"/><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="#03090B" stroke-width="2" stroke-linecap="round"/></svg>Delete</span></div>
     </div>
   </div>
 
-  <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px">
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
 
-    <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-      <div class="group-label" style="color: #7D828D">Sizes &amp; icons</div>
-      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
-        <span class="btn" style="height: 36px; padding: 0 14px; border-radius: 8px; font-size: 13px; background: #4C6DDA; color: #FFFFFF">Small</span>
-        <span class="btn" style="background: #4C6DDA; color: #FFFFFF">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Medium</span>
-        <span class="btn" style="height: 52px; padding: 0 24px; font-size: 16px; background: #4C6DDA; color: #FFFFFF">Large</span>
-        <span class="btn" style="width: 44px; padding: 0; background: #FFFFFF; border-color: #7D828D; color: #191C24">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 6h12M4 10h12M4 14h8" stroke="#191C24" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </span>
-      </div>
-      <div style="font-size: 12px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        An icon-only button is square at the row height and takes its accessible name from a prop,
-        never from the glyph.
+    <div style="border: 1px solid #758589; background: #FFFFFF">
+      <div class="strip" style="background: #EFF5F7; border-bottom: 1px solid #758589"><div class="key" style="color: #55676C">Sizes, icons, and the segment</div></div>
+      <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+          <span class="btn" style="height: 36px; padding: 0 12px; font-size: 12px; background: #017879; color: #FFFFFF">Small</span>
+          <span class="btn" style="background: #017879; color: #FFFFFF">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/></svg>Medium</span>
+          <span class="btn" style="height: 52px; padding: 0 20px; font-size: 14px; background: #017879; color: #FFFFFF">Large</span>
+          <span class="btn" style="width: 44px; padding: 0; background: #FFFFFF; border-color: #758589">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 6h12M4 10h12M4 14h8" stroke="#131F22" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div style="display: flex; padding-top: 12px; border-top: 1px solid #D8E2E4">
+          <span class="btn" style="border-radius: 4px 0 0 4px; background: #017879; color: #FFFFFF">Save</span>
+          <span class="btn" style="border-radius: 0; border-color: #758589; border-left-width: 0; color: #131F22">Discard</span>
+          <span class="btn" style="border-radius: 0 4px 4px 0; border-color: #758589; border-left-width: 0; color: #C1011F">Delete</span>
+        </div>
+        <div style="font-size: 12px; line-height: 1.6; color: #55676C; text-wrap: pretty">
+          The segment is a layout, not a variant: three ordinary buttons sharing borders, rounded only
+          at the two outer corners. Each keeps its own 44&nbsp;px target.
+        </div>
       </div>
     </div>
 
-    <div style="display: flex; gap: 12px; align-items: flex-start; padding: 22px 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-      <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
-      <div style="display: flex; flex-direction: column; gap: 8px">
-        <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-          <strong style="color: #191C24">Loading keeps the label.</strong> The spinner is added, the
+    <div style="border: 1px solid #758589; background: #FFFFFF">
+      <div class="strip" style="background: #EFF5F7; border-bottom: 1px solid #758589"><div class="key" style="color: #55676C">Two rules worth stating</div></div>
+      <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+          <strong style="color: #131F22">Loading keeps the label.</strong> The spinner is added, the
           text is not replaced, so the button does not change width mid-action and a screen reader
-          still reads what it does. The control reports <span class="mono">aria-busy</span> and stays
-          focusable.
+          still reads what it does. It reports <span class="mono">aria-busy</span> and stays focusable.
         </div>
-        <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-          <strong style="color: #191C24">Disabled is flat, not faded.</strong> Opacity would let the
-          variant's colour leak through and break contrast differently in each appearance; a
-          dedicated pair of tokens keeps it measurable.
+        <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty; padding-top: 12px; border-top: 1px solid #D8E2E4">
+          <strong style="color: #131F22">Disabled is flat, not faded.</strong> Opacity would let each
+          variant's colour leak through and break contrast differently in every appearance; a
+          dedicated pair of tokens keeps it measurable &mdash; 4.47 in light, 3.52 in dark.
         </div>
       </div>
     </div>

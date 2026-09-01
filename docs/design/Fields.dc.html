@@ -7,197 +7,216 @@
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
   <style>
     body {
       margin: 0;
-      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums;
     }
-    a { color: #344EA8; text-decoration: none; }
-    a:hover { color: #4C6DDA; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; }
-    .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    a { color: #026465; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #017879; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 11px; }
+    .key {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .strip { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 26px; padding: 0 12px; }
     .field { display: flex; flex-direction: column; gap: 6px; }
-    .label { font-size: 14px; font-weight: 500; letter-spacing: -0.005em; }
-    .help { font-size: 12px; line-height: 18px; }
-    .control {
+    .ctl {
       display: flex; align-items: center; gap: 10px;
-      height: 44px; padding: 0 14px; border-radius: 12px;
-      border: 1px solid transparent; box-sizing: border-box;
-      font-size: 15px;
+      height: 44px; padding: 0 12px; border-radius: 4px;
+      border: 1px solid transparent; box-sizing: border-box; font-size: 15px;
     }
-    .state { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .help { font-size: 12px; line-height: 18px; }
+    .state { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   </style>
 </helmet>
 
-<div style="display: flex; flex-direction: column; gap: 26px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 30px; background: #EFF5F7; min-height: 100%; box-sizing: border-box">
 
-  <div style="display: flex; flex-direction: column; gap: 10px">
-    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Input &amp; Select</div>
-    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 760px; text-wrap: pretty">
-      Both controls share one register: same height, same radius, same border, same focus ring. What
-      differs is what sits inside the box. The label is always present and always associated &mdash;
-      there is no placeholder-as-label variant to reach for.
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <div style="font-size: 30px; font-weight: 300; letter-spacing: -0.03em; color: #131F22">Input &amp; Select</div>
+      <div class="key" style="color: #758589">One control register, set inset</div>
+    </div>
+    <div style="font-size: 14px; line-height: 1.6; color: #55676C; max-width: 860px; text-wrap: pretty">
+      Both controls share one register: same height, same radius, same border, same focus ring, and a
+      darker top edge that makes the field read as recessed into the panel rather than floating on it.
+      The label is always present and always associated &mdash; there is no placeholder-as-label
+      variant to reach for.
     </div>
   </div>
 
-  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px">
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
 
     <!-- ============================ LIGHT ============================ -->
-    <div style="display: flex; flex-direction: column; gap: 22px; padding: 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-      <div class="group-label" style="color: #7D828D">Light appearance</div>
-
-      <div class="field">
-        <div class="state" style="color: #7D828D">Rest &middot; with description</div>
-        <div class="label" style="color: #191C24">Display name</div>
-        <div class="control" style="background: #FFFFFF; border-color: #7D828D; color: #7D828D">Ada Lovelace</div>
-        <div class="help" style="color: #5F646F">Shown next to everything you publish.</div>
+    <div style="border: 1px solid #758589; background: #FFFFFF">
+      <div class="strip" style="background: #131F22">
+        <div class="key" style="color: #EFF5F7">Light appearance</div>
+        <div class="key" style="color: #CDF1F0">height 44 &middot; inset</div>
       </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Hover</div>
-        <div class="label" style="color: #191C24">Display name</div>
-        <div class="control" style="background: #FFFFFF; border-color: #5F646F; color: #7D828D">Ada Lovelace</div>
-      </div>
+      <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 20px">
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Focused &middot; filled</div>
-        <div class="label" style="color: #191C24">Display name</div>
-        <div class="control" style="background: #FFFFFF; border-color: #4C6DDA; color: #191C24; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">
-          Ada<span style="width: 1px; height: 20px; background: #191C24; margin-left: -6px"></span>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Rest &middot; with description</div><div class="mono" style="color: #758589">6/40</div></div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #758589; border-top-color: #55676C; color: #131F22">Studio</div>
+          <div class="help" style="color: #55676C">Everyone you invite sees this name.</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #B7272C">Invalid</div>
-        <div class="label" style="color: #191C24">Display name</div>
-        <div class="control" style="background: #FFFFFF; border-color: #B7272C; color: #191C24">A</div>
-        <div class="help" style="color: #B7272C; display: flex; align-items: center; gap: 6px">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="#B7272C" stroke-width="1.6"/><path d="M8 4.8v3.6" stroke="#B7272C" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.1" r="0.9" fill="#B7272C"/></svg>
-          Needs at least two characters.
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Empty &middot; placeholder</div></div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #758589; border-top-color: #55676C; color: #758589">Add a name</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Disabled</div>
-        <div class="label" style="color: #5F646F">Display name</div>
-        <div class="control" style="background: #DDE0E6; border-color: #DDE0E6; color: #5F646F">Ada Lovelace</div>
-      </div>
-
-      <div style="height: 1px; background: #DDE0E6"></div>
-
-      <div class="field">
-        <div class="state" style="color: #7D828D">Select &middot; rest</div>
-        <div class="label" style="color: #191C24">Appearance</div>
-        <div class="control" style="background: #FFFFFF; border-color: #7D828D; color: #191C24; justify-content: space-between">
-          <span>Follow the system</span>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#5F646F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Hover</div></div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #55676C; border-top-color: #131F22; color: #131F22">Studio</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Select &middot; open</div>
-        <div class="label" style="color: #191C24">Appearance</div>
-        <div class="control" style="background: #FFFFFF; border-color: #4C6DDA; color: #191C24; justify-content: space-between; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">
-          <span>Follow the system</span>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 11.5 10 7.5l4 4" stroke="#4C6DDA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div style="display: flex; flex-direction: column; padding: 6px; margin-top: 6px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DDE0E6; box-shadow: 0 2px 6px rgba(25, 28, 36, 0.08), 0 1px 2px rgba(25, 28, 36, 0.05)">
-          <div style="display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 12px; border-radius: 8px; background: #DFE8FF; font-size: 15px; color: #344EA8; font-weight: 600">
-            <span>Follow the system</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8.4 3 3 6-6.8" stroke="#344EA8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Focused</div></div>
+          <div class="ctl" style="background: #FFFFFF; border-color: #058889; color: #131F22; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">
+            Studio<span style="width: 1px; height: 20px; background: #131F22; margin-left: -6px"></span>
           </div>
-          <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; background: #F2F4F8; font-size: 15px; color: #191C24">Always light</div>
-          <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; font-size: 15px; color: #191C24">Always dark</div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #C1011F">Invalid</div><div class="mono" style="color: #C1011F">1/40</div></div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #C1011F; border-top-color: #C1011F; color: #131F22">S</div>
+          <div class="help" style="color: #C1011F; display: flex; align-items: center; gap: 6px">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="#C1011F" stroke-width="1.6"/><path d="M8 4.8v3.6" stroke="#C1011F" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.1" r="0.9" fill="#C1011F"/></svg>
+            Needs at least two characters.
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Disabled</div></div>
+          <div class="ctl" style="background: #D8E2E4; border-color: #D8E2E4; color: #55676C">Studio</div>
+        </div>
+
+        <div style="height: 1px; background: #758589"></div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Select &middot; rest</div></div>
+          <div class="ctl" style="background: #EFF5F7; border-color: #758589; border-top-color: #55676C; color: #131F22; justify-content: space-between">
+            <span>Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#55676C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Select &middot; open</div></div>
+          <div class="ctl" style="background: #FFFFFF; border-color: #058889; color: #131F22; justify-content: space-between; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #058889">
+            <span>Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 11.5 10 7.5l4 4" stroke="#017879" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="margin-top: 6px; border: 1px solid #758589; background: #FFFFFF">
+            <div style="display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 12px; background: #CDF1F0; font-size: 15px; color: #026465; font-weight: 600; border-bottom: 1px solid #D8E2E4">
+              <span>Follow the system</span>
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8.4 3 3 6-6.8" stroke="#026465" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; background: #EFF5F7; font-size: 15px; color: #131F22; border-bottom: 1px solid #D8E2E4">Always light</div>
+            <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; font-size: 15px; color: #131F22">Always dark</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- ============================ DARK ============================ -->
-    <div style="display: flex; flex-direction: column; gap: 22px; padding: 26px; border-radius: 20px; background: #0D0F15; border: 1px solid #2B2E37">
-      <div class="group-label" style="color: #7D828D">Dark appearance</div>
-
-      <div class="field">
-        <div class="state" style="color: #7D828D">Rest &middot; with description</div>
-        <div class="label" style="color: #F2F4F8">Display name</div>
-        <div class="control" style="background: #0D0F15; border-color: #5F646F; color: #7D828D">Ada Lovelace</div>
-        <div class="help" style="color: #A7ABB5">Shown next to everything you publish.</div>
+    <div style="border: 1px solid #55676C; background: #081114">
+      <div class="strip" style="background: #131F22">
+        <div class="key" style="color: #EFF5F7">Dark appearance</div>
+        <div class="key" style="color: #09CACC">height 44 &middot; inset</div>
       </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Hover</div>
-        <div class="label" style="color: #F2F4F8">Display name</div>
-        <div class="control" style="background: #0D0F15; border-color: #7D828D; color: #7D828D">Ada Lovelace</div>
-      </div>
+      <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 20px">
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Focused &middot; filled</div>
-        <div class="label" style="color: #F2F4F8">Display name</div>
-        <div class="control" style="background: #0D0F15; border-color: #6A8DF8; color: #F2F4F8; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">
-          Ada<span style="width: 1px; height: 20px; background: #F2F4F8; margin-left: -6px"></span>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Rest &middot; with description</div><div class="mono" style="color: #758589">6/40</div></div>
+          <div class="ctl" style="background: #03090B; border-color: #55676C; border-top-color: #233135; color: #EFF5F7">Studio</div>
+          <div class="help" style="color: #9FAFB2">Everyone you invite sees this name.</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #F1635E">Invalid</div>
-        <div class="label" style="color: #F2F4F8">Display name</div>
-        <div class="control" style="background: #0D0F15; border-color: #F1635E; color: #F2F4F8">A</div>
-        <div class="help" style="color: #F1635E; display: flex; align-items: center; gap: 6px">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="#F1635E" stroke-width="1.6"/><path d="M8 4.8v3.6" stroke="#F1635E" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.1" r="0.9" fill="#F1635E"/></svg>
-          Needs at least two characters.
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Empty &middot; placeholder</div></div>
+          <div class="ctl" style="background: #03090B; border-color: #55676C; border-top-color: #233135; color: #758589">Add a name</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Disabled</div>
-        <div class="label" style="color: #7D828D">Display name</div>
-        <div class="control" style="background: #2B2E37; border-color: #2B2E37; color: #7D828D">Ada Lovelace</div>
-      </div>
-
-      <div style="height: 1px; background: #2B2E37"></div>
-
-      <div class="field">
-        <div class="state" style="color: #7D828D">Select &middot; rest</div>
-        <div class="label" style="color: #F2F4F8">Appearance</div>
-        <div class="control" style="background: #0D0F15; border-color: #5F646F; color: #F2F4F8; justify-content: space-between">
-          <span>Follow the system</span>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#A7ABB5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Hover</div></div>
+          <div class="ctl" style="background: #03090B; border-color: #758589; border-top-color: #55676C; color: #EFF5F7">Studio</div>
         </div>
-      </div>
 
-      <div class="field">
-        <div class="state" style="color: #7D828D">Select &middot; open</div>
-        <div class="label" style="color: #F2F4F8">Appearance</div>
-        <div class="control" style="background: #0D0F15; border-color: #6A8DF8; color: #F2F4F8; justify-content: space-between; box-shadow: 0 0 0 2px #0D0F15, 0 0 0 4px #6A8DF8">
-          <span>Follow the system</span>
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 11.5 10 7.5l4 4" stroke="#6A8DF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div style="display: flex; flex-direction: column; padding: 6px; margin-top: 6px; border-radius: 12px; background: #191C24; border: 1px solid #2B2E37">
-          <div style="display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 12px; border-radius: 8px; background: #101C43; font-size: 15px; color: #91AFFD; font-weight: 600">
-            <span>Follow the system</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8.4 3 3 6-6.8" stroke="#91AFFD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Focused</div></div>
+          <div class="ctl" style="background: #081114; border-color: #07AAAB; color: #EFF5F7; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">
+            Studio<span style="width: 1px; height: 20px; background: #EFF5F7; margin-left: -6px"></span>
           </div>
-          <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; background: #2B2E37; font-size: 15px; color: #F2F4F8">Always light</div>
-          <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; font-size: 15px; color: #F2F4F8">Always dark</div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #FC5654">Invalid</div><div class="mono" style="color: #FC5654">1/40</div></div>
+          <div class="ctl" style="background: #03090B; border-color: #FC5654; border-top-color: #FC5654; color: #EFF5F7">S</div>
+          <div class="help" style="color: #FC5654; display: flex; align-items: center; gap: 6px">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="#FC5654" stroke-width="1.6"/><path d="M8 4.8v3.6" stroke="#FC5654" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.1" r="0.9" fill="#FC5654"/></svg>
+            Needs at least two characters.
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Disabled</div></div>
+          <div class="ctl" style="background: #233135; border-color: #233135; color: #758589">Studio</div>
+        </div>
+
+        <div style="height: 1px; background: #55676C"></div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Select &middot; rest</div></div>
+          <div class="ctl" style="background: #03090B; border-color: #55676C; border-top-color: #233135; color: #EFF5F7; justify-content: space-between">
+            <span>Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#9FAFB2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="state"><div class="key" style="color: #758589">Select &middot; open</div></div>
+          <div class="ctl" style="background: #081114; border-color: #07AAAB; color: #EFF5F7; justify-content: space-between; box-shadow: 0 0 0 2px #081114, 0 0 0 4px #07AAAB">
+            <span>Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 11.5 10 7.5l4 4" stroke="#07AAAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="margin-top: 6px; border: 1px solid #55676C; background: #131F22">
+            <div style="display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 12px; background: #002626; font-size: 15px; color: #09CACC; font-weight: 600; border-bottom: 1px solid #233135">
+              <span>Follow the system</span>
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8.4 3 3 6-6.8" stroke="#09CACC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; background: #233135; font-size: 15px; color: #EFF5F7; border-bottom: 1px solid #233135">Always light</div>
+            <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; font-size: 15px; color: #EFF5F7">Always dark</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="display: flex; gap: 12px; align-items: flex-start; padding: 22px 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
-    <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
-    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px">
-      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        <strong style="color: #191C24">Error is never colour alone.</strong> The message carries an
-        icon and text, the control carries <span class="mono">aria-invalid</span>, and the message is
-        wired through <span class="mono">aria-describedby</span> alongside the description rather
-        than replacing it.
+  <div style="display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; background: #FFFFFF; border-left: 3px solid #017879">
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 30px">
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">Focus lifts the field flush.</strong> The recessed fill goes
+        back to the panel's own surface while the ring is on. It is the one moment the control stops
+        looking recessed, which is exactly when it is receiving your keystrokes.
       </div>
-      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
-        <strong style="color: #191C24">The open list is not a native menu.</strong> Selected is marked
-        by a check and a soft accent fill, not by colour weight alone, so it survives a greyscale
-        print and a colour-vision difference.
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">Error is never colour alone.</strong> The message carries an
+        icon and text, the control carries <span class="mono">aria-invalid</span>, and the message is
+        wired through <span class="mono">aria-describedby</span> alongside the description rather than
+        replacing it.
+      </div>
+      <div style="font-size: 13px; line-height: 1.65; color: #55676C; text-wrap: pretty">
+        <strong style="color: #131F22">The counter is monospace on purpose.</strong> It is machine
+        knowledge, so it takes the mono face and tabular figures &mdash; and stops jittering as you
+        type.
       </div>
     </div>
   </div>
