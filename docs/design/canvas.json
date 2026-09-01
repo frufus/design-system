@@ -1,10 +1,15 @@
 {
   "pages": [
+    { "id": "form", "name": "Form" },
     { "id": "directions", "name": "Directions" },
     { "id": "foundations", "name": "Foundations" },
     { "id": "primitives", "name": "Primitives" }
   ],
   "artboards": [
+    { "file": "FormRulework.dc.html", "page": "form", "x": 0, "y": 0, "w": 660, "h": 1160 },
+    { "file": "FormConsole.dc.html", "page": "form", "x": 740, "y": 0, "w": 660, "h": 1220 },
+    { "file": "FormPlate.dc.html", "page": "form", "x": 1480, "y": 0, "w": 660, "h": 1340 },
+
     { "file": "DirectionIndigo.dc.html", "page": "directions", "x": 0, "y": 0, "w": 640, "h": 1320 },
     { "file": "DirectionPetrol.dc.html", "page": "directions", "x": 720, "y": 0, "w": 640, "h": 1320 },
     { "file": "DirectionAmethyst.dc.html", "page": "directions", "x": 1440, "y": 0, "w": 640, "h": 1320 },
@@ -23,12 +28,20 @@
   ],
   "annotations": [
     {
+      "id": "formpick",
+      "page": "form",
+      "x": 0,
+      "y": -250,
+      "w": 940,
+      "text": "Petrol is settled. This page varies only STRUCTURE - same palette, same IBM Plex Sans and Mono - so form is the single variable.\n\nAll three drop the card-in-a-card habit, which is the part that reads as generic. Rulework replaces boxes with a gutter and hairlines. Console makes the row the unit and sets surfaces inset instead of raised. Plate uses one unbroken surface and lets scale carry the hierarchy.\n\nEach names what it costs at the bottom - none of them is free.\n\nPick one, or say which parts of two you want combined."
+    },
+    {
       "id": "pick",
       "page": "directions",
       "x": 0,
       "y": -230,
       "w": 900,
-      "text": "Pick one. Same composition, same measured floors, five different positions.\n\nIndigo is the incumbent - it is here so the comparison is honest, not to win.\n\nEach direction changes hue, chroma, form and type together, because \"too boring\" is rarely only a colour problem. All 27 contrast pairs pass in both appearances for every one of them; each tile prints its own tightest pair.\n\nThe Foundations and Primitives pages still show Indigo. Whichever you pick gets carried through them before any token is written."
+      "text": "Settled: PETROL.\n\nThe five candidates stay here as the record of what was compared. Each changed hue, chroma, form and type together; all 27 contrast pairs pass in both appearances for every one of them.\n\nThe open question moved to the Form page."
     },
     {
       "id": "gate",
@@ -36,8 +49,8 @@
       "x": 0,
       "y": -190,
       "w": 700,
-      "text": "This canvas is the binding handoff for tokens.css.\nNothing in src/ gets written until it is approved.\n\nEvery contrast number on these artboards is computed by tools/palette-report.mjs, not estimated. All 27 pairs pass their floor in both appearances."
+      "text": "These pages still show the Indigo values. They get recoloured to Petrol - and restructured to whichever form you pick - before any token is written.\n\nEvery contrast number on them is computed by tools/palette-report.mjs, not estimated."
     }
   ],
-  "launch": { "view": "canvas", "page": "directions" }
+  "launch": { "view": "canvas", "page": "form" }
 }

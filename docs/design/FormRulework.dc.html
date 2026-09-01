@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums;
+    }
+    a { color: #026465; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #017879; }
+    .key {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      text-align: right; padding-top: 12px;
+    }
+    .val { font-size: 15px; font-weight: 400; }
+    .row {
+      display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 20px;
+      padding: 0 0 18px 0;
+    }
+    .act {
+      display: inline-flex; align-items: center; justify-content: center;
+      height: 40px; padding: 0 18px; border-radius: 0;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid transparent; box-sizing: border-box;
+    }
+    .tag {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 26px; background: #EFF5F7; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 7px">
+    <div style="display: flex; align-items: baseline; gap: 10px">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #131F22">Rulework</div>
+      <div class="tag" style="color: #758589">Form study &middot; Petrol</div>
+    </div>
+    <div style="font-size: 13px; line-height: 1.55; color: #55676C; text-wrap: pretty">
+      No boxes. A gutter of monospace keys on the left, values on the right, and full-bleed hairlines
+      doing the separating that cards usually do. Fields are a single underline; the primary action is
+      the only filled shape on the screen.
+    </div>
+  </div>
+
+  <!-- ============================ LIGHT ============================ -->
+  <div style="display: flex; background: #FFFFFF">
+    <div style="width: 2px; background: #017879"></div>
+    <div style="flex-grow: 1; padding: 22px 24px 20px 22px">
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid #131F22">
+        <div style="font-size: 24px; font-weight: 300; letter-spacing: -0.02em; color: #131F22">Workspace</div>
+        <div class="tag" style="color: #1E7635"><span style="width: 7px; height: 7px; background: #1E7635"></span>Saved</div>
+      </div>
+
+      <div style="padding-top: 18px">
+        <div class="row">
+          <div class="key" style="color: #758589">Name</div>
+          <div style="display: flex; flex-direction: column">
+            <div class="val" style="color: #131F22; padding-bottom: 8px; border-bottom: 1px solid #758589">Studio</div>
+            <div style="font-size: 12px; line-height: 18px; color: #55676C; padding-top: 6px">Everyone you invite sees this name.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="key" style="color: #758589">Appearance</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid #058889">
+            <span class="val" style="color: #131F22">Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#017879" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 0">
+          <div class="key" style="color: #758589">Changed</div>
+          <div class="val" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #55676C; padding-top: 1px">4 min ago &middot; 12 revisions</div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #D8E2E4">
+        <span class="act" style="background: #017879; color: #FFFFFF">Save changes</span>
+        <a href="#" style="font-size: 13px; font-weight: 500">Discard</a>
+        <span style="flex-grow: 1"></span>
+        <span class="act" style="border-color: #C1011F; color: #C1011F; height: 32px; padding: 0 12px; font-size: 11px">Delete</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ DARK ============================ -->
+  <div style="display: flex; background: #081114">
+    <div style="width: 2px; background: #07AAAB"></div>
+    <div style="flex-grow: 1; padding: 22px 24px 20px 22px">
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid #EFF5F7">
+        <div style="font-size: 24px; font-weight: 300; letter-spacing: -0.02em; color: #EFF5F7">Workspace</div>
+        <div class="tag" style="color: #51B766"><span style="width: 7px; height: 7px; background: #51B766"></span>Saved</div>
+      </div>
+
+      <div style="padding-top: 18px">
+        <div class="row">
+          <div class="key" style="color: #758589">Name</div>
+          <div style="display: flex; flex-direction: column">
+            <div class="val" style="color: #EFF5F7; padding-bottom: 8px; border-bottom: 1px solid #55676C">Studio</div>
+            <div style="font-size: 12px; line-height: 18px; color: #9FAFB2; padding-top: 6px">Everyone you invite sees this name.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="key" style="color: #758589">Appearance</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid #07AAAB">
+            <span class="val" style="color: #EFF5F7">Follow the system</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 8.5 10 12.5l4-4" stroke="#07AAAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 0">
+          <div class="key" style="color: #758589">Changed</div>
+          <div class="val" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9FAFB2; padding-top: 1px">4 min ago &middot; 12 revisions</div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #233135">
+        <span class="act" style="background: #07AAAB; color: #03090B">Save changes</span>
+        <a href="#" style="font-size: 13px; font-weight: 500; color: #09CACC">Discard</a>
+        <span style="flex-grow: 1"></span>
+        <span class="act" style="border-color: #FC5654; color: #FC5654; height: 32px; padding: 0 12px; font-size: 11px">Delete</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; background: #FFFFFF; border-left: 2px solid #017879">
+    <div style="font-size: 12px; line-height: 1.6; color: #55676C; text-wrap: pretty">
+      <strong style="color: #131F22">What it costs.</strong> An underline is a weaker affordance than a
+      box &mdash; it still clears the 3:1 non-text floor, but a field is easier to miss. Works best
+      where forms are short and the reader is deliberate.
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
