@@ -196,7 +196,7 @@ export const directions = {
 
 // Every pair the canvas asserts. `min` is the floor from the project's
 // non-negotiables: 4.5 for text, 3 for non-text (borders, focus rings, icons).
-const PAIRS = [
+export const PAIRS = [
   ['ink', 'canvas', 4.5, 'body text on the page ground'],
   ['ink', 'surface', 4.5, 'body text on a card'],
   ['ink', 'surface-sunken', 4.5, 'body text on a sunken area'],

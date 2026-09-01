@@ -41,24 +41,24 @@
 
 ## 4. Hand-write the rest of `src/tokens.css`
 
-- [ ] 4.1 Add the non-colour tokens from the approved canvas: font stacks, the
+- [x] 4.1 Add the non-colour tokens from the approved canvas: font stacks, the
       eight-step type scale with line heights and tracking, the 4 px spacing scale,
       radii (0 / 2 / 4), control heights (36 / 44 / 52), row heights (40 / 52),
       border weights, and the three motion durations with both easings.
       **Verified by:** `npm run test -- tokens-shape` asserts each documented group
       is present and non-empty.
-- [ ] 4.2 Add the reduced-motion block collapsing all three durations in one place.
+- [x] 4.2 Add the reduced-motion block collapsing all three durations in one place.
       **Verified by:** the same test asserts the durations are redefined under
       `prefers-reduced-motion: reduce` and that no component declares its own.
 
 ## 5. Prove both appearances are complete
 
-- [ ] 5.1 Write the appearance-parity test: every token declared in light is
+- [x] 5.1 Write the appearance-parity test: every token declared in light is
       declared in dark and the reverse, and no token exists only inside a media
       query.
       **Verified by:** `npm run test -- appearance-parity`, which fails when a
       token is deleted from either block.
-- [ ] 5.2 Write the contrast test over the shipped values, reusing the measured
+- [x] 5.2 Write the contrast test over the shipped values, reusing the measured
       pair list.
       **Verified by:** `npm run test -- contrast` reports all 27 pairs passing in
       both appearances and names the pair, ratio and floor on failure.
