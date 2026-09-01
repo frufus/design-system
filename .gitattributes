@@ -1,0 +1,7 @@
+# This repository is authored on Windows but consumed by other projects and by
+# CI on Linux. Text is normalised to LF in the repository so a token file or a
+# snapshot never differs by line ending alone; the working copy still checks out
+# with the platform's native endings.
+* text=auto eol=lf
+*.png binary
+*.woff2 binary

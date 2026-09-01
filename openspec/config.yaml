@@ -1,0 +1,115 @@
+schema: spec-driven
+profile: web
+
+context: |
+  ## Product
+
+  `@frufus/design-system` is the shared user-interface foundation for future
+  projects. It ships a small set of Vue 3 primitives (Button, Input, Select,
+  Dialog, Card, Badge, EmptyState) carried by one visual identity, so a project
+  scaffolded by the `web` profile installs one dependency and has a coherent,
+  accessible, themeable UI on its first commit.
+
+  Its users are not end users. They are the future projects that consume it,
+  and the sessions that build them. A primitive that is awkward to consume has
+  failed, however good it looks in the catalog.
+
+  Scope of v1 is the primitive layer only. Feature panels, layout shells,
+  data tables and anything that knows what an application is about stay in the
+  consuming project.
+
+  ## Non-negotiable principles
+
+  - TOKENS ARE THE ONLY SOURCE OF COLOUR. Every colour-bearing value comes from
+    a `--fds-*` token. A hardcoded hex or `oklch()` outside `src/tokens.css` is
+    a defect, not a shortcut.
+  - THE DEFAULT THEME IS NULLED, NOT EXTENDED. Tailwind's default theme is set
+    to `initial` and utilities are remapped onto our tokens. A palette that is
+    merely extended leaves the defaults available, and available means
+    eventually used.
+  - LIGHT AND DARK ARE EQUAL RANK. Both appearances are designed, measured and
+    tested. Theming happens through token values, so `dark:` variants exist
+    nowhere in this package.
+  - NO DYNAMICALLY COMPOSED CLASS NAMES. State maps to classes through explicit
+    `Record<K, string>` maps in `src/classMaps.ts`, so every class the build
+    sees is greppable.
+  - NO USER-FACING STRING INSIDE A PRIMITIVE. Labels, messages and captions
+    arrive as props or slots. Localisation is the consuming project's job and
+    this package must never make an assumption about its language.
+  - ACCESSIBILITY FLOORS ARE NUMBERS, NOT INTENTIONS. 44 px minimum touch
+    target, 4.5:1 text contrast, 3:1 non-text contrast — in both appearances,
+    asserted by tests rather than judged by eye.
+  - THE PACKAGE SHIPS SOURCE, NOT A BUNDLE. Components stay `.vue` SFCs
+    compiled by the consumer's Vite, because a pre-built bundle carries class
+    names the consumer's Tailwind never sees.
+
+  ## Tech stack
+
+  - Vue 3 (Composition API, `<script setup>`) + TypeScript strict + Vite
+  - Tailwind v4, CSS-first: no `tailwind.config.js`, no PostCSS pipeline
+  - Storybook 9 with `@storybook/addon-a11y` as the component catalog
+  - Vitest for units and component behaviour, Playwright for axe checks against
+    the built Storybook in both appearances
+  - ESLint, Prettier, `vue-tsc` for typechecking
+  - No runtime dependencies beyond Vue itself. No backend, no external CDNs,
+    fonts or analytics.
+
+  ## Language convention
+
+  - Specs, code, identifiers, comments, commit messages, stories: English.
+  - The package contains no user-facing strings at all. There is nothing to
+    localise here, and adding something to localise is a design error.
+
+  ## Vocabulary
+
+  - **Token** — a `--fds-*` custom property holding one raw value.
+  - **Register** — a named set of control classes in `@layer components`
+    (for example the control register shared by Input and Select).
+  - **Primitive** — a component in `src/components/` that knows nothing about
+    any application domain.
+  - **Appearance** — light or dark. Never called "mode"; a `[data-theme]`
+    attribute selects it and `prefers-color-scheme` supplies the default.
+  - **Artboard** — one `.dc.html` frame in `docs/design/`. The approved
+    artboards are the binding handoff for `tokens.css`.
+
+  ## Consumer contract
+
+  A consumer wires the package with exactly four CSS lines, which the
+  `new-project` scaffolding writes:
+
+      @import 'tailwindcss';
+      @source '../node_modules/@frufus/design-system/src';
+      @import '@frufus/design-system/tokens.css';
+      @import '@frufus/design-system/registers.css';
+
+  The `@source` line is required because Tailwind v4 skips `node_modules` in
+  content detection. Changing this contract is a breaking change and needs an
+  ADR.
+
+# Some rules here intentionally restate parts of the global CLAUDE.md
+# (deviation, boundary-parsing): this file travels inside the project and
+# is read by whichever agent works there, while the global file is Claude-only.
+rules:
+  proposal:
+    - Include a "Non-Goals" subsection under "What Changes" naming what this change deliberately does not do.
+    - State the user-visible outcome. A change whose outcome is only internal says so explicitly and justifies itself.
+  specs:
+    - Write requirements as observable behaviour, checkable by someone who cannot read the code.
+    - Include at least one scenario for the unhappy path - no data, bad data, or a failure of something external.
+    - Data crossing a process boundary is parsed into a known shape before anything else touches it. Say which shape.
+  design:
+    - Name the alternatives that were rejected and why, not only the chosen approach.
+    - Call out anything that depends on third-party behaviour or data quality as an explicit risk.
+  tasks:
+    - Every task states how it is verified - a test name, a command, or an observable check.
+    - Group tasks so that pure logic is testable before any UI or I/O task starts.
+
+operations:
+  apply:
+    guidance:
+      - Run the touched area's tests before the full suite.
+      - A deviation from the spec is named and justified before it is built, never discovered afterwards in the diff.
+  archive:
+    guidance:
+      - Keep the completion summary to what changed in observable behaviour.
+      - Note any spec requirement this change made obsolete.
