@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #344EA8; text-decoration: none; }
+    a:hover { color: #4C6DDA; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; }
+    .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .panel {
+      display: flex; flex-direction: column; gap: 16px;
+      padding: 24px 26px; border-radius: 18px;
+      background: #FFFFFF; border: 1px solid #DDE0E6;
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 24px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Geometry &amp; motion</div>
+    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 720px; text-wrap: pretty">
+      Everything sits on a 4&nbsp;px grid. Radius grows with the element's size, so a badge, a button
+      and a dialog look like the same corner seen from different distances rather than three
+      unrelated decisions.
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="group-label" style="color: #7D828D">Radius</div>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 6px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">xs &middot; 6</div>
+        <div class="mono" style="color: #7D828D">checkbox, tag</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 8px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">sm &middot; 8</div>
+        <div class="mono" style="color: #7D828D">small button</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 12px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">md &middot; 12</div>
+        <div class="mono" style="color: #7D828D">controls</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 16px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">lg &middot; 16</div>
+        <div class="mono" style="color: #7D828D">card</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 24px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">xl &middot; 24</div>
+        <div class="mono" style="color: #7D828D">dialog</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="height: 72px; border-radius: 999px; background: #DFE8FF; border: 1px solid #4C6DDA"></div>
+        <div style="font-size: 13px; font-weight: 600; color: #191C24">full</div>
+        <div class="mono" style="color: #7D828D">badge, avatar</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px">
+
+    <div class="panel">
+      <div class="group-label" style="color: #7D828D">Spacing &middot; 4&nbsp;px grid</div>
+      <div style="display: flex; flex-direction: column; gap: 7px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">1 &middot; 4</div>
+          <div style="height: 12px; width: 4px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">2 &middot; 8</div>
+          <div style="height: 12px; width: 8px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">3 &middot; 12</div>
+          <div style="height: 12px; width: 12px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">4 &middot; 16</div>
+          <div style="height: 12px; width: 16px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">5 &middot; 20</div>
+          <div style="height: 12px; width: 20px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">6 &middot; 24</div>
+          <div style="height: 12px; width: 24px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">8 &middot; 32</div>
+          <div style="height: 12px; width: 32px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">10 &middot; 40</div>
+          <div style="height: 12px; width: 40px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">12 &middot; 48</div>
+          <div style="height: 12px; width: 48px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="mono" style="color: #7D828D; width: 52px">16 &middot; 64</div>
+          <div style="height: 12px; width: 64px; border-radius: 2px; background: #4C6DDA"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="group-label" style="color: #7D828D">Control height</div>
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 14px">
+          <div style="display: flex; align-items: center; justify-content: center; height: 36px; padding: 0 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #7D828D; font-size: 13px; font-weight: 600; color: #191C24">Small</div>
+          <div class="mono" style="color: #7D828D">36 &middot; dense toolbars only</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <div style="display: flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 12px; background: #4C6DDA; font-size: 15px; font-weight: 600; color: #FFFFFF">Medium</div>
+          <div class="mono" style="color: #7D828D">44 &middot; the default</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <div style="display: flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; border-radius: 12px; background: #FFFFFF; border: 1px solid #7D828D; font-size: 16px; font-weight: 600; color: #191C24">Large</div>
+          <div class="mono" style="color: #7D828D">52 &middot; primary page action</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; background: #F2F4F8">
+        <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
+        <div style="font-size: 12px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
+          44&nbsp;px is the floor, so <strong style="color: #191C24">Small carries an invisible
+          44&nbsp;px hit area</strong> around its 36&nbsp;px box. Shrinking the target is not one of
+          the sizes on offer.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+
+    <div class="panel">
+      <div class="group-label" style="color: #7D828D">Elevation in light &middot; shadow</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(25, 28, 36, 0.06)"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #191C24">e1</div>
+          <div class="mono" style="color: #7D828D">resting card</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 2px 6px rgba(25, 28, 36, 0.08), 0 1px 2px rgba(25, 28, 36, 0.05)"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #191C24">e2</div>
+          <div class="mono" style="color: #7D828D">menu, popover</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 12px 32px rgba(25, 28, 36, 0.14), 0 2px 6px rgba(25, 28, 36, 0.06)"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #191C24">e3</div>
+          <div class="mono" style="color: #7D828D">dialog</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="background: #0D0F15; border-color: #2B2E37">
+      <div class="group-label" style="color: #7D828D">Elevation in dark &middot; surface</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #0D0F15; border: 1px solid #2B2E37"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #F2F4F8">e1</div>
+          <div class="mono" style="color: #7D828D">surface</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #191C24; border: 1px solid #2B2E37"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #F2F4F8">e2</div>
+          <div class="mono" style="color: #7D828D">surface-raised</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="height: 60px; border-radius: 12px; background: #191C24; border: 1px solid #5F646F"></div>
+          <div style="font-size: 13px; font-weight: 600; color: #F2F4F8">e3</div>
+          <div class="mono" style="color: #7D828D">+ border-strong</div>
+        </div>
+      </div>
+      <div style="font-size: 12px; line-height: 1.6; color: #A7ABB5; text-wrap: pretty">
+        A shadow on a near-black ground is invisible. In dark, height is expressed by a lighter
+        surface and a brighter edge &mdash; the same three levels, a different physical claim.
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="group-label" style="color: #7D828D">Motion</div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 5px">
+        <div style="font-size: 15px; font-weight: 600; color: #191C24">120&nbsp;ms &middot; fast</div>
+        <div style="font-size: 13px; line-height: 1.5; color: #5F646F">Hover, focus ring, colour change. Fast enough to feel like the pointer, not an animation.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 5px">
+        <div style="font-size: 15px; font-weight: 600; color: #191C24">180&nbsp;ms &middot; normal</div>
+        <div style="font-size: 13px; line-height: 1.5; color: #5F646F">Dialog and popover entry, disclosure.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 5px">
+        <div style="font-size: 15px; font-weight: 600; color: #191C24">260&nbsp;ms &middot; slow</div>
+        <div style="font-size: 13px; line-height: 1.5; color: #5F646F">Full-width sheets and anything that travels across the viewport.</div>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 4px">
+      <div class="mono" style="color: #5F646F">--fds-ease-standard: cubic-bezier(0.2, 0, 0, 1)</div>
+      <div class="mono" style="color: #5F646F">--fds-ease-exit: cubic-bezier(0.4, 0, 1, 1)</div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; background: #F2F4F8">
+      <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
+      <div style="font-size: 12px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
+        Under <span class="mono">prefers-reduced-motion: reduce</span> all three durations collapse to
+        <span class="mono">0.01ms</span> in one place. No component opts in or out individually.
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

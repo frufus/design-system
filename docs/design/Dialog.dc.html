@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #344EA8; text-decoration: none; }
+    a:hover { color: #4C6DDA; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; }
+    .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; padding: 0 20px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; border: 1px solid transparent; box-sizing: border-box;
+    }
+    .scrim {
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 28px; border-radius: 20px; min-height: 380px;
+    }
+    .step {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; line-height: 1.6;
+    }
+    .num {
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; border-radius: 999px; flex-shrink: 0;
+      font-size: 11px; font-weight: 700; margin-top: 1px;
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 26px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Dialog</div>
+    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 780px; text-wrap: pretty">
+      The one primitive whose behaviour matters more than its surface. Everything visible here is
+      twenty minutes of work; the focus trap, the restore on close and the escape route are the
+      reason it gets its own component instead of being redrawn per project.
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px">
+
+    <!-- ============================ LIGHT ============================ -->
+    <div class="scrim" style="background: rgba(25, 28, 36, 0.45); border: 1px solid #DDE0E6">
+      <div style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 18px; padding: 26px; border-radius: 24px; background: #FFFFFF; box-shadow: 0 12px 32px rgba(25, 28, 36, 0.22), 0 2px 6px rgba(25, 28, 36, 0.12)">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px">
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #191C24; text-wrap: pretty">Remove Mephiston Red from your shelf?</div>
+          <span class="btn" style="width: 36px; height: 36px; padding: 0; border-radius: 8px; color: #5F646F; flex-shrink: 0; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4C6DDA">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5.5 5.5 9 9m0-9-9 9" stroke="#5F646F" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div style="font-size: 15px; line-height: 24px; color: #5F646F; text-wrap: pretty">
+          Results will stop preferring paints you already own. Your matches are not affected.
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; padding-top: 4px">
+          <span class="btn" style="background: #FFFFFF; border-color: #7D828D; color: #191C24">Keep it</span>
+          <span class="btn" style="background: #B7272C; color: #FFFFFF">Remove</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ DARK ============================ -->
+    <div class="scrim" style="background: rgba(6, 8, 12, 0.72); border: 1px solid #2B2E37">
+      <div style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 18px; padding: 26px; border-radius: 24px; background: #191C24; border: 1px solid #5F646F">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px">
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #F2F4F8; text-wrap: pretty">Remove Mephiston Red from your shelf?</div>
+          <span class="btn" style="width: 36px; height: 36px; padding: 0; border-radius: 8px; color: #A7ABB5; flex-shrink: 0; box-shadow: 0 0 0 2px #191C24, 0 0 0 4px #6A8DF8">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5.5 5.5 9 9m0-9-9 9" stroke="#A7ABB5" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div style="font-size: 15px; line-height: 24px; color: #A7ABB5; text-wrap: pretty">
+          Results will stop preferring paints you already own. Your matches are not affected.
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; padding-top: 4px">
+          <span class="btn" style="background: #0D0F15; border-color: #5F646F; color: #F2F4F8">Keep it</span>
+          <span class="btn" style="background: #F1635E; color: #06080C">Remove</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px">
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 24px 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
+      <div class="group-label" style="color: #7D828D">What happens on open and close</div>
+      <div style="display: flex; flex-direction: column; gap: 11px">
+        <div class="step" style="color: #5F646F">
+          <div class="num" style="background: #DFE8FF; color: #344EA8">1</div>
+          <div><strong style="color: #191C24">Focus enters the dialog</strong> &mdash; on the close
+          button, unless an element declares itself the initial focus. Never on the destructive
+          action.</div>
+        </div>
+        <div class="step" style="color: #5F646F">
+          <div class="num" style="background: #DFE8FF; color: #344EA8">2</div>
+          <div><strong style="color: #191C24">Tab cycles inside</strong> and wraps at both ends. The
+          page behind is inert, so nothing outside can take focus by keyboard or by pointer.</div>
+        </div>
+        <div class="step" style="color: #5F646F">
+          <div class="num" style="background: #DFE8FF; color: #344EA8">3</div>
+          <div><strong style="color: #191C24">Escape and the backdrop both close</strong> &mdash; and
+          both are the same cancel, never a silent confirm.</div>
+        </div>
+        <div class="step" style="color: #5F646F">
+          <div class="num" style="background: #DFE8FF; color: #344EA8">4</div>
+          <div><strong style="color: #191C24">Focus returns to the trigger</strong> on close, even
+          when the dialog closed by Escape or by a backdrop click.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 24px 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE0E6">
+      <div class="group-label" style="color: #7D828D">Structure</div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div class="mono" style="color: #5F646F">role="dialog" aria-modal="true"</div>
+        <div class="mono" style="color: #5F646F">aria-labelledby &rarr; the title slot</div>
+        <div class="mono" style="color: #5F646F">aria-describedby &rarr; the body slot, when present</div>
+      </div>
+      <div style="height: 1px; background: #DDE0E6"></div>
+      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
+        <strong style="color: #191C24">Three slots, no strings.</strong> Title, body and actions are
+        all supplied by the consumer &mdash; including the close button's accessible name. The
+        component ships the behaviour and the geometry; the wording belongs to the project, in
+        whatever language it speaks.
+      </div>
+      <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
+        <strong style="color: #191C24">In dark it gains an edge instead of a shadow.</strong> Same
+        e3 level, expressed the way that level is expressed in that appearance.
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

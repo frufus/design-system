@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #344EA8; text-decoration: none; }
+    a:hover { color: #4C6DDA; }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: 0.01em;
+    }
+    .group-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .chip-name { font-size: 12px; font-weight: 600; letter-spacing: -0.005em; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 28px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; align-items: baseline; gap: 14px">
+      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Foundations</div>
+      <div class="mono" style="color: #7D828D">@frufus/design-system</div>
+    </div>
+    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 780px; text-wrap: pretty">
+      One material, not two. Every neutral carries the accent hue at trace chroma (268&deg;, C 0.004&ndash;0.019),
+      so surfaces and accent read as the same substance under different light. Light and dark are
+      equal rank: each is designed and measured, neither is derived from the other.
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px">
+
+    <!-- ============================ LIGHT ============================ -->
+    <div style="display: flex; flex-direction: column; gap: 22px; padding: 26px; background: #FFFFFF; border: 1px solid #DDE0E6; border-radius: 20px; box-shadow: 0 1px 2px rgba(25, 28, 36, 0.05), 0 8px 24px rgba(25, 28, 36, 0.05)">
+
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="width: 12px; height: 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #7D828D"></div>
+        <div style="font-size: 15px; font-weight: 700; color: #191C24">Light appearance</div>
+        <div class="mono" style="color: #7D828D">:root</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Surfaces</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #F9FAFD; border: 1px solid #DDE0E6"></div>
+            <div class="chip-name" style="color: #191C24">canvas</div>
+            <div class="mono" style="color: #7D828D">#F9FAFD</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #FFFFFF; border: 1px solid #DDE0E6"></div>
+            <div class="chip-name" style="color: #191C24">surface</div>
+            <div class="mono" style="color: #7D828D">#FFFFFF</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #F2F4F8; border: 1px solid #DDE0E6"></div>
+            <div class="chip-name" style="color: #191C24">surface-sunken</div>
+            <div class="mono" style="color: #7D828D">#F2F4F8</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #FFFFFF; border: 1px solid #DDE0E6; box-shadow: 0 2px 6px rgba(25, 28, 36, 0.08)"></div>
+            <div class="chip-name" style="color: #191C24">surface-raised</div>
+            <div class="mono" style="color: #7D828D">#FFFFFF + e2</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #DDE0E6"></div>
+            <div class="chip-name" style="color: #191C24">border</div>
+            <div class="mono" style="color: #7D828D">#DDE0E6</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #7D828D"></div>
+            <div class="chip-name" style="color: #191C24">border-strong</div>
+            <div class="mono" style="color: #7D828D">#7D828D</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Ink</div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #191C24"></div>
+            <div class="chip-name" style="color: #191C24">ink</div>
+            <div class="mono" style="color: #7D828D">#191C24</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #5F646F"></div>
+            <div class="chip-name" style="color: #191C24">ink-muted</div>
+            <div class="mono" style="color: #7D828D">#5F646F</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #7D828D"></div>
+            <div class="chip-name" style="color: #191C24">ink-subtle</div>
+            <div class="mono" style="color: #7D828D">#7D828D</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #FFFFFF; border: 1px solid #DDE0E6"></div>
+            <div class="chip-name" style="color: #191C24">ink-on-accent</div>
+            <div class="mono" style="color: #7D828D">#FFFFFF</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Accent &middot; hue 268</div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #4C6DDA"></div>
+            <div class="chip-name" style="color: #191C24">accent</div>
+            <div class="mono" style="color: #7D828D">#4C6DDA</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #405EC6"></div>
+            <div class="chip-name" style="color: #191C24">hover</div>
+            <div class="mono" style="color: #7D828D">#405EC6</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #344EA8"></div>
+            <div class="chip-name" style="color: #191C24">active</div>
+            <div class="mono" style="color: #7D828D">#344EA8</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #DFE8FF"></div>
+            <div class="chip-name" style="color: #191C24">soft</div>
+            <div class="mono" style="color: #7D828D">#DFE8FF</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #344EA8"></div>
+            <div class="chip-name" style="color: #191C24">accent-ink</div>
+            <div class="mono" style="color: #7D828D">#344EA8</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Status &middot; hues 152 / 75 / 25</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #D9F2DE">
+            <div style="height: 26px; border-radius: 8px; background: #247542"></div>
+            <div class="chip-name" style="color: #247542">success</div>
+            <div class="mono" style="color: #247542">#247542 / #D9F2DE</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #FEECD5">
+            <div style="height: 26px; border-radius: 8px; background: #A6710F"></div>
+            <div class="chip-name" style="color: #7A5103">warning</div>
+            <div class="mono" style="color: #7A5103">#A6710F / #FEECD5</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #FEE4E2">
+            <div style="height: 26px; border-radius: 8px; background: #D53A3B"></div>
+            <div class="chip-name" style="color: #B7272C">danger</div>
+            <div class="mono" style="color: #B7272C">#D53A3B / #FEE4E2</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: #F2F4F8">
+        <div class="group-label" style="color: #5F646F">Measured &middot; WCAG 2.1</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px">
+          <div class="mono" style="color: #5F646F">ink / surface <span style="color: #247542; font-weight: 700">17.0</span></div>
+          <div class="mono" style="color: #5F646F">ink-muted / surface <span style="color: #247542; font-weight: 700">6.0</span></div>
+          <div class="mono" style="color: #5F646F">white / accent <span style="color: #247542; font-weight: 700">4.7</span></div>
+          <div class="mono" style="color: #5F646F">accent-ink / surface <span style="color: #247542; font-weight: 700">7.5</span></div>
+          <div class="mono" style="color: #5F646F">border-strong / surface <span style="color: #247542; font-weight: 700">3.9</span></div>
+          <div class="mono" style="color: #5F646F">accent / surface <span style="color: #247542; font-weight: 700">4.7</span></div>
+          <div class="mono" style="color: #5F646F">warning-ink / soft <span style="color: #247542; font-weight: 700">6.0</span></div>
+          <div class="mono" style="color: #5F646F">danger-ink / surface <span style="color: #247542; font-weight: 700">6.3</span></div>
+        </div>
+        <div style="font-size: 11px; line-height: 1.5; color: #5F646F">
+          Floors: 4.5 text, 3.0 non-text. All 27 pairs pass in this appearance.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================ DARK ============================ -->
+    <div style="display: flex; flex-direction: column; gap: 22px; padding: 26px; background: #0D0F15; border: 1px solid #2B2E37; border-radius: 20px">
+
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="width: 12px; height: 12px; border-radius: 999px; background: #06080C; border: 1px solid #5F646F"></div>
+        <div style="font-size: 15px; font-weight: 700; color: #F2F4F8">Dark appearance</div>
+        <div class="mono" style="color: #7D828D">[data-theme="dark"]</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Surfaces</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #06080C; border: 1px solid #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">canvas</div>
+            <div class="mono" style="color: #7D828D">#06080C</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #0D0F15; border: 1px solid #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">surface</div>
+            <div class="mono" style="color: #7D828D">#0D0F15</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #06080C; border: 1px solid #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">surface-sunken</div>
+            <div class="mono" style="color: #7D828D">#06080C</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #191C24; border: 1px solid #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">surface-raised</div>
+            <div class="mono" style="color: #7D828D">#191C24</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">border</div>
+            <div class="mono" style="color: #7D828D">#2B2E37</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #5F646F"></div>
+            <div class="chip-name" style="color: #F2F4F8">border-strong</div>
+            <div class="mono" style="color: #7D828D">#5F646F</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Ink</div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #F2F4F8"></div>
+            <div class="chip-name" style="color: #F2F4F8">ink</div>
+            <div class="mono" style="color: #7D828D">#F2F4F8</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #A7ABB5"></div>
+            <div class="chip-name" style="color: #F2F4F8">ink-muted</div>
+            <div class="mono" style="color: #7D828D">#A7ABB5</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #7D828D"></div>
+            <div class="chip-name" style="color: #F2F4F8">ink-subtle</div>
+            <div class="mono" style="color: #7D828D">#7D828D</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #06080C; border: 1px solid #2B2E37"></div>
+            <div class="chip-name" style="color: #F2F4F8">ink-on-accent</div>
+            <div class="mono" style="color: #7D828D">#06080C</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Accent &middot; hue 268</div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #6A8DF8"></div>
+            <div class="chip-name" style="color: #F2F4F8">accent</div>
+            <div class="mono" style="color: #7D828D">#6A8DF8</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #91AFFD"></div>
+            <div class="chip-name" style="color: #F2F4F8">hover</div>
+            <div class="mono" style="color: #7D828D">#91AFFD</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #5A7DEA"></div>
+            <div class="chip-name" style="color: #F2F4F8">active</div>
+            <div class="mono" style="color: #7D828D">#5A7DEA</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #101C43"></div>
+            <div class="chip-name" style="color: #F2F4F8">soft</div>
+            <div class="mono" style="color: #7D828D">#101C43</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="height: 52px; border-radius: 10px; background: #91AFFD"></div>
+            <div class="chip-name" style="color: #F2F4F8">accent-ink</div>
+            <div class="mono" style="color: #7D828D">#91AFFD</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="group-label" style="color: #7D828D">Status &middot; hues 152 / 75 / 25</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #022911">
+            <div style="height: 26px; border-radius: 8px; background: #56B675"></div>
+            <div class="chip-name" style="color: #56B675">success</div>
+            <div class="mono" style="color: #56B675">#56B675 / #022911</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #352101">
+            <div style="height: 26px; border-radius: 8px; background: #F2AC39"></div>
+            <div class="chip-name" style="color: #F2AC39">warning</div>
+            <div class="mono" style="color: #F2AC39">#F2AC39 / #352101</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #410C0C">
+            <div style="height: 26px; border-radius: 8px; background: #F1635E"></div>
+            <div class="chip-name" style="color: #F1635E">danger</div>
+            <div class="mono" style="color: #F1635E">#F1635E / #410C0C</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: #06080C">
+        <div class="group-label" style="color: #A7ABB5">Measured &middot; WCAG 2.1</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px">
+          <div class="mono" style="color: #A7ABB5">ink / surface <span style="color: #56B675; font-weight: 700">17.3</span></div>
+          <div class="mono" style="color: #A7ABB5">ink-muted / surface <span style="color: #56B675; font-weight: 700">8.3</span></div>
+          <div class="mono" style="color: #A7ABB5">black / accent <span style="color: #56B675; font-weight: 700">6.5</span></div>
+          <div class="mono" style="color: #A7ABB5">accent-ink / surface <span style="color: #56B675; font-weight: 700">8.9</span></div>
+          <div class="mono" style="color: #A7ABB5">border-strong / surface <span style="color: #56B675; font-weight: 700">3.2</span></div>
+          <div class="mono" style="color: #A7ABB5">accent / surface <span style="color: #56B675; font-weight: 700">6.2</span></div>
+          <div class="mono" style="color: #A7ABB5">warning-ink / soft <span style="color: #56B675; font-weight: 700">7.8</span></div>
+          <div class="mono" style="color: #A7ABB5">danger-ink / surface <span style="color: #56B675; font-weight: 700">6.1</span></div>
+        </div>
+        <div style="font-size: 11px; line-height: 1.5; color: #A7ABB5">
+          Floors: 4.5 text, 3.0 non-text. All 27 pairs pass in this appearance.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 12px; align-items: flex-start; padding: 18px 20px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DDE0E6">
+    <div style="width: 3px; align-self: stretch; border-radius: 999px; background: #4C6DDA"></div>
+    <div style="font-size: 13px; line-height: 1.6; color: #5F646F; text-wrap: pretty">
+      <strong style="color: #191C24">border-strong is darker than a soft system usually wants.</strong>
+      An input's border is its only affordance, so it carries the 3:1 non-text floor rather than a
+      decorative one &mdash; measured, not assumed. The airy border stays available as
+      <span class="mono">border</span> for card edges and dividers, where the component is
+      identifiable without it.
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

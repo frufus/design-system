@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #344EA8; text-decoration: none; }
+    a:hover { color: #4C6DDA; }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+    }
+    .group-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 128px minmax(0, 1fr);
+      gap: 20px;
+      align-items: baseline;
+      padding: 12px 0;
+      border-top: 1px solid #DDE0E6;
+    }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 26px; padding: 44px; background: #F9FAFD; min-height: 100%; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Typography</div>
+    <div style="font-size: 15px; line-height: 1.55; color: #5F646F; max-width: 720px; text-wrap: pretty">
+      One family carries the whole system. Manrope's open apertures and softly cut terminals are what
+      make this identity read as calm rather than corporate &mdash; the geometry does the work the
+      colour deliberately does not.
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 16px; padding: 22px 24px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE0E6; align-items: center">
+    <div style="font-size: 64px; font-weight: 700; letter-spacing: -0.03em; color: #191C24; line-height: 1">Aa</div>
+    <div style="display: flex; flex-direction: column; gap: 6px; flex-grow: 1">
+      <div style="font-size: 18px; font-weight: 700; color: #191C24">Manrope</div>
+      <div style="font-size: 13px; line-height: 1.5; color: #5F646F">
+        Variable 200&ndash;800, SIL Open Font License 1.1. Shipped as one subset
+        <span class="mono">.woff2</span> inside the package &mdash; never fetched from a font host,
+        because the project forbids external CDNs.
+      </div>
+      <div class="mono" style="color: #7D828D; padding-top: 2px">
+        --fds-font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif
+      </div>
+      <div class="mono" style="color: #7D828D">
+        --fds-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end">
+      <div style="font-size: 24px; font-weight: 400; color: #5F646F">400</div>
+      <div style="font-size: 24px; font-weight: 500; color: #5F646F">500</div>
+      <div style="font-size: 24px; font-weight: 600; color: #191C24">600</div>
+      <div style="font-size: 24px; font-weight: 700; color: #191C24">700</div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 2px; padding: 24px 26px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE0E6">
+    <div class="group-label" style="color: #7D828D; padding-bottom: 10px">Scale</div>
+
+    <div class="row" style="border-top: none">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">3xl</div>
+        <div class="mono" style="color: #7D828D">36 / 44 &middot; 700</div>
+      </div>
+      <div style="font-size: 36px; line-height: 44px; font-weight: 700; letter-spacing: -0.025em; color: #191C24">Page title</div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">2xl</div>
+        <div class="mono" style="color: #7D828D">28 / 36 &middot; 700</div>
+      </div>
+      <div style="font-size: 28px; line-height: 36px; font-weight: 700; letter-spacing: -0.02em; color: #191C24">Section title</div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">xl</div>
+        <div class="mono" style="color: #7D828D">22 / 30 &middot; 600</div>
+      </div>
+      <div style="font-size: 22px; line-height: 30px; font-weight: 600; letter-spacing: -0.015em; color: #191C24">Card and dialog title</div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">lg</div>
+        <div class="mono" style="color: #7D828D">18 / 28 &middot; 600</div>
+      </div>
+      <div style="font-size: 18px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; color: #191C24">Subheading</div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">base</div>
+        <div class="mono" style="color: #7D828D">16 / 24 &middot; 400</div>
+      </div>
+      <div style="font-size: 16px; line-height: 24px; color: #191C24; text-wrap: pretty">
+        Body text sits at sixteen over twenty-four. Long passages stay comfortable because the line
+        height is set for reading, not for density.
+      </div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">sm</div>
+        <div class="mono" style="color: #7D828D">14 / 20 &middot; 400 / 500</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <div style="font-size: 14px; line-height: 20px; color: #5F646F">Secondary text and descriptions.</div>
+        <div style="font-size: 14px; line-height: 20px; font-weight: 500; color: #191C24">Control labels are the same size at 500.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">xs</div>
+        <div class="mono" style="color: #7D828D">12 / 18 &middot; 500</div>
+      </div>
+      <div style="font-size: 12px; line-height: 18px; font-weight: 500; color: #5F646F">Badges, helper text, table metadata.</div>
+    </div>
+
+    <div class="row">
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <div class="mono" style="color: #191C24; font-weight: 700">2xs</div>
+        <div class="mono" style="color: #7D828D">11 / 16 &middot; 700 &middot; 0.1em</div>
+      </div>
+      <div class="group-label" style="color: #7D828D">Group label</div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 22px 24px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE0E6">
+      <div class="group-label" style="color: #7D828D">In light</div>
+      <div style="font-size: 22px; line-height: 30px; font-weight: 600; letter-spacing: -0.015em; color: #191C24">Fifty-eight paints matched</div>
+      <div style="font-size: 15px; line-height: 24px; color: #5F646F; text-wrap: pretty">
+        The same three sizes doing the same three jobs, so a reader learns the hierarchy once and
+        carries it between projects.
+      </div>
+      <div style="font-size: 12px; line-height: 18px; font-weight: 500; color: #7D828D">Updated 4 minutes ago</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 22px 24px; border-radius: 18px; background: #0D0F15; border: 1px solid #2B2E37">
+      <div class="group-label" style="color: #7D828D">In dark</div>
+      <div style="font-size: 22px; line-height: 30px; font-weight: 600; letter-spacing: -0.015em; color: #F2F4F8">Fifty-eight paints matched</div>
+      <div style="font-size: 15px; line-height: 24px; color: #A7ABB5; text-wrap: pretty">
+        Weight drops nowhere in dark. Manrope at 400 stays legible against a near-black ground
+        because the ink token is measured, not dimmed by habit.
+      </div>
+      <div style="font-size: 12px; line-height: 18px; font-weight: 500; color: #7D828D">Updated 4 minutes ago</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
