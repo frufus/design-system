@@ -1,36 +1,187 @@
 {
   "pages": [
-    { "id": "typeface", "name": "Typeface" },
-    { "id": "foundations", "name": "Foundations" },
-    { "id": "primitives", "name": "Primitives" },
-    { "id": "form", "name": "Form studies" },
-    { "id": "directions", "name": "Directions" }
+    {
+      "id": "foundations",
+      "name": "Foundations"
+    },
+    {
+      "id": "primitives",
+      "name": "Primitives"
+    },
+    {
+      "id": "typeface",
+      "name": "Typeface"
+    },
+    {
+      "id": "form",
+      "name": "Form studies"
+    },
+    {
+      "id": "directions",
+      "name": "Directions"
+    }
   ],
   "artboards": [
-    { "file": "TypefacePlex.dc.html", "page": "typeface", "x": 0, "y": 0, "w": 640, "h": 1140 },
-    { "file": "TypefaceAtkinson.dc.html", "page": "typeface", "x": 720, "y": 0, "w": 640, "h": 1140 },
-    { "file": "TypefaceFira.dc.html", "page": "typeface", "x": 1440, "y": 0, "w": 640, "h": 1140 },
-    { "file": "TypefaceDejaVu.dc.html", "page": "typeface", "x": 2160, "y": 0, "w": 640, "h": 1140 },
-
-    { "file": "Main.dc.html", "page": "foundations", "x": 0, "y": 0, "w": 1240, "h": 1200 },
-    { "file": "Typography.dc.html", "page": "foundations", "x": 1360, "y": 0, "w": 1020, "h": 1420 },
-    { "file": "Geometry.dc.html", "page": "foundations", "x": 2460, "y": 0, "w": 1020, "h": 1180 },
-
-    { "file": "Buttons.dc.html", "page": "primitives", "x": 0, "y": 0, "w": 1300, "h": 1220 },
-    { "file": "Fields.dc.html", "page": "primitives", "x": 1420, "y": 0, "w": 1180, "h": 1320 },
-    { "file": "Surfaces.dc.html", "page": "primitives", "x": 0, "y": 1440, "w": 1260, "h": 1200 },
-    { "file": "Dialog.dc.html", "page": "primitives", "x": 1380, "y": 1440, "w": 1180, "h": 980 },
-    { "file": "Composition.dc.html", "page": "primitives", "x": 0, "y": 2760, "w": 1260, "h": 1000 },
-
-    { "file": "FormRulework.dc.html", "page": "form", "x": 0, "y": 0, "w": 660, "h": 1160 },
-    { "file": "FormConsole.dc.html", "page": "form", "x": 740, "y": 0, "w": 660, "h": 1220 },
-    { "file": "FormPlate.dc.html", "page": "form", "x": 1480, "y": 0, "w": 660, "h": 1340 },
-
-    { "file": "DirectionIndigo.dc.html", "page": "directions", "x": 0, "y": 0, "w": 640, "h": 1320 },
-    { "file": "DirectionPetrol.dc.html", "page": "directions", "x": 720, "y": 0, "w": 640, "h": 1320 },
-    { "file": "DirectionAmethyst.dc.html", "page": "directions", "x": 1440, "y": 0, "w": 640, "h": 1320 },
-    { "file": "DirectionMagenta.dc.html", "page": "directions", "x": 2160, "y": 0, "w": 640, "h": 1320 },
-    { "file": "DirectionSignal.dc.html", "page": "directions", "x": 2880, "y": 0, "w": 640, "h": 1320 }
+    {
+      "file": "TypefacePlex.dc.html",
+      "page": "typeface",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 1140
+    },
+    {
+      "file": "TypefaceAtkinson.dc.html",
+      "page": "typeface",
+      "x": 720,
+      "y": 0,
+      "w": 640,
+      "h": 1140
+    },
+    {
+      "file": "TypefaceFira.dc.html",
+      "page": "typeface",
+      "x": 1440,
+      "y": 0,
+      "w": 640,
+      "h": 1140
+    },
+    {
+      "file": "TypefaceDejaVu.dc.html",
+      "page": "typeface",
+      "x": 2160,
+      "y": 0,
+      "w": 640,
+      "h": 1140
+    },
+    {
+      "file": "Main.dc.html",
+      "page": "foundations",
+      "x": 0,
+      "y": 0,
+      "w": 1240,
+      "h": 1200
+    },
+    {
+      "file": "Typography.dc.html",
+      "page": "foundations",
+      "x": 1360,
+      "y": 0,
+      "w": 1020,
+      "h": 1420
+    },
+    {
+      "file": "Geometry.dc.html",
+      "page": "foundations",
+      "x": 2460,
+      "y": 0,
+      "w": 1020,
+      "h": 1180
+    },
+    {
+      "file": "Buttons.dc.html",
+      "page": "primitives",
+      "x": 0,
+      "y": 0,
+      "w": 1300,
+      "h": 1220
+    },
+    {
+      "file": "Fields.dc.html",
+      "page": "primitives",
+      "x": 1420,
+      "y": 0,
+      "w": 1180,
+      "h": 1320
+    },
+    {
+      "file": "Surfaces.dc.html",
+      "page": "primitives",
+      "x": 0,
+      "y": 1440,
+      "w": 1260,
+      "h": 1200
+    },
+    {
+      "file": "Dialog.dc.html",
+      "page": "primitives",
+      "x": 1380,
+      "y": 1440,
+      "w": 1180,
+      "h": 980
+    },
+    {
+      "file": "Composition.dc.html",
+      "page": "primitives",
+      "x": 0,
+      "y": 2760,
+      "w": 1260,
+      "h": 1000
+    },
+    {
+      "file": "FormRulework.dc.html",
+      "page": "form",
+      "x": 0,
+      "y": 0,
+      "w": 660,
+      "h": 1160
+    },
+    {
+      "file": "FormConsole.dc.html",
+      "page": "form",
+      "x": 740,
+      "y": 0,
+      "w": 660,
+      "h": 1220
+    },
+    {
+      "file": "FormPlate.dc.html",
+      "page": "form",
+      "x": 1480,
+      "y": 0,
+      "w": 660,
+      "h": 1340
+    },
+    {
+      "file": "DirectionIndigo.dc.html",
+      "page": "directions",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 1320
+    },
+    {
+      "file": "DirectionPetrol.dc.html",
+      "page": "directions",
+      "x": 720,
+      "y": 0,
+      "w": 640,
+      "h": 1320
+    },
+    {
+      "file": "DirectionAmethyst.dc.html",
+      "page": "directions",
+      "x": 1440,
+      "y": 0,
+      "w": 640,
+      "h": 1320
+    },
+    {
+      "file": "DirectionMagenta.dc.html",
+      "page": "directions",
+      "x": 2160,
+      "y": 0,
+      "w": 640,
+      "h": 1320
+    },
+    {
+      "file": "DirectionSignal.dc.html",
+      "page": "directions",
+      "x": 2880,
+      "y": 0,
+      "w": 640,
+      "h": 1320
+    }
   ],
   "annotations": [
     {
@@ -39,7 +190,7 @@
       "x": 0,
       "y": -270,
       "w": 960,
-      "text": "Same palette, same layout, same words - only the typeface changes.\n\nAll four are self-hosted in the package; none is fetched from a font host at runtime. Three of them are SIL OFL 1.1, which is the practical ceiling for a usable UI face: it asks nothing of your code, no attribution in the interface, no share-alike. Its only two limits - you may not sell the font on its own, and a modified copy must be renamed - never touch us.\n\nSo the licence is not the differentiator. Provenance and character are.\n\nEach tile shows Il1O0 at size, because that is where a typeface for dense data either helps or does not, and states what it costs at the bottom."
+      "text": "Settled: ATKINSON HYPERLEGIBLE.\n\nKept as the record of what was compared. All four were self-hosted candidates; three were SIL OFL 1.1, which is the practical ceiling for a usable UI face - so the licence never separated them, and provenance and character did.\n\nWorth remembering from this page: DejaVu, the one picked for licence freedom, had the least clear paperwork of the four. And IBM Plex is IBM's, not Google's - Google Fonts only mirrors it."
     },
     {
       "id": "gate",
@@ -47,7 +198,7 @@
       "x": 0,
       "y": -250,
       "w": 980,
-      "text": "APPROVED: PETROL + CONSOLE. This is the binding handoff for tokens.css.\n\nThe form study's one conflict is resolved here: display rows sit at 40 px, but any row holding a control is 52 px so the control keeps its full 44 px target.\n\nThese artboards are drawn in IBM Plex. If the Typeface page settles on another face, they get redrawn before any token ships.\n\nEvery contrast number is computed by tools/palette-report.mjs. All 27 pairs pass in both appearances."
+      "text": "APPROVED: PETROL + CONSOLE + ATKINSON HYPERLEGIBLE. This is the binding handoff for tokens.css.\n\nThe form study's one conflict is resolved here: display rows sit at 40 px, but any row holding a control is 52 px so the control keeps its full 44 px target.\n\nThe typeface is vendored, not fetched: two subset variable woff2, 30.3 and 15.4 KB, covering weights 200-800 of both families. No font host, no CDN, works offline.\n\nEvery contrast number is computed by tools/palette-report.mjs. All 27 pairs pass in both appearances."
     },
     {
       "id": "formpick",
@@ -66,5 +217,8 @@
       "text": "Settled: PETROL.\n\nKept as the record. Each candidate changed hue, chroma, form and type together, and all 27 contrast pairs pass in both appearances for every one of them - so the choice was about character, not about which one was safe."
     }
   ],
-  "launch": { "view": "canvas", "page": "typeface" }
+  "launch": {
+    "view": "canvas",
+    "page": "foundations"
+  }
 }

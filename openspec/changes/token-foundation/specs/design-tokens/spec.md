@@ -88,6 +88,42 @@ values on its own `:root`, with no build step, no JavaScript and no fork.
 - **AND** this is documented, because a silent no-op is otherwise
   indistinguishable from a typo
 
+### Requirement: The typeface is served by the consuming project, never fetched
+
+The package SHALL carry its typefaces as files and serve them from the consuming
+project's own origin. No stylesheet, script or font file may be requested from a
+third-party host at runtime.
+
+#### Scenario: A page using the package is opened
+
+- **WHEN** any page built on the package renders
+- **THEN** the fonts load from the consuming project's own origin
+- **AND** no request is made to any font host, CDN or analytics endpoint
+
+#### Scenario: The page is opened with no network at all
+
+- **WHEN** the application is running offline and its own assets are cached
+- **THEN** the interface renders in the intended typeface rather than a fallback
+
+#### Scenario: A weight is not stated
+
+- **WHEN** an element inherits the monospace family without a declared weight
+- **THEN** it must still render at the intended weight, because the variable
+  font's default instance is its lightest and would otherwise render far too thin
+- **AND** the package declares the weight rather than relying on that default
+
+### Requirement: The typeface licence travels with the files
+
+The package SHALL ship the full licence text beside the font files and name their
+author, so a consuming project can satisfy its own attribution obligations without
+research.
+
+#### Scenario: A consuming project audits its dependencies
+
+- **WHEN** someone inspects the installed package for third-party assets
+- **THEN** the licence text is present alongside the fonts
+- **AND** the author is named in the package's notice file
+
 ### Requirement: Token names are the package's public surface
 
 The set of token names SHALL be treated as an API. Renaming or removing one is a

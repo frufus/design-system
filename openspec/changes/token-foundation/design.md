@@ -93,6 +93,32 @@ utilities by design.
 also inline the values at build time, breaking the runtime retheming the whole
 architecture rests on.
 
+### Vendor two variable subsets, not sixteen static files
+
+Atkinson Hyperlegible Next and Atkinson Hyperlegible Mono ship as one variable
+`woff2` each, subset to basic Latin plus the Latin-1 supplement and the handful of
+punctuation and symbols the package actually draws. That is 30.3 KB and 15.4 KB
+for the whole 200–800 range of both families — against roughly 100 KB for the
+eight static weights the type scale would otherwise need, and two requests instead
+of eight.
+
+*Alternative rejected:* static weights. Cheaper per file, more files, and it makes
+the scale's weights a build-time commitment rather than a token one.
+
+*Alternative rejected:* leaving the font to the consumer. The face is the reason
+this identity is legible in the first place; making it optional would mean the
+package's own primitives are drawn in something the design was never checked in.
+
+`tools/subset-fonts.mjs` records the subsetting so it is reproducible rather than
+folklore: source package and version, the unicode ranges, and the expected output
+sizes. It is an authoring step — a consumer never runs it, and CI does not need
+`fonttools` installed.
+
+**One trap worth writing down.** The mono variable's default instance is
+ExtraLight, not Regular. Anything that reaches the family without stating a weight
+renders far too thin, so every rule that sets the mono family sets a weight beside
+it, and a test asserts that.
+
 ### The checks parse, they do not grep
 
 The tests read the shipped stylesheets and parse them into a record of selector to
@@ -107,9 +133,15 @@ that matters — a missing brace that silently swallows the dark block.
   it does not recognise rather than skipping it. Generated output means the input
   shape is ours, not arbitrary CSS.
 
-- **No bundled font, so the package renders in the fallback face.** → Recorded as
-  a non-goal with a follow-up change. The fallback stack is chosen for metric
-  proximity, and the gap is visible rather than silent.
+- **Atkinson runs wider than a neutral grotesque.** → The dense row holds less
+  text at the same size. The row grid gives the key column fixed width and lets
+  the value column flex, so the effect lands in wrapping rather than in overlap;
+  the type scale's base size was set against a dense row, not against prose.
+
+- **The fonts add about 46 KB to every consuming bundle.** → Stated in the
+  proposal's Impact so it can be argued with rather than discovered. It buys the
+  whole weight range of both families and removes a third-party request from every
+  page, which is the trade this project's non-negotiables already imply.
 
 - **Nulling the default theme is hostile to a consumer who wanted Tailwind's
   palette.** → That is the point, and it is stated in the capability spec so it
