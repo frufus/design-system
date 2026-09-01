@@ -65,15 +65,15 @@
 
 ## 6. `src/registers.css`
 
-- [ ] 6.1 Write the `@theme` nulling block setting Tailwind's default colour, font,
+- [x] 6.1 Write the `@theme` nulling block setting Tailwind's default colour, font,
       radius and shadow scales to `initial`.
       **Verified by:** `npm run test -- registers-nulled` fails if a default scale
       is still reachable.
-- [ ] 6.2 Write the `@theme inline` remap claiming the utility names, every one
+- [x] 6.2 Write the `@theme inline` remap claiming the utility names, every one
       pointing at a `--fds-*` variable rather than a literal.
       **Verified by:** `npm run test -- registers-mapped` fails when a mapped
       utility resolves to anything but a variable.
-- [ ] 6.3 Write the shared control register in `@layer components`: height, radius,
+- [x] 6.3 Write the shared control register in `@layer components`: height, radius,
       border, inset treatment, focus ring, and the disabled pair.
       **Verified by:** `npm run test -- control-register` asserts the register
       exists in the components layer and that its geometry comes from tokens.
