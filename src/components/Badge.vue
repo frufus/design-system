@@ -1,3 +1,16 @@
+<template>
+  <span
+    :class="[
+      'inline-flex items-center gap-1.5 rounded-tag border border-transparent px-2 py-0.5',
+      'font-mono text-key font-semibold uppercase tracking-key',
+      badgeToneClasses[tone],
+    ]"
+  >
+    <span v-if="mark" data-fds-mark aria-hidden="true" class="size-1.5 bg-current"></span>
+    <slot />
+  </span>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import {
@@ -26,16 +39,3 @@ const props = withDefaults(
 
 const tone = computed(() => resolveKey(props.tone, BADGE_TONES, DEFAULT_BADGE_TONE))
 </script>
-
-<template>
-  <span
-    :class="[
-      'inline-flex items-center gap-1.5 rounded-tag border border-transparent px-2 py-0.5',
-      'font-mono text-key font-semibold uppercase tracking-key',
-      badgeToneClasses[tone],
-    ]"
-  >
-    <span v-if="mark" data-fds-mark aria-hidden="true" class="size-1.5 bg-current"></span>
-    <slot />
-  </span>
-</template>

@@ -36,9 +36,15 @@ describe('the rules and the document agree', () => {
   })
 
   it('names no check that does not exist', () => {
+    // Only the "Enforced by" lines are read, and only the backticked names that
+    // look like a check id - a file path carries a dot and a slash, so a rule
+    // enforced by a test suite rather than a check is not mistaken for one.
     const ids = new Set(CHECKS.map((check) => check.id))
-    const mentioned = [...language.matchAll(/`(no-[a-z-]+)`/g)].map((match) => match[1] ?? '')
+    const mentioned = [...language.matchAll(/\*\*Enforced by\*\* `([a-z][a-z-]+)`/g)].map(
+      (match) => match[1] ?? '',
+    )
 
+    expect(mentioned.length, 'no check is referenced at all').toBeGreaterThan(0)
     for (const id of mentioned) {
       expect(ids.has(id), `${id} is documented but does not exist`).toBe(true)
     }

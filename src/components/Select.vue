@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import FieldShell from './FieldShell.vue'
-
-/**
- * A native select on the same register as Input.
- *
- * The canvas draws a custom open list; this renders the platform's. A custom
- * listbox means owning roving focus, typeahead, aria-activedescendant and the
- * scroll behaviour every hand-rolled version gets subtly wrong - and it would
- * replace the option list a mobile user already knows how to use. The drawn list
- * is the specification for a future Combobox, which is the case a native select
- * genuinely cannot serve.
- *
- * Options come from the consuming project, so the component owns no words here
- * either.
- */
-withDefaults(
-  defineProps<{
-    label: string
-    modelValue?: string
-    description?: string
-    error?: string
-    id?: string
-    disabled?: boolean
-  }>(),
-  { disabled: false },
-)
-
-defineEmits<{ 'update:modelValue': [value: string] }>()
-</script>
-
 <template>
   <FieldShell :id="id" :label="label" :description="description" :error="error">
     <template #default="{ controlId, describedBy, invalid }">
@@ -68,3 +37,34 @@ defineEmits<{ 'update:modelValue': [value: string] }>()
     </template>
   </FieldShell>
 </template>
+
+<script setup lang="ts">
+import FieldShell from './FieldShell.vue'
+
+/**
+ * A native select on the same register as Input.
+ *
+ * The canvas draws a custom open list; this renders the platform's. A custom
+ * listbox means owning roving focus, typeahead, aria-activedescendant and the
+ * scroll behaviour every hand-rolled version gets subtly wrong - and it would
+ * replace the option list a mobile user already knows how to use. The drawn list
+ * is the specification for a future Combobox, which is the case a native select
+ * genuinely cannot serve.
+ *
+ * Options come from the consuming project, so the component owns no words here
+ * either.
+ */
+withDefaults(
+  defineProps<{
+    label: string
+    modelValue?: string
+    description?: string
+    error?: string
+    id?: string
+    disabled?: boolean
+  }>(),
+  { disabled: false },
+)
+
+defineEmits<{ 'update:modelValue': [value: string] }>()
+</script>

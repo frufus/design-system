@@ -268,6 +268,19 @@
     block-size: 100%;
   }
 
+  /* The one animation this package has. It lives here rather than in the
+     component for the same reason components carry no style block at all: a
+     component declaring its own animation is a component holding a value that is
+     not a token, and that is how a system ends up with six slightly different
+     spinners.
+
+     The duration is a token, so it collapses with everything else under
+     prefers-reduced-motion rather than needing an opt-out of its own. */
+  .fds-spin {
+    animation: fds-spin calc(var(--fds-duration-slow) * 3.5) linear infinite;
+    transform-origin: 50% 50%;
+  }
+
   /* The ring belongs to the system, not to any one control, so anything
      focusable can wear it. */
   .fds-focus-ring:focus-visible {
@@ -275,5 +288,11 @@
     box-shadow:
       0 0 0 var(--fds-focus-offset) var(--fds-surface),
       0 0 0 calc(var(--fds-focus-offset) + var(--fds-focus-width)) var(--fds-focus);
+  }
+}
+
+@keyframes fds-spin {
+  to {
+    rotate: 360deg;
   }
 }

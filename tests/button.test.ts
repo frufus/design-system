@@ -53,6 +53,14 @@ describe('Button behaviour', () => {
     expect(wrapper.text()).toContain(label)
   })
 
+  it('actually spins while it is working', () => {
+    // An indicator that does not move reads as a broken icon, and leaves the
+    // state to the button merely being unresponsive.
+    const wrapper = mount(Button, { props: { loading: true }, slots: { default: label } })
+
+    expect(wrapper.get('[data-fds-busy]').classes()).toContain('fds-spin')
+  })
+
   it('marks the busy indicator as decoration, since the label already speaks', () => {
     const wrapper = mount(Button, { props: { loading: true }, slots: { default: label } })
     const indicator = wrapper.find('[data-fds-busy]')

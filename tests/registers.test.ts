@@ -135,3 +135,22 @@ describe('control register', () => {
     expect(JSON.stringify(disabled?.declarations)).toContain('--fds-disabled')
   })
 })
+
+describe('motion', () => {
+  it('declares the spin the busy indicator uses', () => {
+    const spin = components.find((block) => block.selector === '.fds-spin')
+
+    expect(spin, 'no .fds-spin rule in the components layer').toBeTruthy()
+    expect(spin?.declarations['animation']).toBeTruthy()
+  })
+
+  it('takes the spin duration from a token, not a number', () => {
+    const spin = components.find((block) => block.selector === '.fds-spin')
+
+    expect(spin?.declarations['animation']).toContain('var(--fds-duration-')
+  })
+
+  it('declares the keyframes it animates', () => {
+    expect(registersCss).toMatch(/@keyframes\s+fds-spin/)
+  })
+})
