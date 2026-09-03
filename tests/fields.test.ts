@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import Input from '../src/components/Input.vue'
 import Select from '../src/components/Select.vue'
 
@@ -61,6 +61,38 @@ describe('Input', () => {
     const words = wrapper.text().replace(label, '').replace(description, '').replace(error, '')
 
     expect(words.trim()).toBe('')
+  })
+
+  it('forwards platform attributes to the control, not the wrapper', () => {
+    // The platform's input has dozens of attributes and a prop for each would
+    // never be complete. What a project writes on the field belongs on the
+    // control, which is where a placeholder actually renders.
+    const wrapper = mount(Input, {
+      props: { label },
+      attrs: { placeholder: 'Add a name…', name: 'workspace', autocomplete: 'organization' },
+    })
+    const input = wrapper.get('input')
+
+    expect(input.attributes('placeholder')).toBe('Add a name…')
+    expect(input.attributes('name')).toBe('workspace')
+    expect(input.attributes('autocomplete')).toBe('organization')
+    expect(wrapper.attributes('placeholder')).toBeUndefined()
+  })
+
+  it('keeps class and style on the root, where layout lives', () => {
+    const wrapper = mount(Input, { props: { label }, attrs: { class: 'mt-4' } })
+
+    expect(wrapper.classes()).toContain('mt-4')
+    expect(wrapper.get('input').classes()).not.toContain('mt-4')
+  })
+
+  it('fires a listener the project attaches to the control', async () => {
+    const onBlur = vi.fn()
+    const wrapper = mount(Input, { props: { label }, attrs: { onBlur } })
+
+    await wrapper.get('input').trigger('blur')
+
+    expect(onBlur).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -128,5 +160,31 @@ describe('Select', () => {
     })
 
     expect(wrapper.get('select').attributes('disabled')).toBeDefined()
+  })
+
+  it('forwards platform attributes to the control, not the wrapper', () => {
+    const wrapper = mount(Select, {
+      props: { label },
+      attrs: { name: 'appearance', required: true },
+      slots: { default: options },
+    })
+
+    expect(wrapper.get('select').attributes('name')).toBe('appearance')
+    expect(wrapper.get('select').attributes('required')).toBeDefined()
+    expect(wrapper.attributes('name')).toBeUndefined()
+  })
+
+  it('keeps class on the root and fires a listener on the control', async () => {
+    const onBlur = vi.fn()
+    const wrapper = mount(Select, {
+      props: { label },
+      attrs: { class: 'mt-4', onBlur },
+      slots: { default: options },
+    })
+
+    await wrapper.get('select').trigger('blur')
+
+    expect(wrapper.classes()).toContain('mt-4')
+    expect(onBlur).toHaveBeenCalledTimes(1)
   })
 })

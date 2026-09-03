@@ -47,7 +47,7 @@ import {
   resolveKey,
   type ButtonSize,
   type ButtonVariant,
-} from '../classMaps.ts'
+} from '../classMaps'
 
 const props = withDefaults(
   defineProps<{

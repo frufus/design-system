@@ -153,4 +153,100 @@ describe('motion', () => {
   it('declares the keyframes it animates', () => {
     expect(registersCss).toMatch(/@keyframes\s+fds-spin/)
   })
+
+  it('stops the spin entirely under reduced motion', () => {
+    // A near-zero duration on an infinite animation is not "stopped": every
+    // frame samples a different angle, and the arc flickers. Only `none` stops.
+    const reduced = blocks.find(
+      (block) =>
+        block.selector === '.fds-spin' &&
+        block.atRules.some((rule) => rule.includes('prefers-reduced-motion')),
+    )
+
+    expect(reduced, 'no reduced-motion rule for .fds-spin').toBeTruthy()
+    expect(reduced?.declarations['animation']).toBe('none')
+  })
+})
+
+describe('type scale mapping', () => {
+  const steps = ['display', '2xl', 'xl', 'lg', 'base', 'sm', 'xs', 'code', 'key']
+
+  it('gives every text step its line height, tracking and weight through the step itself', () => {
+    // Tailwind v4 reads these three keys when it emits `text-<step>`. Without
+    // them the utility sets a size and nothing else, and every component
+    // inherits the body's line height.
+    for (const step of steps) {
+      expect(mapped[`--text-${step}--line-height`]).toBe(`var(--fds-leading-${step})`)
+      expect(mapped[`--text-${step}--letter-spacing`]).toBe(`var(--fds-tracking-${step})`)
+      expect(mapped[`--text-${step}--font-weight`]).toBe(`var(--fds-weight-${step})`)
+    }
+  })
+
+  it('maps the four named weights, so a component can depart from a step on purpose', () => {
+    for (const weight of ['light', 'regular', 'medium', 'semibold']) {
+      expect(mapped[`--font-weight-${weight}`]).toBe(`var(--fds-weight-${weight})`)
+    }
+  })
+})
+
+describe('the inert action wins', () => {
+  it('declares the inert state in the utilities layer, where the variant colours live', () => {
+    // Variant colours are utilities. A rule in the components layer loses to
+    // them however specific it is, so the inert state has to sit in the same
+    // layer, after them.
+    const inert = blocks.find(
+      (block) =>
+        block.selector.includes('.fds-action:disabled') &&
+        block.atRules.includes('@layer utilities'),
+    )
+
+    expect(inert, 'no inert action rule in the utilities layer').toBeTruthy()
+    expect(inert?.declarations['background-color']).toBe('var(--fds-disabled-surface)')
+    expect(inert?.declarations['color']).toBe('var(--fds-disabled-ink)')
+  })
+
+  it('leaves no inert action rule in the components layer to disagree with it', () => {
+    const stale = components.find((block) => block.selector.includes('.fds-action:disabled'))
+    expect(stale).toBeUndefined()
+  })
+})
+
+describe('the ring is an outline', () => {
+  const rings = components.filter((block) => block.selector.includes(':focus-visible'))
+
+  it('draws every focus-visible ring with outline and outline-offset from the tokens', () => {
+    // Forced-colours mode keeps outlines and discards shadows, and an outline
+    // is not clipped by an ancestor's overflow.
+    expect(rings.length).toBeGreaterThan(0)
+    for (const ring of rings) {
+      expect(ring.declarations['outline'], `${ring.selector} has no outline`).toContain(
+        'var(--fds-focus)',
+      )
+      expect(ring.declarations['outline-offset'], `${ring.selector} has no offset`).toContain(
+        'var(--fds-focus-offset)',
+      )
+      expect(ring.declarations['box-shadow']).toBeUndefined()
+    }
+  })
+
+  it('never turns the outline off', () => {
+    for (const block of blocks) {
+      expect(block.declarations['outline'], `${block.selector} sets outline: none`).not.toBe('none')
+    }
+  })
+})
+
+describe('touch', () => {
+  it('opts controls and actions out of the double-tap delay', () => {
+    const action = components.find((block) => block.selector === '.fds-action')?.declarations
+    expect(control['touch-action']).toBe('manipulation')
+    expect(action?.['touch-action']).toBe('manipulation')
+  })
+})
+
+describe('placeholder', () => {
+  it('is text, and wears an ink measured at the text floor on the control surface', () => {
+    const placeholder = components.find((block) => block.selector === '.fds-control::placeholder')
+    expect(placeholder?.declarations['color']).toBe('var(--fds-ink-muted)')
+  })
 })

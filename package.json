@@ -19,7 +19,6 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
     "lint": "eslint . && node tools/check-conventions.mjs",
     "typecheck": "vue-tsc --noEmit",
     "format": "prettier --write .",
@@ -37,6 +36,8 @@
   "devDependencies": {
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/vue3-vite": "^10.5.10",
+    "@tailwindcss/node": "^4.3.3",
+    "@tailwindcss/oxide": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.4.0",
     "@vitejs/plugin-vue": "^6.0.8",

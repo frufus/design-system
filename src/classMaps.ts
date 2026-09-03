@@ -48,9 +48,11 @@ export const buttonVariantClasses: Record<ButtonVariant, string> = {
 export const buttonSizeClasses: Record<ButtonSize, string> = {
   // The visible box is 36; `fds-target` restores the 44 px activation area
   // around it, so density never costs the floor.
-  sm: 'fds-target h-[var(--fds-control-sm)] px-3 text-xs',
-  md: 'h-[var(--fds-control-md)] px-4 text-sm',
-  lg: 'h-[var(--fds-control-lg)] px-5 text-base',
+  // A step carries a weight and a tracking of its own; the action's follow it
+  // as utilities so the step cannot take them.
+  sm: 'fds-target h-[var(--fds-control-sm)] px-3 text-xs font-action tracking-action',
+  md: 'h-[var(--fds-control-md)] px-4 text-sm font-action tracking-action',
+  lg: 'h-[var(--fds-control-lg)] px-5 text-base font-action tracking-action',
 }
 
 /** Every button wears both: the register that gives it its shape, and the ring. */
@@ -75,3 +77,15 @@ export const badgeToneClasses: Record<BadgeTone, string> = {
   danger: 'bg-danger-soft text-danger-ink',
   outline: 'border-border-strong text-ink-muted',
 }
+
+/**
+ * The Console panel. Depth is a fill and an edge, never a shadow: a shadow is
+ * invisible on a near-black ground, so this identity never learns to depend on
+ * one.
+ */
+export const cardBaseClasses =
+  'block w-full border border-border-strong bg-surface text-left text-ink'
+
+/** An interactive card takes a left bar, not a lift. */
+export const cardInteractiveClasses =
+  'fds-focus-ring cursor-pointer border-l-[3px] hover:border-l-accent hover:bg-surface-sunken'

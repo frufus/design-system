@@ -4,10 +4,12 @@ Status: accepted · Date: 2026-09-01 · Affects: change/token-foundation, capabi
 
 ## Context
 
-The package ships 30 colour tokens per appearance plus 65 non-colour tokens —
-95 custom property names in total. Every one of them appears in consuming code:
+The package ships 30 colour tokens per appearance plus 71 non-colour tokens —
+101 custom property names in total (the counts at the time of writing were 65
+and 95; the action tokens and the four named weights came later, each an
+addition and none a rename). Every one of them appears in consuming code:
 directly where a project overrides a value on its own `:root`, and indirectly
-through the 74 Tailwind utility names the register maps onto them.
+through the 80 Tailwind utility names the register maps onto them.
 
 That makes the names an interface, not an implementation detail, and it makes
 them expensive to change: a rename breaks every consumer at once, silently. CSS

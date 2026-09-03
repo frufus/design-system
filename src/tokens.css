@@ -151,6 +151,33 @@
 /* <<< end generated */
 
 /* ------------------------------------------------------------------------- *
+ * Colour scheme
+ *
+ * Native form chrome, the option popup of a select, and scrollbars follow
+ * `color-scheme`, not the tokens. Without this the dark appearance opens a
+ * white popup. Declared by every route an appearance can be chosen, in the
+ * same four blocks as the colours above.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------------- *
  * Typeface
  *
  * Both faces ship inside the package and are served from the consuming
@@ -281,6 +308,14 @@
      step at this weight, and a button is not a heading. */
   --fds-weight-action: 600;
   --fds-tracking-action: 0.02em;
+
+  /* The weights a component departs to when a step's default is not wanted:
+     a label at medium on the sm step, a light title on the xl step. Named by
+     role in the type system, never by number in the class. */
+  --fds-weight-light: 300;
+  --fds-weight-regular: 400;
+  --fds-weight-medium: 500;
+  --fds-weight-semibold: 600;
 
   --fds-border-width: 1px;
   --fds-focus-width: 2px;

@@ -48,6 +48,19 @@ describe('class maps', () => {
     expect(resolveKey('ghost', BUTTON_VARIANTS, DEFAULT_BUTTON_VARIANT)).toBe('ghost')
   })
 
+  it('keeps the action weight and tracking at every size', () => {
+    // A size sets its type step, and a step now carries a weight and a tracking
+    // of its own as utilities - which beat the register's. The action's own
+    // weight and tracking ride along as utilities too, so the step cannot take
+    // them.
+    for (const size of BUTTON_SIZES) {
+      expect(buttonSizeClasses[size], `${size} loses the action weight`).toContain('font-action')
+      expect(buttonSizeClasses[size], `${size} loses the action tracking`).toContain(
+        'tracking-action',
+      )
+    }
+  })
+
   it('restores the touch target only where the box is below it', () => {
     // The small size is a 36 px box; the other two already clear 44.
     expect(buttonSizeClasses.sm).toContain('fds-target')

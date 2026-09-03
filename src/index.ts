@@ -20,11 +20,11 @@ export {
   type BadgeTone,
   type ButtonSize,
   type ButtonVariant,
-} from './classMaps.ts'
+} from './classMaps'
 
 export {
   defaultMatcher,
   filterOptions,
   type ComboboxMatcher,
   type ComboboxOption,
-} from './comboboxFilter.ts'
+} from './comboboxFilter'

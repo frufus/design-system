@@ -1,8 +1,15 @@
 <template>
-  <FieldShell :id="id" :label="label" :description="description" :error="error">
+  <FieldShell
+    v-bind="splitFieldAttrs(attrs).root"
+    :id="id"
+    :label="label"
+    :description="description"
+    :error="error"
+  >
     <template #default="{ controlId, describedBy, invalid }">
       <div class="relative flex items-center">
         <select
+          v-bind="splitFieldAttrs(attrs).control"
           :id="controlId"
           :value="modelValue"
           :disabled="disabled || undefined"
@@ -39,7 +46,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAttrs } from 'vue'
 import FieldShell from './FieldShell.vue'
+import { splitFieldAttrs } from '../fieldAttrs'
 
 /**
  * A native select on the same register as Input.
@@ -47,13 +56,15 @@ import FieldShell from './FieldShell.vue'
  * The canvas draws a custom open list; this renders the platform's. A custom
  * listbox means owning roving focus, typeahead, aria-activedescendant and the
  * scroll behaviour every hand-rolled version gets subtly wrong - and it would
- * replace the option list a mobile user already knows how to use. The drawn list
- * is the specification for a future Combobox, which is the case a native select
- * genuinely cannot serve.
+ * replace the option list a mobile user already knows how to use. That case is
+ * Combobox, which a native select genuinely cannot serve.
  *
  * Options come from the consuming project, so the component owns no words here
- * either.
+ * either. Attributes it does not declare go to the select; `class` and `style`
+ * stay on the root.
  */
+defineOptions({ inheritAttrs: false })
+
 withDefaults(
   defineProps<{
     label: string
@@ -67,4 +78,6 @@ withDefaults(
 )
 
 defineEmits<{ 'update:modelValue': [value: string] }>()
+
+const attrs = useAttrs()
 </script>

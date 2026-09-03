@@ -1,5 +1,8 @@
+/* eslint-disable vue/one-component-per-file -- the hosts below are test
+   scaffolding, one per scenario, not components anyone imports */
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import Badge from '../src/components/Badge.vue'
 import Card from '../src/components/Card.vue'
 import EmptyState from '../src/components/EmptyState.vue'
@@ -130,6 +133,40 @@ describe('Card', () => {
 
     expect(classes).not.toMatch(/\bshadow-/)
   })
+
+  it('renders a strip that a project fills after mount', async () => {
+    // Slot presence is read at render time. A computed over the slots object
+    // is evaluated once and never again, which is how a header that arrives
+    // later stays invisible.
+    const show = ref(false)
+    const Host = defineComponent({
+      setup: () => () =>
+        h(Card, null, {
+          default: () => 'Body',
+          ...(show.value ? { header: () => 'Workspace' } : {}),
+        }),
+    })
+    const wrapper = mount(Host)
+    expect(wrapper.find('[data-fds-card-header]').exists()).toBe(false)
+
+    show.value = true
+    await nextTick()
+
+    expect(wrapper.get('[data-fds-card-header]').text()).toBe('Workspace')
+  })
+
+  it('holds no block element a button may not contain when it acts', () => {
+    // A button's content model is phrasing content. The strips become spans
+    // that lay out as blocks, so the markup stays valid as well as focusable.
+    const wrapper = mount(Card, {
+      props: { interactive: true },
+      slots: { header: 'Workspace', default: 'Body', footer: 'v0.1.0' },
+    })
+
+    expect(wrapper.element.tagName).toBe('BUTTON')
+    expect(wrapper.findAll('div')).toHaveLength(0)
+    expect(wrapper.get('[data-fds-card-header]').text()).toBe('Workspace')
+  })
 })
 
 describe('EmptyState', () => {
@@ -160,6 +197,24 @@ describe('EmptyState', () => {
     const wrapper = mount(EmptyState, {
       slots: { title: 'Nothing yet', action: '<button>Add a paint</button>' },
     })
+
+    expect(wrapper.get('[data-fds-empty-action]').text()).toBe('Add a paint')
+  })
+
+  it('renders an action that a project supplies after mount', async () => {
+    const show = ref(false)
+    const Host = defineComponent({
+      setup: () => () =>
+        h(EmptyState, null, {
+          title: () => 'Nothing yet',
+          ...(show.value ? { action: () => 'Add a paint' } : {}),
+        }),
+    })
+    const wrapper = mount(Host)
+    expect(wrapper.find('[data-fds-empty-action]').exists()).toBe(false)
+
+    show.value = true
+    await nextTick()
 
     expect(wrapper.get('[data-fds-empty-action]').text()).toBe('Add a paint')
   })

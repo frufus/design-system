@@ -33,6 +33,18 @@ function resolveReferences(root: Element, describedBy: string | undefined): Elem
 }
 
 describe('FieldShell', () => {
+  it('announces an error that appears after the field did', async () => {
+    // An error that arrives on submit is read without moving focus only if the
+    // live region existed before the error did.
+    const wrapper = mountShell()
+    const live = wrapper.get('[aria-live="polite"]')
+    expect(live.text()).toBe('')
+
+    await wrapper.setProps({ error })
+
+    expect(wrapper.get('[aria-live="polite"]').text()).toContain(error)
+  })
+
   it('points its label at the control', () => {
     const wrapper = mountShell()
 

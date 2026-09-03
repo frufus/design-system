@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import Combobox from '../src/components/Combobox.vue'
 
 const label = 'Paint'
@@ -9,9 +9,10 @@ const options = [
   { value: 'khorne', label: 'Khorne Red' },
 ]
 
-function mountBox(props: Record<string, unknown> = {}) {
+function mountBox(props: Record<string, unknown> = {}, attrs: Record<string, unknown> = {}) {
   return mount(Combobox, {
     props: { label, options, ...props },
+    attrs,
     attachTo: document.body,
   })
 }
@@ -151,6 +152,70 @@ describe('Combobox keyboard', () => {
     expect(input(wrapper).attributes('aria-expanded')).toBe('false')
     expect((input(wrapper).element as HTMLInputElement).value).toBe('Khorne Red')
   })
+
+  it('opens from the keyboard at the end of the current matches, not of all options', async () => {
+    const wrapper = mountBox()
+
+    await input(wrapper).setValue('red')
+    await input(wrapper).trigger('keydown', { key: 'Escape' })
+    await input(wrapper).trigger('keydown', { key: 'ArrowUp' })
+
+    const active = activeId(wrapper)
+    expect(active).toBeTruthy()
+    expect(wrapper.find(`#${active}`).text()).toBe('Khorne Red')
+  })
+
+  it('keeps the active option in view', async () => {
+    const scroll = vi.spyOn(HTMLElement.prototype, 'scrollIntoView')
+    const wrapper = mountBox()
+
+    await input(wrapper).trigger('keydown', { key: 'ArrowDown' })
+    await input(wrapper).trigger('keydown', { key: 'ArrowDown' })
+
+    const active = wrapper.get(`#${activeId(wrapper)}`).element
+    expect(scroll.mock.contexts.at(-1)).toBe(active)
+    scroll.mockRestore()
+  })
+
+  it('leaves Escape alone when it has nothing to close or clear', () => {
+    // A dialog around the field is waiting for that Escape.
+    const wrapper = mountBox()
+    const event = new KeyboardEvent('keydown', { key: 'Escape', cancelable: true, bubbles: true })
+
+    input(wrapper).element.dispatchEvent(event)
+
+    expect(event.defaultPrevented).toBe(false)
+  })
+
+  it('claims Escape when it clears a value', () => {
+    const wrapper = mountBox({ modelValue: 'khorne' })
+    const event = new KeyboardEvent('keydown', { key: 'Escape', cancelable: true, bubbles: true })
+
+    input(wrapper).element.dispatchEvent(event)
+
+    expect(event.defaultPrevented).toBe(true)
+  })
+})
+
+describe('Combobox pointer', () => {
+  it('opens when the field is clicked', async () => {
+    const wrapper = mountBox()
+
+    await input(wrapper).trigger('click')
+
+    expect(input(wrapper).attributes('aria-expanded')).toBe('true')
+  })
+
+  it('keeps focus in the field when the pointer goes down on the list itself', async () => {
+    // A drag on the listbox scrollbar must not blur the field and close the list.
+    const wrapper = mountBox()
+    await input(wrapper).trigger('keydown', { key: 'ArrowDown' })
+
+    const event = new MouseEvent('mousedown', { cancelable: true, bubbles: true })
+    wrapper.get('[role="listbox"]').element.dispatchEvent(event)
+
+    expect(event.defaultPrevented).toBe(true)
+  })
 })
 
 describe('Combobox and assistive technology', () => {
@@ -201,6 +266,27 @@ describe('Combobox and assistive technology', () => {
 
     expect(chosen, 'no option reports itself selected').toBeTruthy()
     expect(chosen?.find('[data-fds-chosen]').exists()).toBe(true)
+  })
+
+  it('shows the active state on the chosen option rather than two fills at once', async () => {
+    // Two `bg-` utilities on one element leave the winner to Tailwind's output
+    // order. The active fill has to be the one that shows; the check still
+    // says which option is chosen.
+    const wrapper = mountBox({ modelValue: 'khorne' })
+    for (let i = 0; i < 3; i += 1) await input(wrapper).trigger('keydown', { key: 'ArrowDown' })
+
+    const chosen = optionEls(wrapper).find((o) => o.attributes('aria-selected') === 'true')
+    expect(chosen?.attributes('id')).toBe(activeId(wrapper))
+
+    const fills = chosen?.classes().filter((name) => name.startsWith('bg-')) ?? []
+    expect(fills).toHaveLength(1)
+    expect(chosen?.find('[data-fds-chosen]').exists()).toBe(true)
+  })
+
+  it('forwards platform attributes to the field', () => {
+    const wrapper = mountBox({}, { name: 'paint' })
+
+    expect(input(wrapper).attributes('name')).toBe('paint')
   })
 
   it('reports the count in the words the project supplies', async () => {
