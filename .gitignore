@@ -15,3 +15,7 @@ docs/design/frufus-design-system.html
 # OpenSpec's archive lock is a runtime claim, not content. Committing it means
 # a stale lock travels to every clone.
 openspec/changes/archive/.openspec-archive.lock
+
+# openspec archive leaves its claim behind; a committed lock blocks the next
+# archive on every other machine.
+openspec/changes/archive/.openspec-archive.lock

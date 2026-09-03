@@ -28,9 +28,17 @@ the platform - the dialog SHALL emit `update:open` exactly once per close.
   backdrop
 - **THEN** the dialog stays open, because that is a selection, not a dismissal
 
-## MODIFIED Requirements
+### Requirement: A dialog mounted open opens
 
-### Requirement: A description that is gone is not referenced
+A dialog whose `open` prop is true on its first render SHALL open through the
+modal mechanism once its element exists, exactly as one that is opened later.
+
+#### Scenario: The dialog is mounted open
+
+- **WHEN** a dialog mounts with `open` already true
+- **THEN** the platform's modal mechanism is invoked once
+
+### Requirement: A withdrawn body is no longer a description
 
 The dialog SHALL reference its body as its description only while the body is
 rendered, including when the body slot appears or disappears after mount.

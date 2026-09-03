@@ -45,9 +45,22 @@ chosen, so native form chrome, popups and scrollbars match the tokens.
 
 ### Requirement: Contrast floors are measured, not asserted
 
-Every foreground and background pair the components actually draw SHALL be
-measured from the shipped token values in both appearances. Text SHALL clear
-4.5:1 and non-text 3:1. Placeholder text is text.
+Every colour pair the package relies on SHALL meet its floor: 4.5:1 for text and
+3:1 for non-text, in both appearances. The floors are checked against computed
+values, never against a designer's judgement. Placeholder is text, and a pair a
+component draws SHALL be measured on the surface it is actually drawn on.
+
+#### Scenario: The token values are checked
+
+- **WHEN** the contrast check runs over the shipped token values
+- **THEN** every declared pair reports a ratio at or above its floor in both
+  appearances
+
+#### Scenario: A value change drops a pair below its floor
+
+- **WHEN** a token value is edited so that a pair falls below its floor
+- **THEN** the check fails
+- **AND** the failure names the pair, the measured ratio and the floor it missed
 
 #### Scenario: Placeholder text in a control
 

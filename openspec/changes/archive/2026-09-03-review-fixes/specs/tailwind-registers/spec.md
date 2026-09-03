@@ -43,9 +43,24 @@ The control and action registers SHALL set `touch-action: manipulation`.
 
 ### Requirement: Actions share one register
 
-Every button SHALL take its shape, focus ring, transition and inert state from
-the action register. The inert state SHALL be declared in the utilities layer,
-after the variant colours, so that it wins against them and against hover.
+Every control that acts when activated — buttons of any variant — SHALL take its
+shape, focus ring, transition and inert state from one shared register, so those
+are not decisions each variant makes for itself. The inert state SHALL be
+declared in the utilities layer, after the variant colours, so that it wins
+against them and against hover.
+
+#### Scenario: Two variants sit side by side
+
+- **WHEN** a primary and a ghost button are rendered next to each other
+- **THEN** they present the same radius, the same border geometry, the same
+  transition and the same focus ring
+- **AND** only their colours and their box size differ
+
+#### Scenario: A variant declares its own focus ring
+
+- **WHEN** a variant sets a focus indicator of its own instead of using the
+  register
+- **THEN** the enforcement check fails and names the variant
 
 #### Scenario: Reduced motion is preferred
 
