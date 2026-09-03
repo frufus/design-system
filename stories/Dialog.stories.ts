@@ -32,8 +32,7 @@ export const Confirm: Story = {
       <div>
         <Button variant="destructive" @click="open = true">Remove from shelf</Button>
 
-        <Dialog v-model:open="open" title="Remove Mephiston Red from your shelf?">
-          <template #close-label><span class="sr-only">Close</span></template>
+        <Dialog v-model:open="open" close-label="Close" title="Remove Mephiston Red from your shelf?">
 
           Results will stop preferring paints you already own. Your matches are not affected.
 
@@ -59,8 +58,7 @@ export const TitleOnly: Story = {
       <div>
         <Button @click="open = true">Sign out</Button>
 
-        <Dialog v-model:open="open" title="Sign out of this workspace?">
-          <template #close-label><span class="sr-only">Close</span></template>
+        <Dialog v-model:open="open" close-label="Close" title="Sign out of this workspace?">
           <template #actions>
             <Button variant="secondary" @click="open = false">Stay</Button>
             <Button @click="open = false">Sign out</Button>
@@ -87,8 +85,7 @@ export const PlacedFocus: Story = {
       <div>
         <Button @click="open = true">Rename workspace</Button>
 
-        <Dialog v-model:open="open" title="Rename workspace" initial-focus="none">
-          <template #close-label><span class="sr-only">Close</span></template>
+        <Dialog v-model:open="open" close-label="Close" title="Rename workspace" initial-focus="none">
 
           <input class="fds-control" value="Studio" autofocus />
 

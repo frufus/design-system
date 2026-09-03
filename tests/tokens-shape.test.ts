@@ -81,6 +81,45 @@ describe('token shape', () => {
   })
 })
 
+describe('named weights', () => {
+  it('declares the four weights a component may depart to', () => {
+    expect(rootTokens['--fds-weight-light']).toBe('300')
+    expect(rootTokens['--fds-weight-regular']).toBe('400')
+    expect(rootTokens['--fds-weight-medium']).toBe('500')
+    expect(rootTokens['--fds-weight-semibold']).toBe('600')
+  })
+})
+
+describe('colour scheme', () => {
+  // Native form chrome, popups and scrollbars follow `color-scheme`, not the
+  // tokens. Without it the dark appearance opens a white select popup.
+  const merged = (selector: string, atRule?: string) =>
+    blocks
+      .filter(
+        (block) =>
+          block.selector === selector &&
+          (atRule
+            ? block.atRules.some((rule) => rule.includes(atRule))
+            : block.atRules.length === 0),
+      )
+      .reduce<Record<string, string>>((all, block) => ({ ...all, ...block.declarations }), {})
+
+  it('is light on the bare root', () => {
+    expect(rootTokens['color-scheme']).toBe('light')
+  })
+
+  it('follows the system preference for dark', () => {
+    expect(
+      merged(":root:not([data-theme='light'])", 'prefers-color-scheme: dark')['color-scheme'],
+    ).toBe('dark')
+  })
+
+  it('follows an explicit choice in both directions', () => {
+    expect(merged(":root[data-theme='dark']")['color-scheme']).toBe('dark')
+    expect(merged(":root[data-theme='light']")['color-scheme']).toBe('light')
+  })
+})
+
 describe('reduced motion', () => {
   const reduced = blocks.filter((block) =>
     block.atRules.some((rule) => rule.includes('prefers-reduced-motion')),

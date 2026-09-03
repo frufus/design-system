@@ -47,9 +47,11 @@ context: |
 
   - Vue 3 (Composition API, `<script setup>`) + TypeScript strict + Vite
   - Tailwind v4, CSS-first: no `tailwind.config.js`, no PostCSS pipeline
-  - Storybook 9 with `@storybook/addon-a11y` as the component catalog
-  - Vitest for units and component behaviour, Playwright for axe checks against
-    the built Storybook in both appearances
+  - Storybook 10 with `@storybook/addon-a11y` as the component catalog
+  - Vitest for units, component behaviour and axe checks in both appearances,
+    plus a compiled-class check that runs Tailwind's compiler over the
+    catalog's wiring. Nothing renders a pixel: after a change to a register or
+    a component, open the catalog in both appearances and look.
   - ESLint, Prettier, `vue-tsc` for typechecking
   - No runtime dependencies beyond Vue itself. No backend, no external CDNs,
     fonts or analytics.

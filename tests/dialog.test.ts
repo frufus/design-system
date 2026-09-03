@@ -1,13 +1,15 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import Dialog from '../src/components/Dialog.vue'
 
 const title = 'Remove Mephiston Red from your shelf?'
 const body = 'Results will stop preferring paints you already own.'
+const closeLabel = 'Close'
 
 function mountDialog(props: Record<string, unknown> = {}) {
   return mount(Dialog, {
-    props: { open: true, title, ...props },
+    props: { open: true, title, closeLabel, ...props },
     slots: { default: body },
     attachTo: document.body,
   })
@@ -38,7 +40,7 @@ describe('Dialog', () => {
     const showModal = vi.spyOn(HTMLDialogElement.prototype, 'showModal')
 
     const wrapper = mount(Dialog, {
-      props: { open: false, title },
+      props: { open: false, title, closeLabel },
       slots: { default: body },
       attachTo: document.body,
     })
@@ -47,6 +49,17 @@ describe('Dialog', () => {
     expect(showModal).toHaveBeenCalled()
     showModal.mockRestore()
     element.remove()
+  })
+
+  it('opens at mount when it is mounted open', () => {
+    // A watcher that runs immediately runs before the element exists. A dialog
+    // that is open from its first render has to open once the element is there.
+    const showModal = vi.spyOn(HTMLDialogElement.prototype, 'showModal')
+
+    mountDialog({ open: true })
+
+    expect(showModal).toHaveBeenCalledTimes(1)
+    showModal.mockRestore()
   })
 
   it('closes when the platform closes it', async () => {
@@ -71,7 +84,8 @@ describe('Dialog', () => {
     const wrapper = mountDialog()
 
     // A click whose target is the dialog itself landed on the backdrop: nothing
-    // else is there to receive it.
+    // else is there to receive it - provided the pointer went down there too.
+    await wrapper.get('dialog').trigger('pointerdown')
     await wrapper.get('dialog').trigger('click')
 
     expect(wrapper.emitted('dismiss')).toHaveLength(1)
@@ -80,9 +94,53 @@ describe('Dialog', () => {
   it('stays open when the click lands inside the panel', async () => {
     const wrapper = mountDialog()
 
+    await wrapper.get('[data-fds-dialog-panel]').trigger('pointerdown')
     await wrapper.get('[data-fds-dialog-panel]').trigger('click')
 
     expect(wrapper.emitted('dismiss')).toBeUndefined()
+  })
+
+  it('stays open when a drag that began in the panel ends on the backdrop', async () => {
+    // Selecting text in the body and releasing outside fires a click on the
+    // dialog element. That is a selection, not a dismissal.
+    const wrapper = mountDialog()
+
+    await wrapper.get('[data-fds-dialog-panel]').trigger('pointerdown')
+    await wrapper.get('dialog').trigger('click')
+
+    expect(wrapper.emitted('dismiss')).toBeUndefined()
+  })
+
+  it('reports one close when the close action is used', async () => {
+    const wrapper = mountDialog()
+
+    await wrapper.get('[data-fds-dialog-close]').trigger('click')
+
+    expect(wrapper.emitted('dismiss')).toHaveLength(1)
+    expect(wrapper.emitted('update:open')).toEqual([[false]])
+  })
+
+  it('names its close action with the label the project supplies, without painting it', () => {
+    const wrapper = mountDialog()
+    const close = wrapper.get('[data-fds-dialog-close]')
+
+    expect(close.attributes('aria-label')).toBe(closeLabel)
+    expect(close.text()).toBe('')
+  })
+
+  it('drops its description when the body slot is withdrawn', async () => {
+    const show = ref(true)
+    const Host = defineComponent({
+      setup: () => () =>
+        h(Dialog, { open: false, title, closeLabel }, show.value ? { default: () => body } : {}),
+    })
+    const wrapper = mount(Host)
+    expect(wrapper.get('dialog').attributes('aria-describedby')).toBeTruthy()
+
+    show.value = false
+    await nextTick()
+
+    expect(wrapper.get('dialog').attributes('aria-describedby')).toBeUndefined()
   })
 
   it('is named by its title', () => {
@@ -103,7 +161,7 @@ describe('Dialog', () => {
 
   it('leaves no dangling description when there is no body', () => {
     const wrapper = mount(Dialog, {
-      props: { open: true, title },
+      props: { open: true, title, closeLabel },
       attachTo: document.body,
     })
 
@@ -134,7 +192,7 @@ describe('Dialog', () => {
 
     try {
       const wrapper = mount(Dialog, {
-        props: { open: false, title },
+        props: { open: false, title, closeLabel },
         slots: { default: body },
         attachTo: document.body,
       })

@@ -19,7 +19,7 @@ import {
   badgeToneClasses,
   resolveKey,
   type BadgeTone,
-} from '../classMaps.ts'
+} from '../classMaps'
 
 /**
  * A short, static label. Not a chip: it has no affordance, because a badge you

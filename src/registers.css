@@ -136,6 +136,54 @@
   --font-weight-code: var(--fds-weight-code);
   --font-weight-key: var(--fds-weight-key);
 
+  /* The four weights a component departs to on purpose - a label at medium on
+     the sm step, a light title on the xl step. Nulling the namespace above
+     removed Tailwind's own; these are the only named weights that exist. */
+  --font-weight-light: var(--fds-weight-light);
+  --font-weight-regular: var(--fds-weight-regular);
+  --font-weight-medium: var(--fds-weight-medium);
+  --font-weight-semibold: var(--fds-weight-semibold);
+
+  /* An action's label is its own typographic decision, and a button wears a
+     type step for its size. The step now carries a weight and a tracking as
+     utilities, which beat the register's, so the action's own ride along as
+     utilities too - `font-action tracking-action` in every size entry. */
+  --font-weight-action: var(--fds-weight-action);
+  --tracking-action: var(--fds-tracking-action);
+
+  /* Tailwind v4 reads these three keys when it emits `text-<step>`. Without
+     them the utility sets a size and nothing else, and every component inherits
+     the body's line height. With them, one class means the whole row of the
+     scale on the artboard; `leading-*`, `tracking-*` and `font-*` still win
+     when a component departs from it. */
+  --text-display--line-height: var(--fds-leading-display);
+  --text-display--letter-spacing: var(--fds-tracking-display);
+  --text-display--font-weight: var(--fds-weight-display);
+  --text-2xl--line-height: var(--fds-leading-2xl);
+  --text-2xl--letter-spacing: var(--fds-tracking-2xl);
+  --text-2xl--font-weight: var(--fds-weight-2xl);
+  --text-xl--line-height: var(--fds-leading-xl);
+  --text-xl--letter-spacing: var(--fds-tracking-xl);
+  --text-xl--font-weight: var(--fds-weight-xl);
+  --text-lg--line-height: var(--fds-leading-lg);
+  --text-lg--letter-spacing: var(--fds-tracking-lg);
+  --text-lg--font-weight: var(--fds-weight-lg);
+  --text-base--line-height: var(--fds-leading-base);
+  --text-base--letter-spacing: var(--fds-tracking-base);
+  --text-base--font-weight: var(--fds-weight-base);
+  --text-sm--line-height: var(--fds-leading-sm);
+  --text-sm--letter-spacing: var(--fds-tracking-sm);
+  --text-sm--font-weight: var(--fds-weight-sm);
+  --text-xs--line-height: var(--fds-leading-xs);
+  --text-xs--letter-spacing: var(--fds-tracking-xs);
+  --text-xs--font-weight: var(--fds-weight-xs);
+  --text-code--line-height: var(--fds-leading-code);
+  --text-code--letter-spacing: var(--fds-tracking-code);
+  --text-code--font-weight: var(--fds-weight-code);
+  --text-key--line-height: var(--fds-leading-key);
+  --text-key--letter-spacing: var(--fds-tracking-key);
+  --text-key--font-weight: var(--fds-weight-key);
+
   --radius-none: var(--fds-radius-none);
   --radius-tag: var(--fds-radius-tag);
   --radius-control: var(--fds-radius-control);
@@ -176,14 +224,17 @@
     font-family: var(--fds-font-sans);
     font-size: var(--fds-text-base);
     line-height: var(--fds-leading-base);
+    touch-action: manipulation;
     transition:
       border-color var(--fds-duration-fast) var(--fds-ease-standard),
-      background-color var(--fds-duration-fast) var(--fds-ease-standard),
-      box-shadow var(--fds-duration-fast) var(--fds-ease-standard);
+      background-color var(--fds-duration-fast) var(--fds-ease-standard);
   }
 
+  /* Placeholder is text, and WCAG exempts only disabled controls from the text
+     floor. `ink-subtle` sits near 3.5:1 on the sunken fill; `ink-muted` clears
+     4.5 on the surface the control actually draws, and is measured there. */
   .fds-control::placeholder {
-    color: var(--fds-ink-subtle);
+    color: var(--fds-ink-muted);
   }
 
   .fds-control:hover:not(:disabled, [aria-disabled='true']) {
@@ -192,14 +243,13 @@
   }
 
   /* Focus lifts the field flush with the panel: the recessed fill goes back to
-     the surface exactly while the control is taking your keystrokes. */
+     the surface exactly while the control is taking your keystrokes. The ring
+     is an outline, for the reason given at `.fds-focus-ring` below. */
   .fds-control:focus-visible {
-    outline: none;
     border-color: var(--fds-focus);
     background-color: var(--fds-surface);
-    box-shadow:
-      0 0 0 var(--fds-focus-offset) var(--fds-surface),
-      0 0 0 calc(var(--fds-focus-offset) + var(--fds-focus-width)) var(--fds-focus);
+    outline: var(--fds-focus-width) solid var(--fds-focus);
+    outline-offset: var(--fds-focus-offset);
   }
 
   .fds-control[aria-invalid='true'] {
@@ -233,21 +283,15 @@
     letter-spacing: var(--fds-tracking-action);
     white-space: nowrap;
     cursor: pointer;
+    touch-action: manipulation;
     transition:
       background-color var(--fds-duration-fast) var(--fds-ease-standard),
       border-color var(--fds-duration-fast) var(--fds-ease-standard),
       color var(--fds-duration-fast) var(--fds-ease-standard);
   }
 
-  /* Both unavailable states look identical; only their mechanism differs, and
-     that difference is the component's to make, not the stylesheet's. */
-  .fds-action:disabled,
-  .fds-action[aria-disabled='true'] {
-    background-color: var(--fds-disabled-surface);
-    border-color: transparent;
-    color: var(--fds-disabled-ink);
-    cursor: not-allowed;
-  }
+  /* The inert state is not here. It lives in the utilities layer at the end of
+     this file, because that is the only place it can win - see the note there. */
 
   /* Restores a 44 px activation area around a control whose visible box is
      smaller, without changing how it looks. The pseudo-element is centred on the
@@ -281,13 +325,48 @@
     transform-origin: 50% 50%;
   }
 
+  /* The collapsed duration that stops every transition does not stop an
+     infinite animation: at a few microseconds per turn, every frame samples a
+     different angle and the arc flickers. Only `none` is still. */
+  @media (prefers-reduced-motion: reduce) {
+    .fds-spin {
+      animation: none;
+    }
+  }
+
   /* The ring belongs to the system, not to any one control, so anything
-     focusable can wear it. */
+     focusable can wear it.
+
+     It is an outline rather than a box-shadow on purpose: forced-colours mode
+     keeps outlines and discards shadows, and an outline is not clipped by an
+     ancestor's overflow. The offset draws the same gap the shadow pair did. */
   .fds-focus-ring:focus-visible {
-    outline: none;
-    box-shadow:
-      0 0 0 var(--fds-focus-offset) var(--fds-surface),
-      0 0 0 calc(var(--fds-focus-offset) + var(--fds-focus-width)) var(--fds-focus);
+    outline: var(--fds-focus-width) solid var(--fds-focus);
+    outline-offset: var(--fds-focus-offset);
+  }
+}
+
+/* ------------------------------------------------------------------------- *
+ * 4. The inert action
+ *
+ * A button's variant colours are utilities, and the utilities layer beats the
+ * components layer however specific a components-layer selector is. So the one
+ * rule that has to beat a variant colour - and its hover - lives in the same
+ * layer as they do, after them: this file is imported after Tailwind, and the
+ * selector outranks any single utility. No `!important` is needed, and a
+ * consumer's own utility still cannot repaint a disabled button by accident.
+ *
+ * Both unavailable states look identical; only their mechanism differs, and
+ * that difference is the component's to make, not the stylesheet's.
+ * ------------------------------------------------------------------------- */
+
+@layer utilities {
+  .fds-action:disabled,
+  .fds-action[aria-disabled='true'] {
+    background-color: var(--fds-disabled-surface);
+    border-color: transparent;
+    color: var(--fds-disabled-ink);
+    cursor: not-allowed;
   }
 }
 

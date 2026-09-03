@@ -40,13 +40,28 @@ it, and a branch is a place for the two appearances to drift apart.
 ### Contrast floors are measured, not judged
 
 4.5:1 for text, 3:1 for non-text, in both appearances. Every pair the package
-relies on is computed from the shipped token values — 27 pairs, 54 assertions.
+relies on is computed from the shipped token values — 30 pairs, 60 assertions.
 
 This is also why `border-strong` is darker than a soft system would draw it: an
 input's border is its only affordance, so it carries the non-text floor rather
 than a decorative one.
 
+Placeholder is text. WCAG exempts only disabled controls from the text floor,
+so a placeholder wears `ink-muted` and is measured on `surface-sunken`, the
+fill a control actually draws — not on `surface`, and not at 3:1. A pair a
+component draws that the table does not name is a pair nobody measured; the
+rule is to add it, not to assume it from a similar one.
+
 **Enforced by** the contrast suite in `tests/appearance.test.ts`.
+
+### The colour scheme follows the appearance
+
+Native form chrome, the option popup of a select, and scrollbars follow
+`color-scheme`, not the tokens. Without it the dark appearance opens a white
+popup. It is declared by every route an appearance can be chosen — the bare
+root, the system preference, and both explicit attributes.
+
+**Enforced by** the colour-scheme suite in `tests/tokens-shape.test.ts`.
 
 ---
 
@@ -81,11 +96,46 @@ reason components carry no style block - a component declaring its own animation
 is a component holding a value that is not a token, and that is how a system ends
 up with six slightly different spinners.
 
-Its duration comes from a motion token, so it stops with everything else under
-`prefers-reduced-motion` rather than needing an opt-out of its own.
+Its duration comes from a motion token. That is not, on its own, what stops it
+under `prefers-reduced-motion`: the collapsed duration that halts every
+transition leaves an infinite animation sampling a different angle every frame,
+which flickers. So the register sets the animation to `none` under reduced
+motion, explicitly.
 
 **Enforced by** the register suite in `tests/registers.test.ts`, which requires
-the animation to exist and its duration to come from a token.
+the animation to exist, its duration to come from a token, and the reduced-motion
+rule to stop it.
+
+### The focus ring is an outline
+
+The shared ring is `outline` with `outline-offset`, from the focus tokens, on
+every control and action. Not a box-shadow: forced-colours mode keeps outlines
+and discards shadows, and an outline is not clipped by an ancestor's overflow.
+Nothing in the package sets `outline: none`.
+
+**Enforced by** the ring suite in `tests/registers.test.ts`.
+
+### The inert state wins
+
+A button's variant colours are utilities, and the utilities layer beats the
+components layer however specific the selector. So the one rule that has to
+beat a variant colour and its hover — the disabled and busy state — lives in a
+`@layer utilities` block at the end of `registers.css`, after Tailwind's own
+output. Layer order, then source order, then specificity, and no `!important`.
+
+**Enforced by** the inert suite in `tests/registers.test.ts`, and by the
+compiled-class check below, which reads the order out of the compiled
+stylesheet.
+
+### A type step is one class
+
+`text-<step>` carries the step's size, line height, tracking and default
+weight, because the register maps all three companion keys Tailwind reads when
+it emits the utility. A component departs from a step deliberately, with
+`leading-*`, `tracking-*` or one of the four named weights — `light`,
+`regular`, `medium`, `semibold` — which are tokens like everything else.
+
+**Enforced by** `tests/registers.test.ts` and the compiled-class check.
 
 ### Three radii, and no more
 
@@ -122,6 +172,40 @@ class names it has seen literally, so a composed name fails twice: it cannot be
 found by searching, and it is never generated.
 
 **Enforced by** `no-composed-classes`.
+
+### Every class a component wears compiles
+
+A literal class name is not the same as a class that exists. After the default
+theme is nulled, a utility whose namespace was not remapped compiles to nothing,
+silently — a component wore `font-medium` for a month and rendered at 400. So
+the stylesheet is compiled the way a consumer's Tailwind compiles it, and every
+class in a `class` or `:class` attribute or a class map has to produce a rule.
+
+Class strings live in exactly those places — an attribute in a template, or an
+export ending in `Classes` in `src/classMaps.ts` — so the check can find them.
+
+**Enforced by** `tests/compiled-classes.test.ts`, which runs Tailwind's
+compiler over the rehearsed consumer wiring.
+
+### A field's attributes reach its control
+
+`class` and `style` on a field are how it is placed in a layout, so they stay on
+the root. Everything else a project writes on a field — `placeholder`, `name`,
+`autocomplete`, `required`, a `blur` listener — is about the control, and a
+placeholder that lands on the wrapper does not exist.
+
+**Enforced by** the passthrough tests in `tests/fields.test.ts` and
+`tests/combobox.test.ts`.
+
+### Slot presence is read at render time
+
+`useSlots()` returns an object Vue updates in place; a `computed` over it is
+evaluated once and cached forever, so a strip a project fills after mount never
+appears and a dialog keeps describing a body that is gone. A component that
+branches on a slot reads `$slots` in its template.
+
+**Enforced by** the after-mount tests in `tests/surfaces.test.ts` and
+`tests/dialog.test.ts`.
 
 ### Components carry no stylesheet
 
@@ -165,9 +249,11 @@ component's ADR-adjacent design notes and in the change that introduced it.
 
 ### A silent failure is worse than a loud one
 
-`Dialog` throws rather than opening a dialog that would trap nothing. An
-`aria-describedby` is emitted only when its target is rendered. A check that
-would cry wolf is dropped rather than kept.
+`Dialog` throws rather than opening a dialog that would trap nothing, and takes
+the name of its close action as a required prop rather than a slot, because a
+slot made "no name" the default outcome. An `aria-describedby` is emitted only
+when its target is rendered. A check that would cry wolf is dropped rather than
+kept.
 
 **Not enforced by a check**, by nature. It is the reason several of the above
 exist.
@@ -178,11 +264,18 @@ exist.
 
 ```
 npm run test            # every assertion the package makes about itself,
-                        #   including contrast and accessibility
+                        #   including contrast, accessibility and the
+                        #   compiled-class check
 npm run lint            # ESLint plus the five convention checks
 npm run typecheck       # vue-tsc
 npm run test:consumer   # packs, installs and builds against a real application
 ```
+
+None of these looks at a rendered pixel. The compiled-class check is the closest
+thing to it, and it is what makes the rest trustworthy: a green suite over dead
+classes is how this document and the artboards disagreed with the browser for a
+month. After a change to the registers or a component, open the catalog in both
+appearances and look.
 
 **`npm run test:consumer` is the one that matters most**, and the one easiest to
 skip. Everything else verifies the package from inside itself. That command packs

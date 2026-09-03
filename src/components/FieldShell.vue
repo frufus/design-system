@@ -4,24 +4,30 @@
 
     <slot :control-id="controlId" :described-by="describedBy" :invalid="invalid" />
 
-    <p v-if="error" :id="errorId" class="flex items-center gap-1 text-xs text-danger-ink">
-      <!-- The icon is what keeps the state from being colour alone. It is
-           decoration: the message beside it already says what is wrong. -->
-      <svg
-        data-fds-error-icon
-        aria-hidden="true"
-        focusable="false"
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6" />
-        <path d="M8 4.8v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-        <circle cx="8" cy="11.1" r="0.9" fill="currentColor" />
-      </svg>
-      {{ error }}
-    </p>
+    <!-- The region exists before the error does. An error that arrives on
+         submit is only read without moving focus if the region was already in
+         the document; one that appears with the message is announced by
+         nobody. -->
+    <div aria-live="polite">
+      <p v-if="error" :id="errorId" class="flex items-center gap-1 text-xs text-danger-ink">
+        <!-- The icon is what keeps the state from being colour alone. It is
+             decoration: the message beside it already says what is wrong. -->
+        <svg
+          data-fds-error-icon
+          aria-hidden="true"
+          focusable="false"
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          fill="none"
+        >
+          <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6" />
+          <path d="M8 4.8v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          <circle cx="8" cy="11.1" r="0.9" fill="currentColor" />
+        </svg>
+        {{ error }}
+      </p>
+    </div>
 
     <!-- The description stays when an error appears. Removing it takes
          information away at exactly the moment it is most needed. -->
@@ -68,8 +74,8 @@ const invalid = computed(() => (props.error ? true : undefined))
 /**
  * The error comes first. A screen reader reads these in order, and someone who
  * has just failed a field should hear the problem before the explanation of the
- * field. An id is listed only when its element is actually rendered: a reference
- * to a missing element announces nothing and raises nothing.
+ * field. An id is listed only when its element is actually rendered: a
+ * reference to a missing element announces nothing and raises nothing.
  */
 const describedBy = computed(() => {
   const ids = [props.error ? errorId.value : null, props.description ? descriptionId.value : null]

@@ -68,7 +68,7 @@ createApp({
       h(Card, { interactive: true }, () => 'Open'),
       h(Badge, { tone: 'success', mark: true }, () => 'Verified'),
       h(EmptyState, { title: () => 'Nothing yet' }, { title: () => 'Nothing yet' }),
-      h(Dialog, { open: false, title: 'Confirm' }, () => 'Body'),
+      h(Dialog, { open: false, title: 'Confirm', closeLabel: 'Close' }, () => 'Body'),
     ]),
 }).mount('#app')
 `

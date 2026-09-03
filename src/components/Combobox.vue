@@ -1,8 +1,15 @@
 <template>
-  <FieldShell :id="id" :label="label" :description="description" :error="error">
+  <FieldShell
+    v-bind="splitFieldAttrs(attrs).root"
+    :id="id"
+    :label="label"
+    :description="description"
+    :error="error"
+  >
     <template #default="{ controlId, describedBy, invalid }">
       <div class="relative">
         <input
+          v-bind="splitFieldAttrs(attrs).control"
           :id="controlId"
           role="combobox"
           type="text"
@@ -19,6 +26,7 @@
           class="fds-control pr-10"
           @input="onInput"
           @keydown="onKeydown"
+          @click="onClick"
           @blur="onBlur"
         />
 
@@ -40,13 +48,17 @@
           />
         </svg>
 
-        <!-- The open list the canvas drew, at last. -->
+        <!-- The open list the canvas drew, at last. A pointer going down
+             anywhere on it - the scrollbar included - must not take focus
+             from the field, or the list closes under the drag. -->
         <div
           v-if="open"
           :id="listId"
+          ref="listbox"
           role="listbox"
           :aria-label="label"
           class="absolute z-10 mt-1 max-h-64 w-full overflow-auto border border-border-strong bg-surface"
+          @mousedown.prevent
         >
           <div
             v-for="(option, index) in matches"
@@ -56,10 +68,14 @@
             :aria-selected="option.value === modelValue ? 'true' : 'false'"
             :class="[
               'flex cursor-pointer items-center justify-between gap-2 px-3 py-2 text-base',
-              index === activeIndex ? 'bg-surface-sunken' : '',
-              option.value === modelValue
-                ? 'bg-accent-soft font-medium text-accent-ink'
-                : 'text-ink',
+              // One fill at a time. Active wins, because it is the state that
+              // moves; the check below still says which option is chosen.
+              index === activeIndex
+                ? 'bg-surface-sunken'
+                : option.value === modelValue
+                  ? 'bg-accent-soft'
+                  : '',
+              option.value === modelValue ? 'font-medium text-accent-ink' : 'text-ink',
             ]"
             @mousedown.prevent="choose(option)"
             @mousemove="activeIndex = index"
@@ -106,9 +122,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useId, watch } from 'vue'
+import { computed, ref, useAttrs, useId, watch } from 'vue'
 import FieldShell from './FieldShell.vue'
-import { filterOptions, type ComboboxMatcher, type ComboboxOption } from '../comboboxFilter.ts'
+import { filterOptions, type ComboboxMatcher, type ComboboxOption } from '../comboboxFilter'
+import { splitFieldAttrs } from '../fieldAttrs'
 
 /**
  * A searchable single choice.
@@ -125,6 +142,8 @@ import { filterOptions, type ComboboxMatcher, type ComboboxOption } from '../com
  * through `aria-activedescendant`. Roving focus would move focus out of the field
  * on the first arrow key and stop the typing this component exists for.
  */
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(
   defineProps<{
     label: string
@@ -143,6 +162,8 @@ const props = withDefaults(
 
 const emit = defineEmits<{ 'update:modelValue': [value: string | null] }>()
 
+const attrs = useAttrs()
+
 const uid = useId()
 const listId = `fds-combobox-${uid}-list`
 const optionId = (index: number) => `fds-combobox-${uid}-option-${index}`
@@ -159,14 +180,33 @@ watch(chosen, (option) => {
   query.value = option?.label ?? ''
 })
 
-const matches = computed(() =>
-  open.value ? filterOptions(props.options, query.value, props.matcher) : [],
-)
+/** What the typed text matches, whether or not the list is showing it. */
+const filtered = computed(() => filterOptions(props.options, query.value, props.matcher))
+
+const matches = computed(() => (open.value ? filtered.value : []))
 
 const activeId = computed(() =>
   open.value && activeIndex.value >= 0 && activeIndex.value < matches.value.length
     ? optionId(activeIndex.value)
     : undefined,
+)
+
+const listbox = ref<HTMLElement | null>(null)
+
+/**
+ * The list scrolls; focus does not move. So the browser will not bring the
+ * active option into view on its own, the way it would for a focused element.
+ * The option is found inside this component's own list rather than by id in
+ * the document: the options are the list's children, in order.
+ */
+watch(
+  activeId,
+  () => {
+    if (activeIndex.value < 0) return
+    const option = listbox.value?.children.item(activeIndex.value)
+    if (option instanceof HTMLElement) option.scrollIntoView({ block: 'nearest' })
+  },
+  { flush: 'post' },
 )
 
 function openList(active: number): void {
@@ -192,6 +232,11 @@ function onInput(event: Event): void {
   activeIndex.value = -1
 }
 
+/** A pointer user reaches the list without typing or arrowing. */
+function onClick(): void {
+  if (!open.value && !props.disabled) openList(-1)
+}
+
 function move(delta: number): void {
   if (!open.value) {
     openList(0)
@@ -213,7 +258,9 @@ function onKeydown(event: KeyboardEvent): void {
 
     case 'ArrowUp':
       event.preventDefault()
-      if (!open.value) openList(Math.max(0, props.options.length - 1))
+      // The end of what the text matches, not of everything: with text in the
+      // field the last option may not be on offer at all.
+      if (!open.value) openList(Math.max(0, filtered.value.length - 1))
       else move(-1)
       break
 
@@ -238,13 +285,16 @@ function onKeydown(event: KeyboardEvent): void {
     }
 
     // Once to leave the list, twice to leave the choice - so both are reachable
-    // without going for the mouse.
+    // without going for the mouse. With nothing to leave, the key is not ours:
+    // a dialog around the field is waiting for it.
     case 'Escape':
-      event.preventDefault()
       if (open.value) {
+        event.preventDefault()
         closeList()
         return
       }
+      if (query.value === '' && props.modelValue === null) return
+      event.preventDefault()
       query.value = ''
       if (props.modelValue !== null) emit('update:modelValue', null)
       break

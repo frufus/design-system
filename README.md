@@ -4,7 +4,7 @@ A small set of Vue 3 primitives carried by one visual identity, so a new project
 installs a single dependency and has a coherent, accessible, themeable interface
 on its first commit.
 
-Nine components. 97 design tokens. Two appearances of equal rank. No runtime
+Nine components. 101 design tokens. Two appearances of equal rank. No runtime
 dependency beyond Vue itself.
 
 ---
@@ -92,7 +92,7 @@ consumer, on the same standing as a token rename.
 | `Input`      | Labelled text control                          | `label`, `description`, `error`          |
 | `Select`     | Labelled native `<select>`                     | `label`, `description`, `error`          |
 | `Combobox`   | Searchable single choice (ARIA pattern)        | `label`, `options`, `matcher`            |
-| `Dialog`     | Modal on the platform `<dialog>` element       | `open`, `title`, `initialFocus`          |
+| `Dialog`     | Modal on the platform `<dialog>` element       | `open`, `title`, `closeLabel`            |
 | `Card`       | Surface; a real `<button>` when interactive    | `interactive`, `disabled`                |
 | `Badge`      | Status or category tone                        | `tone`, `mark`                           |
 | `EmptyState` | The nothing-here surface                       | slots only                               |
@@ -100,6 +100,10 @@ consumer, on the same standing as a token rename.
 `Button` variants are `primary`, `secondary`, `ghost`, `destructive`; sizes
 `sm`, `md`, `lg`. `Badge` tones are `neutral`, `accent`, `success`, `warning`,
 `danger`, `outline`. All are exported as `const` arrays with matching types.
+
+Anything else you write on a field — `placeholder`, `name`, `autocomplete`,
+`required`, a `@blur` listener — reaches the control; `class` and `style` stay
+on the field's root, where layout lives.
 
 ---
 
@@ -127,7 +131,7 @@ the imports. No build step, no theme object, no JavaScript.
 
 ### Tokens
 
-97 custom property names in total: 30 colour roles per appearance, plus shape,
+101 custom property names in total: 30 colour roles per appearance, plus shape,
 typography, spacing and motion. Names describe the **role**, never the value or
 the appearance — `--fds-ink`, not `--fds-near-black`; `--fds-surface-sunken`,
 not `--fds-grey-50`. The reasoning, and the alternatives rejected, are in
@@ -141,8 +145,9 @@ file and a fresh generation disagree.
 
 Tailwind's default theme is **nulled, not extended** — a palette that is merely
 extended leaves the defaults available, and available means eventually used. The
-package then claims 74 utility names back and maps them onto its tokens, so what
-you type stays clean: `bg-surface`, not `bg-fds-surface`.
+package then claims 80 utility names back and maps them onto its tokens, so what
+you type stays clean: `bg-surface`, not `bg-fds-surface`. A type step is one
+class: `text-xl` carries the step's size, line height, tracking and weight.
 
 A _register_ is a named set of control classes in `@layer components` — the
 shared wiring that keeps Input, Select and Combobox exactly the same shape.
@@ -165,6 +170,9 @@ Full text, with the reasoning behind each, in
 - Depth is a surface, never a shadow. Shadows are invisible on a near-black
   ground, so `shadow-*` produces nothing at all.
 - Three radii, and no more: `0` surfaces, `2` tags, `4` controls.
+- Every class a component wears compiles. The stylesheet is compiled the way a
+  consumer's Tailwind compiles it, and a class that produces no rule fails the
+  suite — because a literal class name is not the same as a class that exists.
 - **Use the platform before reimplementing it.** `Select` is a native
   `<select>`. An interactive `Card` is a real `<button>`. `Dialog` uses
   `showModal()` and inherits its focus trap, inert page, Escape handling and
@@ -186,7 +194,8 @@ with a document nobody believes.
 ## Verifying
 
 ```
-npm run test          # 274 assertions across 21 files, contrast and a11y included
+npm run test          # 332 assertions across 22 files, contrast, a11y and
+                      #   the compiled-class check included
 npm run lint          # ESLint plus the five convention checks
 npm run typecheck     # vue-tsc, strict
 npm run test:consumer # packs, installs and builds against a real application

@@ -29,6 +29,13 @@ const RULES_OFF = {
   'color-contrast': { enabled: false },
 } satisfies axe.RuleObject
 
+// This file runs under jsdom for axe's sake, and jsdom does not implement
+// scrollIntoView. The combobox calls it to keep its active option in view;
+// here it only has to exist.
+if (typeof Element.prototype.scrollIntoView !== 'function') {
+  Element.prototype.scrollIntoView = () => {}
+}
+
 async function violationsIn(element: Element): Promise<string[]> {
   const results = await axe.run(element, { rules: RULES_OFF })
   return results.violations.map((violation) => `${violation.id}: ${violation.help}`)
@@ -183,7 +190,7 @@ describe('Dialog accessibility', () => {
       // pass over the built catalog.
       withAppearance(appearance)
       const wrapper = mount(Dialog, {
-        props: { open: false, title: 'Remove Mephiston Red from your shelf?' },
+        props: { open: false, title: 'Remove Mephiston Red from your shelf?', closeLabel: 'Close' },
         slots: { default: 'Results will stop preferring paints you already own.' },
         attachTo: document.body,
       })

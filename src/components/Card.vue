@@ -3,33 +3,39 @@
     :is="interactive ? 'button' : 'div'"
     :type="interactive ? 'button' : undefined"
     :disabled="interactive && disabled ? true : undefined"
-    :class="rootClasses"
+    :class="[cardBaseClasses, interactive ? cardInteractiveClasses : '']"
     @click="interactive && $emit('click', $event)"
   >
-    <div
-      v-if="hasHeader"
+    <!-- Slot presence is read here, at render time. A computed over the slots
+         object would be evaluated once, and a strip a project fills later would
+         never appear. -->
+    <component
+      :is="strip"
+      v-if="$slots['header']"
       data-fds-card-header
       class="flex items-center justify-between gap-2 border-b border-border px-3 py-2"
     >
       <slot name="header" />
-    </div>
+    </component>
 
-    <div class="px-3 py-3">
+    <component :is="strip" class="block px-3 py-3">
       <slot />
-    </div>
+    </component>
 
-    <div
-      v-if="hasFooter"
+    <component
+      :is="strip"
+      v-if="$slots['footer']"
       data-fds-card-footer
       class="flex items-center justify-between gap-2 border-t border-border-strong bg-surface-sunken px-3 py-2"
     >
       <slot name="footer" />
-    </div>
+    </component>
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
+import { computed } from 'vue'
+import { cardBaseClasses, cardInteractiveClasses } from '../classMaps'
 
 /**
  * The Console panel: a sharp rectangle with optional header and footer strips.
@@ -42,6 +48,10 @@ import { computed, useSlots } from 'vue'
  * The consequence is real and deliberate: a button may not contain another
  * button or a link, so a card with its own actions inside is not interactive as
  * a whole. Put the actions in the footer and leave the card presentational.
+ *
+ * A button may not contain block elements either, so when the card acts its
+ * strips are spans that lay out as blocks. The markup stays valid as well as
+ * focusable.
  */
 const props = withDefaults(
   defineProps<{
@@ -53,19 +63,5 @@ const props = withDefaults(
 
 defineEmits<{ click: [event: MouseEvent] }>()
 
-const slots = useSlots()
-
-const hasHeader = computed(() => Boolean(slots['header']))
-const hasFooter = computed(() => Boolean(slots['footer']))
-
-/**
- * Depth is a fill and an edge, never a shadow: a shadow is invisible on a
- * near-black ground, so this identity never learns to depend on one.
- */
-const rootClasses = computed(() => [
-  'block w-full border border-border-strong bg-surface text-left text-ink',
-  props.interactive
-    ? 'fds-focus-ring cursor-pointer border-l-[3px] hover:border-l-accent hover:bg-surface-sunken'
-    : '',
-])
+const strip = computed(() => (props.interactive ? 'span' : 'div'))
 </script>

@@ -37,6 +37,6 @@ docs/DESIGN-LANGUAGE.md  The rules, and which check enforces each
 .storybook/        Catalog config: the consumer wiring, rehearsed
 stories/           Component stories
 openspec/          Binding specs and change proposals
-tests/             Unit and end-to-end tests
+tests/             Unit, contrast, accessibility and compiled-class tests
 tools/             Authoring scripts: palette measurement, token and font builds
 ```

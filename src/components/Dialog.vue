@@ -2,27 +2,30 @@
   <dialog
     ref="dialog"
     :aria-labelledby="titleId"
-    :aria-describedby="describedBy"
+    :aria-describedby="$slots['default'] ? bodyId : undefined"
     class="m-auto w-[min(28rem,calc(100vw-2rem))] border border-border-strong bg-surface p-0 text-ink backdrop:bg-ink/60"
     @cancel="onCancel"
     @close="onClose"
+    @pointerdown="onPointerDown"
     @click="onClick"
   >
     <div data-fds-dialog-panel>
       <div
         class="flex items-center justify-between gap-3 border-b border-border-strong bg-surface-sunken px-3 py-2"
       >
-        <h2 :id="titleId" class="text-lg font-medium text-ink">{{ title }}</h2>
+        <h2 :id="titleId" class="text-lg text-ink">{{ title }}</h2>
 
+        <!-- The accessible name comes from the project, like every other word.
+             It is a required prop rather than a slot: a slot made "no name" the
+             default outcome, silently. -->
         <button
           data-fds-dialog-close
           type="button"
           class="fds-focus-ring fds-target inline-flex size-8 items-center justify-center rounded-tag text-ink-muted hover:bg-surface"
+          :aria-label="closeLabel"
           :autofocus="initialFocus === 'close' || undefined"
-          @click="($emit('dismiss'), $emit('update:open', false))"
+          @click="dismiss"
         >
-          <!-- The accessible name comes from the project, like every other word. -->
-          <slot name="close-label" />
           <svg
             aria-hidden="true"
             focusable="false"
@@ -41,7 +44,7 @@
         </button>
       </div>
 
-      <div v-if="hasBody" :id="bodyId" class="px-4 py-4 text-base text-ink-muted">
+      <div v-if="$slots['default']" :id="bodyId" class="px-4 py-4 text-base text-ink-muted">
         <slot />
       </div>
 
@@ -56,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useId, useSlots, watch } from 'vue'
+import { computed, onMounted, ref, useId, watch } from 'vue'
 
 /**
  * A modal dialog on the platform's own `dialog` element.
@@ -74,6 +77,9 @@ const props = withDefaults(
   defineProps<{
     open: boolean
     title: string
+    /** The accessible name of the close action. Required: an unnamed icon
+     *  button is a control no screen reader can describe. */
+    closeLabel: string
     /**
      * Where focus starts. `close` is the safe default - never the destructive
      * action. `none` leaves the placement to the project's own autofocus.
@@ -85,45 +91,56 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   'update:open': [open: boolean]
-  /** Escape or the backdrop. Both mean cancel; neither means confirm. */
+  /** Escape, the backdrop or the close action. All mean cancel; none means confirm. */
   dismiss: []
 }>()
 
-const slots = useSlots()
 const dialog = ref<HTMLDialogElement | null>(null)
 
 const id = useId()
 const titleId = computed(() => `fds-dialog-${id}-title`)
 const bodyId = computed(() => `fds-dialog-${id}-body`)
 
-const hasBody = computed(() => Boolean(slots['default']))
-const describedBy = computed(() => (hasBody.value ? bodyId.value : undefined))
+/**
+ * Makes the element agree with the prop. Called once the element exists and
+ * again whenever the prop moves - not through an immediate watcher, whose first
+ * run happens before mount, when there is no element to open.
+ */
+function sync(open: boolean): void {
+  const element = dialog.value
+  if (!element) return
 
-watch(
-  () => props.open,
-  (open) => {
-    const element = dialog.value
-    if (!element) return
+  if (!open) {
+    if (element.open) element.close()
+    return
+  }
 
-    if (!open) {
-      if (element.open) element.close()
-      return
-    }
+  // No fallback to the `open` attribute on purpose: it renders something that
+  // looks exactly like a modal, traps nothing, and leaves the page behind
+  // reachable. A silent accessibility failure is worse than a loud one.
+  if (typeof element.showModal !== 'function') {
+    throw new TypeError(
+      'Dialog needs the platform’s modal dialog: element.showModal is unavailable. ' +
+        'Refusing to open a dialog that would not trap focus.',
+    )
+  }
 
-    // No fallback to the `open` attribute on purpose: it renders something that
-    // looks exactly like a modal, traps nothing, and leaves the page behind
-    // reachable. A silent accessibility failure is worse than a loud one.
-    if (typeof element.showModal !== 'function') {
-      throw new TypeError(
-        'Dialog needs the platform’s modal dialog: element.showModal is unavailable. ' +
-          'Refusing to open a dialog that would not trap focus.',
-      )
-    }
+  if (!element.open) element.showModal()
+}
 
-    if (!element.open) element.showModal()
-  },
-  { immediate: true, flush: 'post' },
-)
+onMounted(() => sync(props.open))
+watch(() => props.open, sync, { flush: 'post' })
+
+/**
+ * Every route out goes through the platform's `close()`, so the `close` event
+ * is the one place `update:open` is reported - once per close, whichever way
+ * it happened. Escape already worked like this; the button and the backdrop
+ * now do too.
+ */
+function dismiss(): void {
+  emit('dismiss')
+  dialog.value?.close()
+}
 
 /** The platform's cancel is Escape. Let it close, and report the dismissal. */
 function onCancel(): void {
@@ -136,13 +153,22 @@ function onClose(): void {
 
 /**
  * A click whose target is the dialog itself landed on the backdrop - nothing
- * else is there to receive it. Comparing pointer coordinates against the panel's
- * box instead would have to account for padding, borders, and a drag that starts
- * inside and ends outside.
+ * else is there to receive it. But a pointer that went down inside the panel
+ * and came up outside is a selection, and browsers deliver that as a click on
+ * the common ancestor, which is the dialog. So the press is remembered, and
+ * only a press that also began on the backdrop counts.
  */
+const pressedOn = ref<EventTarget | null>(null)
+
+function onPointerDown(event: PointerEvent): void {
+  pressedOn.value = event.target
+}
+
 function onClick(event: MouseEvent): void {
-  if (event.target !== dialog.value) return
-  emit('dismiss')
-  emit('update:open', false)
+  const element = dialog.value
+  const press = pressedOn.value
+  pressedOn.value = null
+  if (event.target !== element || press !== element) return
+  dismiss()
 }
 </script>
